@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+@using Labinator2016.Lib.Utilities
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Intelligence Education Virtual Lab</title>
+    <link rel="apple-touch-icon" href="/Images/ININ_favicon.png" />
+    <link rel="ICON" href="/Images/ININ_favicon.png" />
+    <link rel="icon" href="/Images/ININ_favicon.png" sizes="16x16" />
+
+    @*@Styles.Render("/Content/css")*@
+</head>
+<body>
+    <div class="body-content">
+        <center>
+            @Html.Raw("&nbsp;")
+            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn" })
+            @*@if (User.IsInRole("Administrator"))
+            {
+                @Html.Raw("&nbsp;")
+                @Html.ActionLink("DataCenters", "Index", "DataCenters", null, new { @class = "btn" })
+                @Html.Raw("&nbsp;")
+                @Html.ActionLink("Users", "Index", "Users", null, new { @class = "btn" })
+                @Html.Raw("&nbsp;")
+                @Html.ActionLink("Courses", "Index", "Courses", null, new { @class = "btn" })
+                @Html.Raw("&nbsp;")
+                @Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "btn" })
+            }
+            @Html.Raw("&nbsp;")
+            @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "btn" })*@
+            @Html.Raw("&nbsp;")
+
+            @RenderBody()
+        </center>
+    </div>
+    <div class="footer">
+        <center>
+            <table>
+                <tr>
+                    <td align="center" class="disclaimer"><br><b>IC</b> and <b>Interaction Client</b> are abbreviated terms indicating the core Customer Interaction Center&trade; (CIC) product from Interactive Intelligence, and used for internal Education Services purposes only.</td>
+                </tr>
+                <tr>
+                    <td align="center" class="copyright"> &copy;@DateTime.Now.Year Interactive Intelligence, Inc. All Rights Reserved. @Html.CurrentVersion()</td>
+                </tr>
+            </table>
+        </center>
+    </div>
+    @RenderSection("scripts", required: false)
+    @*@Scripts.Render("/bundles/modernizr")
+
+    @Scripts.Render("/bundles/jquery")
+
+    @Scripts.Render("/bundles/jquery-ui")*@
+</body>
+</html>

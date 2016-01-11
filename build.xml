@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildExtensionsPath>C:\Program Files\MSBuild</MSBuildExtensionsPath>
+  </PropertyGroup>
+  <!-- Import MSBuildExtensionsPack -->
+  <Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
+
+  <!-- Names of all projects -->
+  <PropertyGroup>
+    <Labinator2016>Labinator2016</Labinator2016>
+    <Labinator2016Tests>Labinator2016.Tests</Labinator2016Tests>
+    <Configuration Condition="$(Configuration) == ''">Debug</Configuration>
+    <PublishProfile Condition="$(PublishProfile) == ''">Debug</PublishProfile>
+    <OutputDir>.out</OutputDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- All projects -->
+    <Projects Include="$(Labinator2016)" />
+
+    <!-- Test projects -->
+    <TestProjects Include="$(Labinator2016Tests)" />
+  </ItemGroup>
+
+  <Target Name="CreateDirectories">
+    <MakeDir Directories="$(OutputDir)"/>
+    <MakeDir Directories="$(OutputDir)\Package"/>
+    <MakeDir Directories="$(Labinator2016)\obj\Package"/>
+  </Target>
+
+  <Target Name="Clean" DependsOnTargets="CreateDirectories">
+    <MSBuild.ExtensionPack.FileSystem.Folder
+      TaskAction="RemoveContent"
+      Path="$(OutputDir)"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder
+    TaskAction="RemoveContent"
+    Path="$(Labinator2016)\obj\Package"/>
+  </Target>
+
+  <!-- Compiles and Cleans all projects (if named correctly) -->
+  <Target Name="Build" DependsOnTargets="Clean">
+    <PropertyGroup>
+      <CurrentProject>%(Projects.Identity)</CurrentProject>
+    </PropertyGroup>
+
+    <MSBuild Projects="$(CurrentProject)\$(CurrentProject).csproj"
+      Targets="Clean;Build"
+      Properties="Configuration=$(Configuration)" />
+  </Target>
+
+
+  <Target Name="Package" DependsOnTargets="Build">
+
+    <MSBuild Projects="$(Labinator2016)\$(Labinator2016).csproj"
+      Properties="Configuration=$(Configuration);DeployOnBuild=True;PublishProfile=$(PublishProfile)" />
+
+    <ItemGroup>
+      <OutputFiles Include="$(Labinator2016)\obj\Package\**\*.*"/>
+    </ItemGroup>
+
+    <Copy
+      SourceFiles="@(OutputFiles)"
+      DestinationFiles="@(OutputFiles->'.out\Package\%(RecursiveDir)%(Filename)%(Extension)')"
+        />
+    
+  </Target>
+
+</Project>
