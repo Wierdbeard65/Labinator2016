@@ -37,6 +37,7 @@ namespace Labinator2016.Lib.Utilities
                 {
                     response = response + " " + config.Description;
                 }
+
                 return MvcHtmlString.Create(response);
             }
             catch

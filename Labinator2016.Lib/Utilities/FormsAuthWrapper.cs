@@ -11,6 +11,7 @@ namespace Labinator2016.Lib.Utility
 {
     using System.Web.Security;
     using Headers;
+
     /// <summary>
     /// Implementation of Authentication interface for live use.
     /// Author: Paul Simpson

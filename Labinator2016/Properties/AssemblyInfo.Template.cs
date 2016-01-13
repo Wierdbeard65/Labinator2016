@@ -1,4 +1,14 @@
-﻿using System.Reflection;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Interactive Intelligence">
+//     Copyright (c) Interactive Intelligence. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+/// <summary>
+/// Author: Paul Simpson
+/// Version: 1.0 - Initial build.
+/// </summary>
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
