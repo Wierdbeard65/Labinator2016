@@ -17,7 +17,7 @@ namespace Labinator2016.Service
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                ////new Service1()
             };
             ServiceBase.Run(ServicesToRun);
         }

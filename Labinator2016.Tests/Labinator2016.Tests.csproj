@@ -87,6 +87,7 @@
     <Compile Include="SiteTests\HomeControllerTest.cs" />
     <Compile Include="TestData\FakeControllerContext.cs" />
     <Compile Include="TestData\FakeDatabase.cs" />
+    <Compile Include="TestData\LoggingSystem.cs" />
     <Compile Include="TestData\TestUserData.cs" />
   </ItemGroup>
   <ItemGroup>

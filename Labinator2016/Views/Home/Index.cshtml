@@ -1,8 +1,42 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@model Labinator2016.ViewModels.IndexViewModel
+@using (Html.BeginForm("Index", "Home", FormMethod.Post
+                            ))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <label>
+        @Html.RadioButtonFor(model => model.ShowAll, true, htmlAttributes: new { onchange = "$(this).closest('form').submit()" })
+        Show All Classrooms
+    </label>
+    <label>
+        @Html.RadioButtonFor(model => model.ShowAll, false, htmlAttributes: new { onchange = "$(this).closest('form').submit()" })
+        Show My Classrooms
+    </label>
+    <p>
+        <table width="100%" class="display" id="datatable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Course</th>
+                    <th>Region</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Date</th>
+                    <th>Course</th>
+                    <th>Region</th>
+                </tr>
+            </tfoot>
+        </table>
+    </p>
+    @Html.ActionLink(linkText: "Add",
+                        actionName: "Edit",
+                        controllerName: "Classrooms",
+                        routeValues: new { Id = 0 },
+                        htmlAttributes: new { @class = "btn" })
 }
-
-<h2>Index</h2>
-Hello World ;-)
-
+@*<script src="~/Scripts/HomeIndex.js" language="javascript"></script>
+<script>
+    $(document).ready(refreshList(aj, dc, columnRows));
+</script>*@

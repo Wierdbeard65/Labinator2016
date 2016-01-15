@@ -7,6 +7,7 @@
 /// <summary>
 /// Author: Paul Simpson
 /// Version: 1.0 - Initial build.
+/// Version: 1.1 - Log Table Added
 /// </summary>
 namespace Labinator2016.Lib.Models
 {
@@ -35,6 +36,14 @@ namespace Labinator2016.Lib.Models
         /// A representation of the Users table in the Database.
         /// </value>
         public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// Gets or sets the logs table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the Logs table in the Database.
+        /// </value>
+        public DbSet<Log> Logs { get; set; }
 
         /// <summary>
         /// Implements the Interface Query on the Database.
