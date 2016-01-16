@@ -1,0 +1,32 @@
+﻿<br />
+    <table width="100%" class="display" id="datatable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Email Address</th>
+                <th>Instructor</th>
+                <th>Administrator</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th>Email Address</th>
+                <th>Instructor</th>
+                <th>Administrator</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+<p>
+        @Html.ActionLink(linkText: "Add",
+                        actionName: "Edit",
+                        controllerName: "Users",
+                        routeValues: new { Id = 0 },
+                        htmlAttributes: new { @class = "btn" })
+</p>
+@*<script src="~/Scripts/site.js" language="javascript"></script>
+<script src="~/Scripts/UserIndex.js" language="javascript"></script>
+<script>
+    $(document).load(refreshList(aj, dc, columnRows));
+</script>*@

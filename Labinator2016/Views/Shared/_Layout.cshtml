@@ -8,30 +8,30 @@
     <link rel="apple-touch-icon" href="/Images/ININ_favicon.png" />
     <link rel="ICON" href="/Images/ININ_favicon.png" />
     <link rel="icon" href="/Images/ININ_favicon.png" sizes="16x16" />
-
-    @*@Styles.Render("/Content/css")*@
+    @Styles.Render("~/Content/css")
 </head>
 <body>
     <div class="body-content">
         <center>
             @Html.Raw("&nbsp;")
             @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn" })
-            @*@if (User.IsInRole("Administrator"))
-            {
-                @Html.Raw("&nbsp;")
-                @Html.ActionLink("DataCenters", "Index", "DataCenters", null, new { @class = "btn" })
-                @Html.Raw("&nbsp;")
-                @Html.ActionLink("Users", "Index", "Users", null, new { @class = "btn" })
-                @Html.Raw("&nbsp;")
-                @Html.ActionLink("Courses", "Index", "Courses", null, new { @class = "btn" })
-                @Html.Raw("&nbsp;")
-                @Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "btn" })
-            }
+    @*@if (User.IsInRole("Administrator"))
+    {*@
+        @Html.Raw("&nbsp;")
+        @Html.ActionLink("DataCenters", "Index", "DataCenters", null, new { @class = "btn" })
+        @Html.Raw("&nbsp;")
+        @Html.ActionLink("Users", "Index", "Users", null, new { @class = "btn" })
+        @Html.Raw("&nbsp;")
+        @Html.ActionLink("Courses", "Index", "Courses", null, new { @class = "btn" })
+        @Html.Raw("&nbsp;")
+        @Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "btn" })
+    @*}*@
+    @Html.Raw("&nbsp;")
+    @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "btn" })
             @Html.Raw("&nbsp;")
-            @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "btn" })*@
-            @Html.Raw("&nbsp;")
-
-            @RenderBody()
+            <div class="content-frame">
+                @RenderBody()
+            </div>
         </center>
     </div>
     <div class="footer">

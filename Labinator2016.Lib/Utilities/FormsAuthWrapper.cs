@@ -7,7 +7,7 @@
 /// <summary>
 /// Author: Paul Simpson
 /// </summary>
-namespace Labinator2016.Lib.Utility
+namespace Labinator2016.Lib.Utilities
 {
     using System.Web.Security;
     using Headers;

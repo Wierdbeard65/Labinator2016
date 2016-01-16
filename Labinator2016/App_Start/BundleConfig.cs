@@ -43,7 +43,7 @@ namespace Labinator2016
             ////            "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      ////"~/Content/jquery.dataTables.min.css",
+                      "~/Content/jquery.dataTables.min.css",
                       "~/Content/site.css"));
         }
     }
