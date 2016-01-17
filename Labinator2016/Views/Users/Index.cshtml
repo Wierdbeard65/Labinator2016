@@ -23,10 +23,11 @@
                         actionName: "Edit",
                         controllerName: "Users",
                         routeValues: new { Id = 0 },
-                        htmlAttributes: new { @class = "btn" })
+                        htmlAttributes: new { @class = "btn btn-primary" })
 </p>
-@*<script src="~/Scripts/site.js" language="javascript"></script>
+@section Scripts {
 <script src="~/Scripts/UserIndex.js" language="javascript"></script>
 <script>
     $(document).load(refreshList(aj, dc, columnRows));
-</script>*@
+</script>
+    }

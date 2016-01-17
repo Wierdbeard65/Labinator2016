@@ -122,7 +122,15 @@
     <Content Include="Images\ININ_favicon.png" />
     <Content Include="Images\midLeftLabLogin.jpg" />
     <Content Include="Images\midRightLabLogin.jpg" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_asc_disabled.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\sort_desc_disabled.png" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\UserIndex.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

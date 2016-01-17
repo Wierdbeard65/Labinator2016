@@ -8,49 +8,56 @@
     <link rel="apple-touch-icon" href="/Images/ININ_favicon.png" />
     <link rel="ICON" href="/Images/ININ_favicon.png" />
     <link rel="icon" href="/Images/ININ_favicon.png" sizes="16x16" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     @Styles.Render("~/Content/css")
 </head>
 <body>
-    <div class="body-content">
-        <center>
-            @Html.Raw("&nbsp;")
-            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn" })
-    @*@if (User.IsInRole("Administrator"))
-    {*@
-        @Html.Raw("&nbsp;")
-        @Html.ActionLink("DataCenters", "Index", "DataCenters", null, new { @class = "btn" })
-        @Html.Raw("&nbsp;")
-        @Html.ActionLink("Users", "Index", "Users", null, new { @class = "btn" })
-        @Html.Raw("&nbsp;")
-        @Html.ActionLink("Courses", "Index", "Courses", null, new { @class = "btn" })
-        @Html.Raw("&nbsp;")
-        @Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "btn" })
-    @*}*@
-    @Html.Raw("&nbsp;")
-    @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "btn" })
-            @Html.Raw("&nbsp;")
-            <div class="content-frame">
-                @RenderBody()
+    <div class="container full-height">
+        <div class="row full-height">
+            <div class="col-md-12 col-lg-12 full-height">
+                <div class="panel panel-primary full-height">
+                    <div class="panel-heading">
+                        <center>
+                            @Html.Raw("&nbsp;")
+                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default" })
+                            @*@if (User.IsInRole("Administrator"))
+                    {*@
+                            @Html.Raw("&nbsp;")
+                            @Html.ActionLink("DataCenters", "Index", "DataCenters", null, new { @class = "btn btn-default" })
+                            @Html.Raw("&nbsp;")
+                            @Html.ActionLink("Users", "Index", "Users", null, new { @class = "btn btn-default" })
+                            @Html.Raw("&nbsp;")
+                            @Html.ActionLink("Courses", "Index", "Courses", null, new { @class = "btn btn-default" })
+                            @Html.Raw("&nbsp;")
+                            @Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "btn btn-default" })
+                            @*}*@
+                            @Html.Raw("&nbsp;")
+                            @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "btn btn-default" })
+                            @Html.Raw("&nbsp;")
+                        </center>
+                    </div>
+
+                    <div class="panel-body full-height">
+                        @RenderBody()
+                    </div>
+                    <div class="panel-footer">
+                        <center>
+
+                                    <span align="center" class="disclaimer"><br><b>IC</b> and <b>Interaction Client</b> are abbreviated terms indicating the core Customer Interaction Center&trade; (CIC) product from Interactive Intelligence, and used for internal Education Services purposes only.</span><br/>
+                                    <span align="center" class="copyright"> &copy;@DateTime.Now.Year Interactive Intelligence, Inc. All Rights Reserved. @Html.CurrentVersion()</span>
+                        </center>
+                    </div>
+                </div>
+
             </div>
-        </center>
-    </div>
-    <div class="footer">
-        <center>
-            <table>
-                <tr>
-                    <td align="center" class="disclaimer"><br><b>IC</b> and <b>Interaction Client</b> are abbreviated terms indicating the core Customer Interaction Center&trade; (CIC) product from Interactive Intelligence, and used for internal Education Services purposes only.</td>
-                </tr>
-                <tr>
-                    <td align="center" class="copyright"> &copy;@DateTime.Now.Year Interactive Intelligence, Inc. All Rights Reserved. @Html.CurrentVersion()</td>
-                </tr>
-            </table>
-        </center>
-    </div>
-    @RenderSection("scripts", required: false)
-    @*@Scripts.Render("/bundles/modernizr")
-
+        </div>
+    </div>    
     @Scripts.Render("/bundles/jquery")
-
-    @Scripts.Render("/bundles/jquery-ui")*@
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    @RenderSection("scripts", required: false)
+    @*@Scripts.Render("/bundles/modernizr")*@
+    @*@Scripts.Render("/bundles/jquery-ui")*@
 </body>
 </html>
