@@ -83,6 +83,7 @@ namespace Labinator2016.Lib.Utilities
             {
                 return false;
             }
+
             // Extract the parameters from the hash
             char[] delimiter = { ':' };
             string[] split = correctHash.Split(delimiter);

@@ -85,19 +85,27 @@
     <Compile Include="Headers\IAuth.cs" />
     <Compile Include="Headers\ILabinatorDb.cs" />
     <Compile Include="Headers\LogMessages.cs" />
-    <Compile Include="Migrations\201601131821564_Initial.cs" />
+    <Compile Include="Migrations\201601131821564_Initial.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\201601131821564_Initial.Designer.cs">
       <DependentUpon>201601131821564_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601141739160_Log.cs" />
+    <Compile Include="Migrations\201601141739160_Log.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\201601141739160_Log.Designer.cs">
       <DependentUpon>201601141739160_Log.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601181201441_SkytapAPIKeyAdded.cs" />
+    <Compile Include="Migrations\201601181201441_SkytapAPIKeyAdded.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\201601181201441_SkytapAPIKeyAdded.Designer.cs">
       <DependentUpon>201601181201441_SkytapAPIKeyAdded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Configuration.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Models\LabinatorContext.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\User.cs" />

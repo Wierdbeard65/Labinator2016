@@ -14,6 +14,7 @@ namespace Labinator2016.Controllers
 {
     using System.Web.Mvc;
     using ViewModels;
+
     /// <summary>
     /// Controller class for the Home Page
     /// </summary>
@@ -41,6 +42,5 @@ namespace Labinator2016.Controllers
         {
             return this.View(model);
         }
-
     }
 }

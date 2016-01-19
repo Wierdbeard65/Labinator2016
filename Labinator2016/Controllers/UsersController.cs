@@ -15,14 +15,14 @@ namespace Labinator2016.Controllers
     using System.Web.Mvc;
     using Labinator2016.Lib.Headers;
     using Labinator2016.Lib.Models;
-//    using Labinator2016.ViewModels;
     using Labinator2016.Lib.Utilities;
     using ViewModels.DatatablesViewModel;
+
     /// <summary>
     /// Back-end processing for all User-related work and pages.
     /// </summary>
     /// <seealso cref="System.Web.Mvc.Controller" />
-    //[Authorize]
+    ////[Authorize]
     public class UsersController : Controller
     {
         /// <summary>
@@ -108,30 +108,36 @@ namespace Labinator2016.Controllers
                 {
                     if ((user.NewPassword1 == null) || (user.NewPassword2 == null) || (user.NewPassword1.Length == 0) || (user.NewPassword2.Length == 0) || (user.NewPassword1 != user.NewPassword2))
                     {
-                        return this.View("Edit",user);
+                        return this.View("Edit", user);
                     }
                     user.Password = PasswordHash.CreateHash(user.NewPassword1);
                     this.db.Add<User>(user);
+                    Log.Write(db,new Log() {Message=LogMessages.create,Detail="User " + user.EmailAddress+" created." });
                 }
                 else
                 {
                     if (!((user.NewPassword1 == null) || (user.NewPassword2 == null) || (user.NewPassword1.Length == 0) || (user.NewPassword2.Length == 0)))
                     {
-                        if(user.NewPassword1 != user.NewPassword2)
+                        if (user.NewPassword1 != user.NewPassword2)
                         {
                             return this.View("Edit", user);
                         }
-                        User ExistingUser = this.db.Query<User>().Where(u => u.UserId == user.UserId).FirstOrDefault();
+
+                        User existingUser = this.db.Query<User>().Where(u => u.UserId == user.UserId).FirstOrDefault();
                         if (user == null)
                         {
                             return this.View("Edit", user);
                         }
-                        if (!PasswordHash.ValidatePassword(user.OldPassword, ExistingUser.Password))
+
+                        if (!PasswordHash.ValidatePassword(user.OldPassword, existingUser.Password))
                         {
                             return this.View("Edit", user);
                         }
+
                         user.Password = PasswordHash.CreateHash(user.NewPassword1);
                     }
+
+                    Log.Write(db, new Log() { Message = LogMessages.update, Detail = "User " + user.EmailAddress + " updated." });
                     this.db.Update<User>(user);
                 }
 

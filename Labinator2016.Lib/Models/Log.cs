@@ -24,7 +24,7 @@ namespace Labinator2016.Lib.Models
         /// <value>
         /// The log message identifier.
         /// </value>
-        public Int32 LogId { get; set; }
+        public int LogId { get; set; }
 
         /// <summary>
         /// Gets or sets the time stamp.
@@ -40,7 +40,7 @@ namespace Labinator2016.Lib.Models
         /// <value>
         /// The message detail.
         /// </value>
-        public String Detail { get; set; }
+        public string Detail { get; set; }
 
         /// <summary>
         /// Gets or sets the message type

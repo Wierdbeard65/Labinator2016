@@ -80,7 +80,8 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(1, db.Added.Count);
             Assert.AreEqual("TestNew", ((User)db.Added[0]).EmailAddress);
             Assert.AreEqual(true, PasswordHash.ValidatePassword("TestPassword", ((User)db.Added[0]).Password));
-            Assert.AreEqual(1, db.saved);
+            Assert.AreEqual(1, db.LogAdded.Count);
+            Assert.AreEqual(2, db.saved);
         }
         [Test]
         public void UsersControllerEditNewUserPostbackInValidPasswordTest()
@@ -117,7 +118,8 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(0, db.Added.Count);
             Assert.AreEqual(1, db.Updated.Count);
             Assert.AreEqual("TestUpdate", ((User)db.Updated[0]).EmailAddress);
-            Assert.AreEqual(1, db.saved);
+            Assert.AreEqual(1, db.LogAdded.Count);
+            Assert.AreEqual(2, db.saved);
         }
         [Test]
         public void UsersControllerEditExistingUserPostbackUserValidPasswordChangeTest()
@@ -136,7 +138,8 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(1, db.Updated.Count);
             Assert.AreEqual("TestUpdate", ((User)db.Updated[0]).EmailAddress);
             Assert.AreEqual(true, PasswordHash.ValidatePassword("NewPassword", ((User)db.Updated[0]).Password));
-            Assert.AreEqual(1, db.saved);
+            Assert.AreEqual(1, db.LogAdded.Count);
+            Assert.AreEqual(2, db.saved);
         }
         [Test]
         public void UsersControllerEditExistingUserPostbackUserInvalidPasswordChangeBadOldPasswordTest()
