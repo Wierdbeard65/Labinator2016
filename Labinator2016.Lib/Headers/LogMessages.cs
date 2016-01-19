@@ -29,6 +29,7 @@ namespace Labinator2016.Lib.Headers
         /// An entity was updated.
         /// </summary>
         update,
+
         /// <summary>
         /// Someone logged on.
         /// </summary>
@@ -40,7 +41,7 @@ namespace Labinator2016.Lib.Headers
         logout,
 
         /// <summary>
-        /// There was an incorrect logon attenpt.
+        /// There was an incorrect logon attempt.
         /// </summary>
         incorrectlogon,
 
@@ -55,7 +56,7 @@ namespace Labinator2016.Lib.Headers
         started,
 
         /// <summary>
-        /// A user connected to an environmrnt.
+        /// A user connected to an environment.
         /// </summary>
         connected,
 

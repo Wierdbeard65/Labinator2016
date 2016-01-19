@@ -68,7 +68,7 @@ namespace Labinator2016.Lib.Models
         /// The API key.
         /// </value>
         [Display(Name = "SkyTap API Key")]
-        public string STAPIKey { get; set;}
+        public string STAPIKey { get; set; }
 
         /// <summary>
         /// Gets or sets the existing password. This is used when changing the password. Not a database field.

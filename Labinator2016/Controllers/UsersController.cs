@@ -110,9 +110,10 @@ namespace Labinator2016.Controllers
                     {
                         return this.View("Edit", user);
                     }
+
                     user.Password = PasswordHash.CreateHash(user.NewPassword1);
                     this.db.Add<User>(user);
-                    Log.Write(db,new Log() {Message=LogMessages.create,Detail="User " + user.EmailAddress+" created." });
+                    Log.Write(this.db,new Log() {Message=LogMessages.create,Detail="User " + user.EmailAddress+" created." });
                 }
                 else
                 {
@@ -137,7 +138,7 @@ namespace Labinator2016.Controllers
                         user.Password = PasswordHash.CreateHash(user.NewPassword1);
                     }
 
-                    Log.Write(db, new Log() { Message = LogMessages.update, Detail = "User " + user.EmailAddress + " updated." });
+                    Log.Write(this.db, new Log() { Message = LogMessages.update, Detail = "User " + user.EmailAddress + " updated." });
                     this.db.Update<User>(user);
                 }
 
