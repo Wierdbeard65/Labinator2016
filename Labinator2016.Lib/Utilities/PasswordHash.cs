@@ -79,6 +79,10 @@ namespace Labinator2016.Lib.Utilities
         /// <returns>True if the password is correct. False otherwise.</returns>
         public static bool ValidatePassword(string password, string correctHash)
         {
+            if ((password == null) || (correctHash == null) || (password.Length == 0) || (correctHash.Length == 0))
+            {
+                return false;
+            }
             // Extract the parameters from the hash
             char[] delimiter = { ':' };
             string[] split = correctHash.Split(delimiter);

@@ -106,10 +106,32 @@ namespace Labinator2016.Controllers
             {
                 if (user.UserId == 0)
                 {
+                    if ((user.NewPassword1 == null) || (user.NewPassword2 == null) || (user.NewPassword1.Length == 0) || (user.NewPassword2.Length == 0) || (user.NewPassword1 != user.NewPassword2))
+                    {
+                        return this.View("Edit",user);
+                    }
+                    user.Password = PasswordHash.CreateHash(user.NewPassword1);
                     this.db.Add<User>(user);
                 }
                 else
                 {
+                    if (!((user.NewPassword1 == null) || (user.NewPassword2 == null) || (user.NewPassword1.Length == 0) || (user.NewPassword2.Length == 0)))
+                    {
+                        if(user.NewPassword1 != user.NewPassword2)
+                        {
+                            return this.View("Edit", user);
+                        }
+                        User ExistingUser = this.db.Query<User>().Where(u => u.UserId == user.UserId).FirstOrDefault();
+                        if (user == null)
+                        {
+                            return this.View("Edit", user);
+                        }
+                        if (!PasswordHash.ValidatePassword(user.OldPassword, ExistingUser.Password))
+                        {
+                            return this.View("Edit", user);
+                        }
+                        user.Password = PasswordHash.CreateHash(user.NewPassword1);
+                    }
                     this.db.Update<User>(user);
                 }
 
@@ -117,7 +139,7 @@ namespace Labinator2016.Controllers
                 return this.RedirectToAction("Index");
             }
 
-            return this.View(user);
+            return this.View("Edit", user);
         }
 
         /// <summary>

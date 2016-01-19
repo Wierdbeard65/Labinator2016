@@ -1,4 +1,4 @@
-﻿namespace Labinator2016R1.Tests.TestData
+﻿namespace Labinator2016.Tests.TestData
 {
     using System;
     using System.Collections.Generic;

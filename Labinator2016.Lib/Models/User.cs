@@ -11,7 +11,7 @@
 namespace Labinator2016.Lib.Models
 {
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     /// <summary>
     /// Database model for the User table
     /// </summary>
@@ -48,6 +48,7 @@ namespace Labinator2016.Lib.Models
         /// <value>
         /// <c>true</c> if this user is an instructor; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Instructor")]
         public bool IsInstructor { get; set; }
 
         /// <summary>
@@ -56,6 +57,31 @@ namespace Labinator2016.Lib.Models
         /// <value>
         /// <c>true</c> if this user is an administrator; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Administrator")]
         public bool IsAdministrator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the API key, used by Instructors and Administrators to connect to SkyTap.
+        /// </summary>
+        /// <value>
+        /// The API key.
+        /// </value>
+        [Display(Name = "SkyTap API Key")]
+        public string STAPIKey { get; set;}
+
+        [NotMapped]
+        [DataType(DataType.Password)]
+        [Display(Name = "Existing Password")]
+        public string OldPassword { get; set; }
+        [NotMapped]
+        [DataType(DataType.Password)]
+        [Display(Name = "New Password")]
+        public string NewPassword1 { get; set; }
+        [NotMapped]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        public string NewPassword2 { get; set; }
+
+
     }
 }

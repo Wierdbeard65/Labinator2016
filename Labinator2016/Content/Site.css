@@ -72,3 +72,22 @@ center{
     border-bottom-left-radius:19px;
     border-bottom-right-radius:19px;
 }
+.datatable{
+    padding-left:-15px;
+    padding-right:-15px;
+}
+div.dataTables_length {
+    float: left;
+}
+
+div.dataTables_filter {
+    float: right;
+}
+
+div.dataTables_info {
+    float: left;
+}
+
+div.dataTables_paginate {
+    float: right;
+}

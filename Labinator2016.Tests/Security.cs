@@ -13,6 +13,8 @@ namespace Labinator2016.Tests
             string hashed = PasswordHash.CreateHash("Test");
             Assert.AreEqual(true, PasswordHash.ValidatePassword("Test", hashed));
             Assert.AreEqual(false, PasswordHash.ValidatePassword("NoTest", hashed));
+            Assert.AreEqual(false, PasswordHash.ValidatePassword("Test", ""));
+            Assert.AreEqual(false, PasswordHash.ValidatePassword("Test", null));
         }
     }
 }

@@ -2,20 +2,22 @@
 function refreshList(aj, dc, cr) {
     oTable = $('#datatable').DataTable(
         {
-        "serverSide": true,
-        "Searching": false,
-        "Ordering": false,
-        "ajax": aj,
-        "rowCallback": cr,
-        "processing": true,
-        "pagingType": "full_numbers",
-        "deferRender": true,
-        "columns": dc,
-        "language": {
-            "emptyTable": "Empty List"
+            "serverSide": true,
+            "Searching": false,
+            "Ordering": false,
+            "ajax": aj,
+            "dom": 'lfrtip<"toolbar">',
+            "rowCallback": cr,
+            "processing": true,
+            "pagingType": "full_numbers",
+            "deferRender": true,
+            "columns": dc,
+            "language": {
+                "emptyTable": "Empty List"
+            }
         }
-       }
     );
+    oTable.buttons().container().appendTo($('.col-sm-6:eq(0)', oTable.table().container()));
     //$('#datatable').on('draw.dt', function () {
 
     //    $(this).parent().find(".dataTables_paginate a").each(function () {

@@ -20,7 +20,7 @@ namespace Labinator2016.Lib.Migrations
             String password = PasswordHash.CreateHash("password");
             List<User> users = new List<User> {
                 new User() { EmailAddress = "system", IsAdministrator = true, IsInstructor = true, Password = password },
-                new User() { EmailAddress = "paul.simpson@inin.com", IsAdministrator = true, IsInstructor = true, Password = password }
+                new User() { EmailAddress = "paul.simpson@inin.com", IsAdministrator = true, IsInstructor = true, Password = password, STAPIKey="c4246ea631bf8a6c97d85997a3494082251ece3e" }
             };
             context.Users.AddOrUpdate(u => u.EmailAddress, users.ToArray());
             context.SaveChanges();

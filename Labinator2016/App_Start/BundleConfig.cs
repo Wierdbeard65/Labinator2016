@@ -26,8 +26,8 @@ namespace Labinator2016
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.dataTables.js",
+            ////            "~/Scripts/jquery-{version}.js",
+            ////            "~/Scripts/jquery.dataTables.js",
                         "~/Scripts/site.js"));
             ////bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
             ////            "~/Scripts/jquery.validate*"));
@@ -38,7 +38,7 @@ namespace Labinator2016
             ////bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
             ////            "~/Scripts/modernizr-*"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/jquery.dataTables.min.css",
+                      ////"~/Content/jquery.dataTables.min.css",
                       "~/Content/site.css"));
         }
     }

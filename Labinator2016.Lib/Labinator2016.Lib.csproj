@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201601141739160_Log.Designer.cs">
       <DependentUpon>201601141739160_Log.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601181201441_SkytapAPIKeyAdded.cs" />
+    <Compile Include="Migrations\201601181201441_SkytapAPIKeyAdded.Designer.cs">
+      <DependentUpon>201601181201441_SkytapAPIKeyAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LabinatorContext.cs" />
     <Compile Include="Models\Log.cs" />
@@ -112,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601141739160_Log.resx">
       <DependentUpon>201601141739160_Log.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601181201441_SkytapAPIKeyAdded.resx">
+      <DependentUpon>201601181201441_SkytapAPIKeyAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

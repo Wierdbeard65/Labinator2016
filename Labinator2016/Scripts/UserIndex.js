@@ -25,4 +25,3 @@ function columnRows(Row, Data, Index) {
     link = link + '</a>';
     $('td:eq(3)', Row).html(link);
 };
-
