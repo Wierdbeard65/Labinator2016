@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model Labinator2016R1.ViewModels.LoginViewModel
+@model Labinator2016.ViewModels.LoginViewModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,10 +28,10 @@
 
                 <table width="1300" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td colspan="3" style="line-height:0;"><img src="/Images/headerLabLogin.png" width="1300" height="305" border="0" /></td>
+                        <td colspan="3" style="line-height:0;"><img src="~/Images/headerLabLogin.png" width="1300" height="305" border="0" /></td>
                     </tr>
                     <tr>
-                        <td width="775" style="line-height:0;"><img src="/Images/midLeftLabLogin.jpg" width="775" height="268" border="0" /></td>
+                        <td width="775" style="line-height:0;"><img src="~/Images/midLeftLabLogin.jpg" width="775" height="268" border="0" /></td>
                         <td width="401" bgcolor="#d6d6d6" valign="top">
                             <br>
                             <br>
@@ -44,7 +44,7 @@
                             @Html.PasswordFor(m => m.Password)
 
                             <br>
-                            <img src="/Images/formDivider.gif" width="401" height="12" border="0">
+                            <img src="~/Images/formDivider.gif" width="401" height="12" border="0">
                             <br>
                             <center>
                                     @*<a href="javascript:{}" onclick="document.getElementById('login_form').submit(); return false;">Login</a>*@
@@ -52,10 +52,10 @@
                                 @*<input type="image" name="usrlogin" src="/Images/btnSignIn.gif" width="57" height="34" border="0">*@
                             </center>
                         </td>
-                        <td width="124" style="line-height:0;"><img src="/Images/midRightLabLogin.jpg" width="124" height="268" border="0" /></td>
+                        <td width="124" style="line-height:0;"><img src="~/Images/midRightLabLogin.jpg" width="124" height="268" border="0" /></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><img src="/Images/footerLabLogin.png" width="1300" height="167" border="0" style="line-height:0;" /></td>
+                        <td colspan="3"><img src="~/Images/footerLabLogin.png" width="1300" height="167" border="0" style="line-height:0;" /></td>
                     </tr>
                 </table>
             }

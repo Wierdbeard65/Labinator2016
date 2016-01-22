@@ -7,6 +7,8 @@
 /// <summary>
 /// Author: Paul Simpson
 /// Version: 1.0 - Initial build.
+/// Version: 1.1 - Login added.
+/// Version: 1.2 - Password management added.
 /// </summary>
 namespace Labinator2016.Controllers
 {
@@ -16,13 +18,14 @@ namespace Labinator2016.Controllers
     using Labinator2016.Lib.Headers;
     using Labinator2016.Lib.Models;
     using Labinator2016.Lib.Utilities;
+    using ViewModels;
     using ViewModels.DatatablesViewModel;
 
     /// <summary>
     /// Back-end processing for all User-related work and pages.
     /// </summary>
     /// <seealso cref="System.Web.Mvc.Controller" />
-    ////[Authorize]
+    [Authorize]
     public class UsersController : Controller
     {
         /// <summary>
@@ -49,10 +52,12 @@ namespace Labinator2016.Controllers
         /// Initializes a new instance of the <see cref="UsersController"/> class.
         /// Used for constructing when Unit Testing.
         /// </summary>
-        /// <param name="db">Handle to Database stub..</param>
-        public UsersController(ILabinatorDb db)
+        /// <param name="db">Handle to Database stub.</param>
+        /// <param name="auth">Handle to the Authenticator stub.</param>
+        public UsersController(ILabinatorDb db, IAuth auth)
         {
             this.db = db;
+            this.auth = auth;
         }
 
         /// <summary>
@@ -113,7 +118,7 @@ namespace Labinator2016.Controllers
 
                     user.Password = PasswordHash.CreateHash(user.NewPassword1);
                     this.db.Add<User>(user);
-                    Log.Write(this.db,new Log() {Message=LogMessages.create,Detail="User " + user.EmailAddress+" created." });
+                    Log.Write(this.db, new Log() {Message = LogMessages.create, Detail = "User " + user.EmailAddress + " created." });
                 }
                 else
                 {
@@ -175,9 +180,9 @@ namespace Labinator2016.Controllers
         /// </summary>
         /// <param name="id">The id of the user to delete.</param>
         /// <returns>The user list.</returns>
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             User user = this.db.Query<User>().Where(u => u.UserId == id).FirstOrDefault();
             this.db.Remove<User>(user);
@@ -202,12 +207,12 @@ namespace Labinator2016.Controllers
         /// <param name="returnUrl">The URL of the page that caused the authentication request.
         /// Used to redirect back after successful login.</param>
         /// <returns>The view for the Login Dialog</returns>
-        ////[AllowAnonymous]
-        ////public ActionResult Login(string returnUrl)
-        ////{
-        ////    LoginViewModel model = new LoginViewModel { ReturnUrl = returnUrl };
-        ////    return this.View(model);
-        ////}
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            LoginViewModel model = new LoginViewModel { ReturnUrl = returnUrl };
+            return this.View(model);
+        }
 
         /// <summary>
         /// Called when the user submits a login request.
@@ -215,39 +220,39 @@ namespace Labinator2016.Controllers
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>A redirect to the original page, or the view for the Login Dialog</returns>
-        ////[HttpPost]
-        ////[AllowAnonymous]
-        ////[ValidateAntiForgeryToken]
-        ////public ActionResult Login(LoginViewModel model)
-        ////{
-        ////    // Lets first check if the Model is valid or not
-        ////    if (ModelState.IsValid)
-        ////    {
-        ////        string username = model.UserName;
-        ////        string password = model.Password;
-        ////        var user = this.db.Query<User>().Where(i => i.EmailAddress == username).FirstOrDefault();
-        ////        if (user != null)
-        ////        {
-        ////            bool userValid = PasswordHash.ValidatePassword(password, user.Password);
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel model)
+        {
+            // Lets first check if the Model is valid or not
+            if (ModelState.IsValid)
+            {
+                string username = model.UserName;
+                string password = model.Password;
+                var user = this.db.Query<User>().Where(i => i.EmailAddress == username).FirstOrDefault();
+                if (user != null)
+                {
+                    bool userValid = PasswordHash.ValidatePassword(password, user.Password);
 
-        ////            // User found in the database
-        ////            if (userValid)
-        ////            {
-        ////                ////Log.Write(this.db, new Log() { User = username, Message = LogMessages.logon });
-        ////                string returnUrl = model.ReturnUrl;
-        ////                this.auth.DoAuth(username, false);
-        ////                ActionResult response = Redirect(returnUrl);
-        ////                return response;
-        ////            }
-        ////        }
+                    // User found in the database
+                    if (userValid)
+                    {
+                        Log.Write(this.db, new Log() { Message = LogMessages.logon, Detail = "User " + username + " successfully logged on." });
+                        string returnUrl = model.ReturnUrl;
+                        this.auth.DoAuth(username, false);
+                        ActionResult response = Redirect(returnUrl);
+                        return response;
+                    }
+                }
 
-        ////        ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
-        ////        ////Log.Write(this.db, new Log() { User = username, Message = LogMessages.incorrectlogon });
-        ////    }
+                ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
+                Log.Write(this.db, new Log() {Message = LogMessages.incorrectlogon, Detail = "There was an incorrect login attempt for user" + username });
+            }
 
-        ////    // If we got this far, something failed, redisplay form
-        ////    return this.View(model);
-        ////}
+            // If we got this far, something failed, redisplay form
+            return this.View(model);
+        }
 
         /// <summary>
         /// Processes the logout request
@@ -256,7 +261,7 @@ namespace Labinator2016.Controllers
         public ActionResult Logout()
         {
             this.auth.DoDeAuth();
-            return this.Redirect("/");
+            return this.Redirect("~/");
         }
     }
 }

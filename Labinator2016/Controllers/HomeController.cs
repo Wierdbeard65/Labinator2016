@@ -19,6 +19,7 @@ namespace Labinator2016.Controllers
     /// Controller class for the Home Page
     /// </summary>
     /// <seealso cref="System.Web.Mvc.Controller" />
+    [Authorize]
     public class HomeController : Controller
     {
         /// <summary>

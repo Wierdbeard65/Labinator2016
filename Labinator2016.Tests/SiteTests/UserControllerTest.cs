@@ -17,6 +17,7 @@ namespace Labinator2016.Tests.Controllers
     using Lib.Models;
     using NUnit.Framework;
     using Lib.Utilities;
+    using Lib.Headers;
     [TestFixture]
     public class UserControllerTest
     {
@@ -24,7 +25,9 @@ namespace Labinator2016.Tests.Controllers
         public void UsersControllerInitialIndexTest()
         {
             // Arrange
-            UsersController controller = new UsersController();
+            var db = new FakeDatabase();
+            IAuth auth = new FakeFormAuthenticator();
+            UsersController controller = new UsersController(db,auth);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -50,12 +53,13 @@ namespace Labinator2016.Tests.Controllers
         public void UsersControllerEditExistingUserInitialTest()
         {
             var db = new FakeDatabase();
+            IAuth auth = new FakeFormAuthenticator();
 ////            var st = new FakeSkyTap();
             db.AddSet(TestUserData.Users);
 ////            db.AddSet(TestCourseData.Courses);
 ////            db.AddSet(TestClassroomData.Classrooms);
 ////            st.AddSet(TestTemplateRESTData.templates);
-            var controller = new UsersController(db);
+            var controller = new UsersController(db,auth);
 ////            controller.ControllerContext = new FakeControllerContext();
             ViewResult result = controller.Edit(1) as ViewResult;
             Assert.IsNotNull(result);
@@ -66,12 +70,13 @@ namespace Labinator2016.Tests.Controllers
         public void UsersControllerEditNewUserPostbackValidPasswordTest()
         {
             var db = new FakeDatabase();
+            IAuth auth = new FakeFormAuthenticator();
             ////var st = new FakeSkyTap();
             db.AddSet(TestUserData.Users);
             ////db.AddSet(TestCourseData.Courses);
             ////db.AddSet(TestClassroomData.Classrooms);
             ////st.AddSet(TestTemplateRESTData.templates);
-            var controller = new UsersController(db);
+            UsersController controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
             User testUser = new User() { UserId = 0, EmailAddress = "TestNew", NewPassword1="TestPassword",NewPassword2="TestPassword" };
             var result = controller.Edit(testUser);
@@ -87,12 +92,13 @@ namespace Labinator2016.Tests.Controllers
         public void UsersControllerEditNewUserPostbackInValidPasswordTest()
         {
             var db = new FakeDatabase();
+            IAuth auth = new FakeFormAuthenticator();
             ////var st = new FakeSkyTap();
             db.AddSet(TestUserData.Users);
             ////db.AddSet(TestCourseData.Courses);
             ////db.AddSet(TestClassroomData.Classrooms);
             ////st.AddSet(TestTemplateRESTData.templates);
-            var controller = new UsersController(db);
+            UsersController controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
             User testUser = new User() { UserId = 0, EmailAddress = "TestNew", NewPassword1 = "TestPassword", NewPassword2 = "WrongPassword" };
             var result = controller.Edit(testUser);
@@ -106,10 +112,11 @@ namespace Labinator2016.Tests.Controllers
         public void UsersControllerEditExistingUserPostbackAdminsitratorNoPasswordChangeTest()
         {
             var db = new FakeDatabase();
+            IAuth auth = new FakeFormAuthenticator();
             ////var st = new FakeSkyTap();
             db.AddSet(TestUserData.Users);
             ////st.AddSet(TestTemplateRESTData.templates);
-            var controller = new UsersController(db);
+            UsersController controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
             User testUser = new User() { UserId = 1, EmailAddress = "TestUpdate" };
             var result = controller.Edit(testUser);
@@ -125,10 +132,11 @@ namespace Labinator2016.Tests.Controllers
         public void UsersControllerEditExistingUserPostbackUserValidPasswordChangeTest()
         {
             var db = new FakeDatabase();
+            IAuth auth = new FakeFormAuthenticator();
             ////var st = new FakeSkyTap();
             db.AddSet(TestUserData.Users);
             ////st.AddSet(TestTemplateRESTData.templates);
-            var controller = new UsersController(db);
+            UsersController controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
             User testUser = new User() { UserId = 1, EmailAddress = "TestUpdate", OldPassword= "password", NewPassword1="NewPassword",NewPassword2="NewPassword" };
             var result = controller.Edit(testUser);
@@ -145,10 +153,11 @@ namespace Labinator2016.Tests.Controllers
         public void UsersControllerEditExistingUserPostbackUserInvalidPasswordChangeBadOldPasswordTest()
         {
             var db = new FakeDatabase();
+            IAuth auth = new FakeFormAuthenticator();
             ////var st = new FakeSkyTap();
             db.AddSet(TestUserData.Users);
             ////st.AddSet(TestTemplateRESTData.templates);
-            var controller = new UsersController(db);
+            UsersController controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
             User testUser = new User() { UserId = 1, EmailAddress = "TestUpdate", OldPassword = "wrong", NewPassword1 = "NewPassword", NewPassword2 = "NewPassword" };
             var result = controller.Edit(testUser);
@@ -161,10 +170,11 @@ namespace Labinator2016.Tests.Controllers
         public void UsersControllerEditExistingUserPostbackUserInvalidPasswordChangeBadNewPasswordTest()
         {
             var db = new FakeDatabase();
+            IAuth auth = new FakeFormAuthenticator();
             ////var st = new FakeSkyTap();
             db.AddSet(TestUserData.Users);
             ////st.AddSet(TestTemplateRESTData.templates);
-            var controller = new UsersController(db);
+            UsersController controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
             User testUser = new User() { UserId = 1, EmailAddress = "TestUpdate", OldPassword = "password", NewPassword1 = "NewPassword", NewPassword2 = "WrongPassword" };
             var result = controller.Edit(testUser);
@@ -173,5 +183,51 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual("Edit", ((ViewResult)result).ViewName);
             Assert.AreEqual(0, db.Added.Count);
         }
+        [Test]
+        public void ValidUser()
+        {
+            var db = new FakeDatabase();
+            var auth = new FakeFormAuthenticator();
+            db.AddSet(TestUserData.Users);
+            var controller = new UsersController(db, auth);
+            controller.ControllerContext = new FakeControllerContext();
+            var result = controller.Login(new LoginViewModel() { UserName = "TestUser0@test.com", Password = "password", ReturnUrl = "/" });
+            Assert.AreEqual(typeof(RedirectResult), result.GetType());
+            Assert.AreEqual(1, db.LogAdded.Count);
+            Assert.AreEqual(LogMessages.logon, ((Log)db.LogAdded[0]).Message);
+        }
+        [Test]
+        public void InValidUser()
+        {
+            var db = new FakeDatabase();
+            var auth = new FakeFormAuthenticator();
+            db.AddSet(TestUserData.Users);
+            var controller = new UsersController(db, auth);
+            var result = controller.Login(new LoginViewModel() { UserName = "NonExistent@test.com", Password = "password", ReturnUrl = "/" }) as ViewResult;
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ViewData.ModelState[""]);
+            Assert.IsNotNull(result.ViewData.ModelState[""].Errors);
+            Assert.IsTrue(result.ViewData.ModelState[""].Errors.Count == 1);
+            Assert.AreEqual("The user name or password provided is incorrect.", result.ViewData.ModelState[""].Errors[0].ErrorMessage);
+            Assert.AreEqual(1, db.LogAdded.Count);
+            Assert.AreEqual(LogMessages.incorrectlogon, ((Log)db.LogAdded[0]).Message);
+        }
+        [Test]
+        public void InvalidPassword()
+        {
+            var db = new FakeDatabase();
+            var auth = new FakeFormAuthenticator();
+            db.AddSet(TestUserData.Users);
+            var controller = new UsersController(db, auth);
+            var result = controller.Login(new LoginViewModel() { UserName = "TestUser0@test.com", Password = "bad", ReturnUrl = "/" }) as ViewResult;
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ViewData.ModelState[""]);
+            Assert.IsNotNull(result.ViewData.ModelState[""].Errors);
+            Assert.IsTrue(result.ViewData.ModelState[""].Errors.Count == 1);
+            Assert.AreEqual("The user name or password provided is incorrect.", result.ViewData.ModelState[""].Errors[0].ErrorMessage);
+            Assert.AreEqual(1, db.LogAdded.Count);
+            Assert.AreEqual(LogMessages.incorrectlogon, ((Log)db.LogAdded[0]).Message);
+        }
+
     }
 }
