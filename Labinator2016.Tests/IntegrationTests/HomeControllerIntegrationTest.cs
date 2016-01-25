@@ -47,6 +47,10 @@ namespace Labinator2016.Tests.Controllers
                     case "Users/Login":
                     case "Users/Ajax":
                     case "DataCenters/Ajax":
+                    case "Courses/Ajax":
+                    case "Courses/MachineAjax":
+                    case "Courses/Refresh":
+                    case "Courses/Active":
                         break;
                     default:
                         request = (HttpWebRequest)HttpWebRequest.Create("http://localhost/Labinator2016/" + testURL);

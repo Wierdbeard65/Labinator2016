@@ -35,7 +35,25 @@ namespace Labinator2016.Lib.Models
         /// <value>
         /// A representation of the Users table in the Database.
         /// </value>
-        public DbSet<User> Users { get; set; }
+        public DbSet<Course> Courses { get; set; }         
+            
+            /// <summary        
+                                                     /// Gets or sets the Users table reference.
+                                                     /// </summary>
+                                                     /// <value>
+                                                     /// A representation of the Users table in the Database.
+                                                     /// </value>
+        public DbSet<CourseMachine> CourseMachines { get; set; }
+
+
+        /// Gets or sets the Users table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the Users table in the Database.
+        /// </value>
+        public DbSet<CourseMachineTemp> CourseMachineTemps { get; set; }
+
+
 
         /// <summary>
         /// Gets or sets the DataCenter table reference.
@@ -44,6 +62,14 @@ namespace Labinator2016.Lib.Models
         /// A representation of the DataCenter table in the Database.
         /// </value>
         public DbSet<DataCenter> DataCenters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Users table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the Users table in the Database.
+        /// </value>
+        public DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Gets or sets the logs table reference.

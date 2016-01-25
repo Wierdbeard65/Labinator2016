@@ -18,11 +18,11 @@ var dc = [
 
 function columnRows(Row, Data, Index) {
     var link = '<a class="btn"';
-    link = link + ' href="/DataCenters/Edit/' + Data["DataCenterId"] + '">';
+    link = link + ' href="DataCenters/Edit/' + Data["DataCenterId"] + '">';
     link = link + 'Edit';
     link = link + '</a>';
     link = link + '&nbsp;<a class="btn"';
-    link = link + ' href="/DataCenters/Delete/' + Data["DataCenterId"] + '">';
+    link = link + ' href="DataCenters/Delete/' + Data["DataCenterId"] + '">';
     link = link + 'Delete';
     link = link + '</a>';
     $('td:eq(4)', Row).html(link);

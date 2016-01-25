@@ -48,6 +48,10 @@
       <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -96,9 +100,12 @@
     <Compile Include="TestData\FakeControllerContext.cs" />
     <Compile Include="TestData\FakeDatabase.cs" />
     <Compile Include="TestData\FakeFormAuthenticator.cs" />
+    <Compile Include="TestData\FakeSkyTap.cs" />
     <Compile Include="TestData\LoggingSystem.cs" />
     <Compile Include="TestData\TestDataCenterData.cs" />
     <Compile Include="TestData\TestUserData.cs" />
+    <Compile Include="TestData\TestVmRESTData.cs" />
+    <Compile Include="TestHarness\FakeVmTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Labinator2016.Lib\Labinator2016.Lib.csproj">
