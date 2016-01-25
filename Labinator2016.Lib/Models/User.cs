@@ -7,6 +7,7 @@
 /// <summary>
 /// Author: Paul Simpson
 /// Version: 1.0 - Initial build.
+/// Version: 1.1 - Password Management fields added.
 /// </summary>
 namespace Labinator2016.Lib.Models
 {

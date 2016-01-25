@@ -90,12 +90,14 @@
     <Compile Include="IntegrationTests\HomeControllerIntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security.cs" />
+    <Compile Include="SiteTests\DataCenterControllerTest.cs" />
     <Compile Include="SiteTests\HomeControllerTest.cs" />
     <Compile Include="SiteTests\UserControllerTest.cs" />
     <Compile Include="TestData\FakeControllerContext.cs" />
     <Compile Include="TestData\FakeDatabase.cs" />
     <Compile Include="TestData\FakeFormAuthenticator.cs" />
     <Compile Include="TestData\LoggingSystem.cs" />
+    <Compile Include="TestData\TestDataCenterData.cs" />
     <Compile Include="TestData\TestUserData.cs" />
   </ItemGroup>
   <ItemGroup>

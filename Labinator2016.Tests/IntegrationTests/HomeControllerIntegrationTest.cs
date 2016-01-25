@@ -45,6 +45,8 @@ namespace Labinator2016.Tests.Controllers
                 switch (testURL)
                 {
                     case "Users/Login":
+                    case "Users/Ajax":
+                    case "DataCenters/Ajax":
                         break;
                     default:
                         request = (HttpWebRequest)HttpWebRequest.Create("http://localhost/Labinator2016/" + testURL);
@@ -68,7 +70,7 @@ namespace Labinator2016.Tests.Controllers
 
                 // actually execute the GET request
                 string ret = client.DownloadString("http://localhost/Labinator2016/");
-            string token= MvcUtils.ExtractAntiForgeryToken(ret);
+            string token = MvcUtils.ExtractAntiForgeryToken(ret);
             string cookies = client.ResponseHeaders["Set-Cookie"];
             client.Headers.Add("Cookie", cookies);
             System.Collections.Specialized.NameValueCollection formData = new System.Collections.Specialized.NameValueCollection();

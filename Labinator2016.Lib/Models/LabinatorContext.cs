@@ -38,6 +38,14 @@ namespace Labinator2016.Lib.Models
         public DbSet<User> Users { get; set; }
 
         /// <summary>
+        /// Gets or sets the DataCenter table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the DataCenter table in the Database.
+        /// </value>
+        public DbSet<DataCenter> DataCenters { get; set; }
+
+        /// <summary>
         /// Gets or sets the logs table reference.
         /// </summary>
         /// <value>

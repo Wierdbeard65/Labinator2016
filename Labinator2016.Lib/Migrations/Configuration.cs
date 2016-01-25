@@ -24,11 +24,11 @@ namespace Labinator2016.Lib.Migrations
             };
             context.Users.AddOrUpdate(u => u.EmailAddress, users.ToArray());
             context.SaveChanges();
-            List<Log> logs = new List<Log> {
-                new Log() {Message=LogMessages.create,Detail="Database Created" }
-            };
-            context.Logs.AddOrUpdate(l => l.Detail, logs.ToArray());
-            context.SaveChanges();
+            ////List<Log> logs = new List<Log> {
+            ////    new Log() {Message=LogMessages.create,Detail="Database Created" }
+            ////};
+            ////context.Logs.AddOrUpdate(l => l.Detail, logs.ToArray());
+            ////context.SaveChanges();
         }
     }
 }

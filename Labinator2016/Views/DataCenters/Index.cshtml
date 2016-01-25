@@ -1,0 +1,42 @@
+﻿<br />
+<p>
+    <table width="100%" class="display" id="datatable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Time Zone</th>
+                <th>Type</th>
+                <th>Gateway IP</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Time Zone</th>
+                <th>Type</th>
+                <th>Gateway IP</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</p>
+<p>
+    @Html.ActionLink(linkText: "Add",
+                        actionName: "Edit",
+                        controllerName: "DataCenters",
+                        routeValues: new { Id = 0 },
+                        htmlAttributes: new { @class = "btn" })
+</p>
+
+@section Scripts {
+    <script src="~/Scripts/DataCenterIndex.js" language="javascript"></script>
+    <script>
+        $(document).load(refreshList(aj, dc, columnRows));
+        $("div.toolbar").html('<center>@Html.ActionLink(linkText: "Add",
+        actionName: "Edit",
+        controllerName: "DataCenters",
+        routeValues: new { Id = 0 },
+        htmlAttributes: new { @class = "btn btn-primary" })</center>');
+    </script>
+}

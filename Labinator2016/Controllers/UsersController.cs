@@ -196,6 +196,7 @@ namespace Labinator2016.Controllers
         /// </summary>
         /// <param name="param">The information sent from the DataTable regarding sorts, filters etc.</param>
         /// <returns>A JSON response with the new information to display.</returns>
+        [AllowAnonymous]
         public ActionResult Ajax(DTParameters param)
         {
             return this.Json(Generic.Ajax<User>(this.db.Query<User>().ToList(), param));

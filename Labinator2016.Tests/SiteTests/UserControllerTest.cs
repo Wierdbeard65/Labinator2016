@@ -27,7 +27,7 @@ namespace Labinator2016.Tests.Controllers
             // Arrange
             var db = new FakeDatabase();
             IAuth auth = new FakeFormAuthenticator();
-            UsersController controller = new UsersController(db,auth);
+            UsersController controller = new UsersController(db, auth);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -59,7 +59,7 @@ namespace Labinator2016.Tests.Controllers
 ////            db.AddSet(TestCourseData.Courses);
 ////            db.AddSet(TestClassroomData.Classrooms);
 ////            st.AddSet(TestTemplateRESTData.templates);
-            var controller = new UsersController(db,auth);
+            var controller = new UsersController(db, auth);
 ////            controller.ControllerContext = new FakeControllerContext();
             ViewResult result = controller.Edit(1) as ViewResult;
             Assert.IsNotNull(result);
@@ -78,7 +78,7 @@ namespace Labinator2016.Tests.Controllers
             ////st.AddSet(TestTemplateRESTData.templates);
             UsersController controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
-            User testUser = new User() { UserId = 0, EmailAddress = "TestNew", NewPassword1="TestPassword",NewPassword2="TestPassword" };
+            User testUser = new User() { UserId = 0, EmailAddress = "TestNew", NewPassword1 = "TestPassword", NewPassword2 = "TestPassword" };
             var result = controller.Edit(testUser);
             Assert.IsNotNull(result);
             Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
@@ -138,7 +138,7 @@ namespace Labinator2016.Tests.Controllers
             ////st.AddSet(TestTemplateRESTData.templates);
             UsersController controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
-            User testUser = new User() { UserId = 1, EmailAddress = "TestUpdate", OldPassword= "password", NewPassword1="NewPassword",NewPassword2="NewPassword" };
+            User testUser = new User() { UserId = 1, EmailAddress = "TestUpdate", OldPassword= "password", NewPassword1="NewPassword", NewPassword2="NewPassword" };
             var result = controller.Edit(testUser);
             Assert.IsNotNull(result);
             Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
