@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Labinator.Lib.REST;
+using Labinator2016.Lib.REST;
 using Labinator2016.Tests.TestData;
 using NUnit.Framework;
 using RestSharp;

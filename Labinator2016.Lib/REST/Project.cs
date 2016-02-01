@@ -1,9 +1,9 @@
-﻿using System;
-using Labinator2016.Lib.Headers;
-using RestSharp;
-
-namespace Labinator2016.Lib.REST
+﻿namespace Labinator2016.Lib.REST
 {
+    using System;
+    using Labinator2016.Lib.Headers;
+    using RestSharp;
+
     public class Project
     {
         ISkyTap st;

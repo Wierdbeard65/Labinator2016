@@ -1,6 +1,6 @@
 ﻿<br />
 <p>
-    <table width="100%" class="display" id="datatable" cellspacing="0">
+    <table width="100%" class="table table-striped table-bordered" id="datatable" cellspacing="0">
         <thead>
             <tr>
                 <th>Name</th>
@@ -20,13 +20,6 @@
             </tr>
         </tfoot>
     </table>
-</p>
-<p>
-    @Html.ActionLink(linkText: "Add",
-                        actionName: "Edit",
-                        controllerName: "DataCenters",
-                        routeValues: new { Id = 0 },
-                        htmlAttributes: new { @class = "btn" })
 </p>
 
 @section Scripts {

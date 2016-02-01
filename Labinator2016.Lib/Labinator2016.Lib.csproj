@@ -110,17 +110,22 @@
     <Compile Include="Migrations\201601181201441_SkytapAPIKeyAdded.Designer.cs">
       <DependentUpon>201601181201441_SkytapAPIKeyAdded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601221953581_DataCenters.cs" />
+    <Compile Include="Migrations\201601221953581_DataCenters.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\201601221953581_DataCenters.Designer.cs">
       <DependentUpon>201601221953581_DataCenters.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601251317244_Courses.cs" />
+    <Compile Include="Migrations\201601251317244_Courses.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\201601251317244_Courses.Designer.cs">
       <DependentUpon>201601251317244_Courses.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Models\Classroom.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseMachine.cs" />
     <Compile Include="Models\CourseMachineTemp.cs" />
@@ -129,10 +134,18 @@
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="REST\Project.cs" />
-    <Compile Include="REST\SkyTap.cs" />
-    <Compile Include="REST\Template.cs" />
-    <Compile Include="REST\Vm.cs" />
+    <Compile Include="REST\Project.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="REST\SkyTap.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="REST\Template.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="REST\Vm.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utilities\FormsAuthWrapper.cs" />
     <Compile Include="Utilities\HtmlHelperExtensions.cs" />
     <Compile Include="Utilities\EventLog.cs" />

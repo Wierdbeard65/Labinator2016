@@ -30,30 +30,36 @@ namespace Labinator2016.Lib.Models
         }
 
         /// <summary>
-        /// Gets or sets the Users table reference.
+        /// Gets or sets the Classrooms table reference.
         /// </summary>
         /// <value>
-        /// A representation of the Users table in the Database.
+        /// A representation of the Classrooms table in the Database.
         /// </value>
-        public DbSet<Course> Courses { get; set; }         
-            
-            /// <summary        
-                                                     /// Gets or sets the Users table reference.
-                                                     /// </summary>
-                                                     /// <value>
-                                                     /// A representation of the Users table in the Database.
-                                                     /// </value>
+        public DbSet<Classroom> Classrooms { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Courses table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the Courses table in the Database.
+        /// </value>
+        public DbSet<Course> Courses { get; set; }
+
+        /// <summary>
+        /// Gets or sets the CourseMachines table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the CourseMachines table in the Database.
+        /// </value>
         public DbSet<CourseMachine> CourseMachines { get; set; }
 
-
-        /// Gets or sets the Users table reference.
+        /// <summary>
+        /// Gets or sets the temporary CourseMachines table reference.
         /// </summary>
         /// <value>
-        /// A representation of the Users table in the Database.
+        /// A representation of the temporary CourseMachines table in the Database.
         /// </value>
         public DbSet<CourseMachineTemp> CourseMachineTemps { get; set; }
-
-
 
         /// <summary>
         /// Gets or sets the DataCenter table reference.

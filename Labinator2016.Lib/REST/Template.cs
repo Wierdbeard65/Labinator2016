@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Labinator.Lib.REST;
+using Labinator2016.Lib.REST;
 using Labinator2016.Lib.Headers;
 using RestSharp;
 

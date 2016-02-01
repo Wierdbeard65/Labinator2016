@@ -118,7 +118,7 @@ namespace Labinator2016.Controllers
 
                     user.Password = PasswordHash.CreateHash(user.NewPassword1);
                     this.db.Add<User>(user);
-                    Log.Write(this.db, new Log() {Message = LogMessages.create, Detail = "User " + user.EmailAddress + " created." });
+                    Log.Write(this.db, new Log() { Message = LogMessages.create, Detail = "User " + user.EmailAddress + " created." });
                 }
                 else
                 {
@@ -248,7 +248,7 @@ namespace Labinator2016.Controllers
                 }
 
                 ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
-                Log.Write(this.db, new Log() {Message = LogMessages.incorrectlogon, Detail = "There was an incorrect login attempt for user" + username });
+                Log.Write(this.db, new Log() { Message = LogMessages.incorrectlogon, Detail = "There was an incorrect login attempt for user" + username });
             }
 
             // If we got this far, something failed, redisplay form

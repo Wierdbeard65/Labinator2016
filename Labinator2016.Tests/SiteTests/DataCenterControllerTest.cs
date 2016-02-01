@@ -1,20 +1,33 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Labinator2016.Tests.TestData;
-using Labinator2016;
-using Labinator2016.Controllers;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using Labinator2016.ViewModels;
-using Labinator2016.Lib.Models;
-using Labinator2016.ViewModels.DatatablesViewModel;
+﻿//-----------------------------------------------------------------------
+// <copyright file="DataCenterControllerTest.cs" company="Interactive Intelligence">
+//     Copyright (c) Interactive Intelligence. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
+/// <summary>
+/// Author: Paul Simpson
+/// Version: 1.0 - Initial build.
+/// </summary>
 namespace Labinator2016.Tests.Controllers
 {
-    [TestClass]
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using Labinator2016.Controllers;
+    using Labinator2016.Lib.Models;
+    using Labinator2016.Tests.TestData;
+    using Labinator2016.ViewModels.DatatablesViewModel;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// Unit tests for the Data Center Controller
+    /// </summary>
+    [TestFixture]
     public class DataCenterControllerTest
     {
-        [TestMethod]
+        /// <summary>
+        /// Test the Data Center ajax list.
+        /// </summary>
+        [Test]
         public void DataCenterAjaxList()
         {
             var db = new FakeDatabase();
@@ -27,7 +40,11 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(3, ((List<DataCenter>)((DTResult<DataCenter>)result.Data).data).Count);
             Assert.AreEqual("Test2", ((List<DataCenter>)((DTResult<DataCenter>)result.Data).data)[0].Name);
         }
-        [TestMethod]
+
+        /// <summary>
+        /// Data the centers controller index test.
+        /// </summary>
+        [Test]
         public void DataCentersControllerIndexTest()
         {
             // Arrange
@@ -39,7 +56,11 @@ namespace Labinator2016.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-        [TestMethod]
+
+        /// <summary>
+        /// Data the center edit new start test.
+        /// </summary>
+        [Test]
         public void DataCenterEditNewStartTest()
         {
             var db = new FakeDatabase();
@@ -51,7 +72,11 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(typeof(DataCenter), result.Model.GetType());
             Assert.AreEqual("New", ((DataCenter)result.Model).Name);
         }
-        [TestMethod]
+
+        /// <summary>
+        /// Data the center edit existing start test.
+        /// </summary>
+        [Test]
         public void DataCenterEditExistingStartTest()
         {
             var db = new FakeDatabase();
@@ -63,7 +88,11 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(typeof(DataCenter), result.Model.GetType());
             Assert.AreEqual("Test1", ((DataCenter)result.Model).Name);
         }
-        [TestMethod]
+
+        /// <summary>
+        /// Data the center edit new write test.
+        /// </summary>
+        [Test]
         public void DataCenterEditNewWriteTest()
         {
             var db = new FakeDatabase();
@@ -78,7 +107,11 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual("TestNew", ((DataCenter)db.Added[0]).Name);
             Assert.AreEqual(1, db.saved);
         }
-        [TestMethod]
+
+        /// <summary>
+        /// Data the center edit existing write test.
+        /// </summary>
+        [Test]
         public void DataCenterEditExistingWriteTest()
         {
             var db = new FakeDatabase();

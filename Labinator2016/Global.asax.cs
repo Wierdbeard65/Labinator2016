@@ -40,6 +40,7 @@ namespace Labinator2016
         {
             this.db = new LabinatorContext();
         }
+
         /// <summary>
         /// Start the Application.
         /// </summary>

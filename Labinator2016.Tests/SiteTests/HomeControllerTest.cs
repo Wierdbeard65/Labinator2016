@@ -14,9 +14,16 @@ namespace Labinator2016.Tests.Controllers
     using Labinator2016.Controllers;
     using Labinator2016.ViewModels;
     using NUnit.Framework;
+
+    /// <summary>
+    /// Unit tests for the Home Controller
+    /// </summary>
     [TestFixture]
     public class HomeControllerTest
     {
+        /// <summary>
+        /// Home the controller initial index test.
+        /// </summary>
         [Test]
         public void HomeControllerInitialIndexTest()
         {
@@ -30,6 +37,10 @@ namespace Labinator2016.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual(false, ((IndexViewModel)result.Model).ShowAll);
         }
+
+        /// <summary>
+        /// Home the controller post back own classes only index test.
+        /// </summary>
         [Test]
         public void HomeControllerPostbackOwnClassesOnlyIndexTest()
         {
@@ -44,6 +55,9 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(false, ((IndexViewModel)result.Model).ShowAll);
         }
 
+        /// <summary>
+        /// Home the controller post back all classes index test.
+        /// </summary>
         [Test]
         public void HomeControllerPostbackAllClassesIndexTest()
         {

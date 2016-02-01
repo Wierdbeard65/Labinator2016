@@ -22,27 +22,30 @@
             <div class="col-md-12 col-lg-12 full-height">
                 <div class="panel panel-primary full-height">
                     <div class="panel-heading">
-                        <center>
-                            @Html.Raw("&nbsp;")
-                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default" })
-                            @if (User.IsInRole("Administrator"))
-                            {
-                            @Html.Raw("&nbsp;")
-                            @Html.ActionLink("DataCenters", "Index", "DataCenters", null, new { @class = "btn btn-default" })
-                            @Html.Raw("&nbsp;")
-                            @Html.ActionLink("Users", "Index", "Users", null, new { @class = "btn btn-default" })
-                            @Html.Raw("&nbsp;")
-                            @Html.ActionLink("Courses", "Index", "Courses", null, new { @class = "btn btn-default" })
-                            @Html.Raw("&nbsp;")
-                            @Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "btn btn-default" })
-                            }
-                            @Html.Raw("&nbsp;")
-                            @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "btn btn-default" })
-                            @Html.Raw("&nbsp;")
-                        </center>
                     </div>
-
                     <div class="panel-body full-height">
+                        <div class="row" style="height:60px">
+                            <div class="col-md-10 col-md-offset-1 button-bar">
+                                <center>
+                                    @Html.Raw("&nbsp;")
+                                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default v-center" })
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        @Html.Raw("&nbsp;")
+                                        @Html.ActionLink("DataCenters", "Index", "DataCenters", null, new { @class = "btn btn-default v-center" })
+                                        @Html.Raw("&nbsp;")
+                                        @Html.ActionLink("Users", "Index", "Users", null, new { @class = "btn btn-default v-center" })
+                                        @Html.Raw("&nbsp;")
+                                        @Html.ActionLink("Courses", "Index", "Courses", null, new { @class = "btn btn-default v-center" })
+                                        @Html.Raw("&nbsp;")
+                                        @Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "btn btn-default v-center" })
+                                    }
+                                    @Html.Raw("&nbsp;")
+                                    @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "btn btn-default v-center" })
+                                    @Html.Raw("&nbsp;")
+                                </center>
+                            </div>
+                        </div>
                         @RenderBody()
                     </div>
                     <div class="panel-footer">

@@ -154,6 +154,7 @@
     <Content Include="Images\btnSignIn.gif" />
     <Content Include="Images\footerLabLogin.png" />
     <Content Include="Images\formDivider.gif" />
+    <Content Include="Images\header.png" />
     <Content Include="Images\headerLabLogin.png" />
     <Content Include="Images\ININ_favicon.png" />
     <Content Include="Images\midLeftLabLogin.jpg" />
@@ -179,6 +180,7 @@
     </Compile>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClassroomsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DataCentersController.cs" />
     <Compile Include="Controllers\Generic.cs" />
@@ -241,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Classrooms\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Labinator2016.Lib\Labinator2016.Lib.csproj">

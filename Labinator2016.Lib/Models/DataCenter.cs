@@ -10,8 +10,6 @@
 /// </summary>
 namespace Labinator2016.Lib.Models
 {
-    using System;
-
     /// <summary>
     /// Database model for the DataCenter table
     /// </summary>
@@ -37,17 +35,17 @@ namespace Labinator2016.Lib.Models
         /// Gets or sets the that classes associated with this DataCenter typically run in..
         /// </summary>
         /// <value>
-        /// The timezone.
+        /// The time zone.
         /// </value>
-        public String Timezone { get; set; }
+        public string Timezone { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether DataCenter is Skytap-based of Hyper-V
+        /// Gets or sets a value indicating whether DataCenter is SkyTap based of Hyper-V
         /// </summary>
         /// <value>
         ///   <c>true</c> if Hyper-V; <c>false</c> if SkyTap.
         /// </value>
-        public Boolean Type { get; set; }
+        public bool Type { get; set; }
 
         /// <summary>
         /// Gets or sets the Gateway IP Address

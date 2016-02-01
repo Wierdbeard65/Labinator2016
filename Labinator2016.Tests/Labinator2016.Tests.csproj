@@ -94,6 +94,8 @@
     <Compile Include="IntegrationTests\HomeControllerIntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security.cs" />
+    <Compile Include="SiteTests\ClassroomsControllerTest.cs" />
+    <Compile Include="SiteTests\CourseControllerTest.cs" />
     <Compile Include="SiteTests\DataCenterControllerTest.cs" />
     <Compile Include="SiteTests\HomeControllerTest.cs" />
     <Compile Include="SiteTests\UserControllerTest.cs" />
@@ -102,7 +104,12 @@
     <Compile Include="TestData\FakeFormAuthenticator.cs" />
     <Compile Include="TestData\FakeSkyTap.cs" />
     <Compile Include="TestData\LoggingSystem.cs" />
+    <Compile Include="TestData\TestClassroomData.cs" />
+    <Compile Include="TestData\TestCourseData.cs" />
+    <Compile Include="TestData\TestCourseMachineData.cs" />
+    <Compile Include="TestData\TestCourseMachineTempData.cs" />
     <Compile Include="TestData\TestDataCenterData.cs" />
+    <Compile Include="TestData\TestTemplateRESTData.cs" />
     <Compile Include="TestData\TestUserData.cs" />
     <Compile Include="TestData\TestVmRESTData.cs" />
     <Compile Include="TestHarness\FakeVmTest.cs" />

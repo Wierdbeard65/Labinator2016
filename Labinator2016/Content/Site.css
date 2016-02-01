@@ -50,13 +50,18 @@ center{
     left:0px;
     right:0px;
 }
-.panel{margin-bottom:0px;
+.panel{
+    width:1282px;
+    margin-bottom:0px;
        border-radius:20px;
+       border-width:5px;
+       border-color:darkgrey;
 }
 .panel-heading {
-    height: 60px;
-    border-top-left-radius:19px;
-    border-top-right-radius:19px;
+    height: 119px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-image: url('../Images/header.png');
 }
 .panel-body{
     padding-bottom:60px;   /* Height of the footer */
@@ -65,12 +70,25 @@ center{
 }
 .panel-footer {
     position: relative;
-	margin-top: -60px; /* negative value of footer height */
+	margin-top: -119px; /* negative value of footer height */
 	height: 60px;
 	clear:both;
     padding:0px;
     border-bottom-left-radius:19px;
     border-bottom-right-radius:19px;
+}
+.button-bar {
+    background-color: #4b9eb9;
+    height: 60px;
+    border-radius:30px;
+    margin-top:10px;
+}
+.v-center{
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+
+
 }
 .datatable{
     padding-left:-15px;

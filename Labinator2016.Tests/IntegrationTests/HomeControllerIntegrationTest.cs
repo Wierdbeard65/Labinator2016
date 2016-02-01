@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="UserControllerTest.cs" company="Interactive Intelligence">
+// <copyright file="HomeControllerIntegrationTest.cs" company="Interactive Intelligence">
 //     Copyright (c) Interactive Intelligence. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -10,25 +10,24 @@
 /// </summary>
 namespace Labinator2016.Tests.Controllers
 {
-    using System.Web.Mvc;
-    using System.Net;
-    using Labinator2016.Controllers;
-    using Labinator2016.ViewModels;
-    using Labinator2016.Tests.TestData;
-    using Lib.Models;
-    using NUnit.Framework;
-    using Lib.Utilities;
-    using Lib.Headers;
-    using MVCIntegrationTestFramework.Hosting;
-    using MVCIntegrationTestFramework.Browsing;
-    using System;
-    using System.Reflection;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Reflection;
     using System.Text;
+    using System.Web.Mvc;
+    using MVCIntegrationTestFramework.Browsing;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// Integrations tests for the controllers.
+    /// </summary>
     [TestFixture]
-    class HomeControllerIntegrationTest
+    public class HomeControllerIntegrationTest
     {
+        /// <summary>
+        /// Logins the redirect test.
+        /// </summary>
         [Test]
         public void LoginRedirectTest()
         {
@@ -36,12 +35,12 @@ namespace Labinator2016.Tests.Controllers
             HttpWebRequest request;
             Assembly asm = Assembly.LoadFrom("D:\\Source\\Labinator2016\\Labinator2016\\bin\\Labinator2016.dll");
             IEnumerable<MethodInfo> conts = asm.GetTypes()
-                .Where(type => typeof(Controller).IsAssignableFrom(type)) //filter controllers
+                .Where(type => typeof(Controller).IsAssignableFrom(type)) // filter controllers
                 .SelectMany(type => type.GetMethods())
                 .Where(method => method.IsPublic && method.Module.ToString() == "Labinator2016.dll" && !method.IsDefined(typeof(NonActionAttribute)));
-            foreach (MethodInfo TestAction in conts)
+            foreach (MethodInfo testAction in conts)
             {
-                testURL = TestAction.DeclaringType.Name.Replace("Controller", "") + "/" + TestAction.Name;
+                testURL = testAction.DeclaringType.Name.Replace("Controller", string.Empty) + "/" + testAction.Name;
                 switch (testURL)
                 {
                     case "Users/Login":
@@ -51,6 +50,7 @@ namespace Labinator2016.Tests.Controllers
                     case "Courses/MachineAjax":
                     case "Courses/Refresh":
                     case "Courses/Active":
+                    case "Classrooms/Ajax":
                         break;
                     default:
                         request = (HttpWebRequest)HttpWebRequest.Create("http://localhost/Labinator2016/" + testURL);
@@ -60,31 +60,37 @@ namespace Labinator2016.Tests.Controllers
                         {
                             Assert.IsNotNull(response.Headers["Location"], "Action " + testURL + " does not re-direct to Login");
                         }
+
                         break;
                 }
             }
         }
-        [Test]
-        public void LoginTest() { 
-            // create a new instance of WebClient
-            WebClient client = new WebClient();
 
-            // set the user agent to IE6
-            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
+        ///// <summary>
+        ///// Logins the test.
+        ///// </summary>
+        ////[Test]
+        ////public void LoginTest()
+        ////{
+        ////    create a new instance of WebClient
+        ////    WebClient client = new WebClient();
 
-                // actually execute the GET request
-                string ret = client.DownloadString("http://localhost/Labinator2016/");
-            string token = MvcUtils.ExtractAntiForgeryToken(ret);
-            string cookies = client.ResponseHeaders["Set-Cookie"];
-            client.Headers.Add("Cookie", cookies);
-            System.Collections.Specialized.NameValueCollection formData = new System.Collections.Specialized.NameValueCollection();
-            formData["UserName"] = "paul.simpson@inin.com";
-            formData["Password"] = "password";
-            formData["__RequestVerificationToken"] = token;
-            formData["ReturnURL"] = "/Labinator2016/";
-            byte[] responseBytes = client.UploadValues("http://localhost/Labinator2016/Users/Login", "POST", formData);
-            string Result = Encoding.UTF8.GetString(responseBytes);
-        }
+        ////    set the user agent to IE6
+        ////    client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
+
+        ////    actually execute the GET request
+        ////        string ret = client.DownloadString("http://localhost/Labinator2016/");
+        ////    string token = MvcUtils.ExtractAntiForgeryToken(ret);
+        ////    string cookies = client.ResponseHeaders["Set-Cookie"];
+        ////    client.Headers.Add("Cookie", cookies);
+        ////    System.Collections.Specialized.NameValueCollection formData = new System.Collections.Specialized.NameValueCollection();
+        ////    formData["UserName"] = "paul.simpson@inin.com";
+        ////    formData["Password"] = "password";
+        ////    formData["__RequestVerificationToken"] = token;
+        ////    formData["ReturnURL"] = "/Labinator2016/";
+        ////    byte[] responseBytes = client.UploadValues("http://localhost/Labinator2016/Users/Login", "POST", formData);
+        ////    string result = Encoding.UTF8.GetString(responseBytes);
+        ////}
         ////        private AppHost appHost;
 
         ////[OneTimeSetUp]
