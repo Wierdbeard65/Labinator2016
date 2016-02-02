@@ -122,6 +122,10 @@
     <Compile Include="Migrations\201601251317244_Courses.Designer.cs">
       <DependentUpon>201601251317244_Courses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602022017263_Classrooms.cs" />
+    <Compile Include="Migrations\201602022017263_Classrooms.Designer.cs">
+      <DependentUpon>201602022017263_Classrooms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
@@ -170,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601251317244_Courses.resx">
       <DependentUpon>201601251317244_Courses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602022017263_Classrooms.resx">
+      <DependentUpon>201602022017263_Classrooms.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

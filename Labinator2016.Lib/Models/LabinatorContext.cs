@@ -27,6 +27,7 @@ namespace Labinator2016.Lib.Models
         /// </summary>
         public LabinatorContext() : base("DefaultConnection")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LabinatorContext, Migrations.Configuration>("DefaultConnection"));
         }
 
         /// <summary>

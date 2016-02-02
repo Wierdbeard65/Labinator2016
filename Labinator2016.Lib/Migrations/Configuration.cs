@@ -30,7 +30,7 @@ namespace Labinator2016.Lib.Migrations
         /// </summary>
         public Configuration()
         {
-            this.AutomaticMigrationsEnabled = false;
+            this.AutomaticMigrationsEnabled = true;
         }
 
         /// <summary>
