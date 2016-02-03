@@ -1,0 +1,42 @@
+﻿@model Labinator2016.Lib.Models.Classroom
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Classroom</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.course.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.course.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataCenter.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataCenter.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

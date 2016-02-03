@@ -9,11 +9,13 @@
 
     public class Classroom
     {
-        public Int32 ClassroomId { get; set; }
-        public Int32 CourseId { get; set; }
-        public Int32 DataCenterId { get; set; }
-        public Int32 UserId { get; set; }
+        public int ClassroomId { get; set; }
+        public int CourseId { get; set; }
+        public int DataCenterId { get; set; }
+        public int UserId { get; set; }
         public string Project { get; set; }
         public DateTime Start { get; set; }
+        public virtual Course course { get; set; }
+        public virtual DataCenter dataCenter { get; set; }
     }
 }
