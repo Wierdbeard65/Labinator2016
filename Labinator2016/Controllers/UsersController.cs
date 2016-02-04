@@ -9,6 +9,7 @@
 /// Version: 1.0 - Initial build.
 /// Version: 1.1 - Login added.
 /// Version: 1.2 - Password management added.
+/// Version: 1.3 - Logging added.
 /// </summary>
 namespace Labinator2016.Controllers
 {
@@ -239,7 +240,7 @@ namespace Labinator2016.Controllers
                     // User found in the database
                     if (userValid)
                     {
-                        Log.Write(this.db, new Log() { Message = LogMessages.logon, Detail = "User " + username + " successfully logged on." });
+                        Log.Write(this.db, new Log() { Message = LogMessages.logon, Detail = "User successfully logged on.", User = username });
                         string returnUrl = model.ReturnUrl;
                         this.auth.DoAuth(username, false);
                         ActionResult response = Redirect(returnUrl);
@@ -248,7 +249,7 @@ namespace Labinator2016.Controllers
                 }
 
                 ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
-                Log.Write(this.db, new Log() { Message = LogMessages.incorrectlogon, Detail = "There was an incorrect login attempt for user" + username });
+                Log.Write(this.db, new Log() { Message = LogMessages.incorrectlogon, Detail = "There was an incorrect login attempt.", User = username });
             }
 
             // If we got this far, something failed, redisplay form
@@ -261,6 +262,7 @@ namespace Labinator2016.Controllers
         /// <returns>Redirect to main homepage</returns>
         public ActionResult Logout()
         {
+            Log.Write(this.db, new Log() { Message = LogMessages.logout, Detail = "User successfully logged off." });
             this.auth.DoDeAuth();
             return this.Redirect("~/");
         }

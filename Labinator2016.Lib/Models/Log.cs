@@ -11,6 +11,8 @@
 namespace Labinator2016.Lib.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
     using Labinator2016.Lib.Headers;
 
     /// <summary>
@@ -35,6 +37,14 @@ namespace Labinator2016.Lib.Models
         public DateTime TimeStamp { get; set; }
 
         /// <summary>
+        /// Gets or sets the user sparking this update (if any).
+        /// </summary>
+        /// <value>
+        /// The user.
+        /// </value>
+        public string User { get; set; }
+
+        /// <summary>
         /// Gets or sets the message detail.
         /// </summary>
         /// <value>
@@ -50,6 +60,24 @@ namespace Labinator2016.Lib.Models
         /// </value>
         public LogMessages Message { get; set; }
 
+        [NotMapped]
+        public string jsTime
+        {
+            get
+            {
+                return this.TimeStamp.ToShortDateString() + " " + this.TimeStamp.ToLongTimeString();
+            }
+        }
+
+        [NotMapped]
+        public string Msg
+        {
+            get
+            {
+                return this.Message.ToString();
+            }
+        }
+
         /// <summary>
         /// Writes a log message to the database.
         /// </summary>
@@ -57,6 +85,10 @@ namespace Labinator2016.Lib.Models
         /// <param name="logEntry">The log entry to write.</param>
         public static void Write(ILabinatorDb db, Log logEntry)
         {
+            if ((logEntry.User==null) ||(logEntry.User == string.Empty))
+            {
+                logEntry.User = System.Web.HttpContext.Current.User.Identity.Name;
+            }
             logEntry.TimeStamp = DateTime.Now;
             db.Add<Log>(logEntry);
             db.SaveChanges();

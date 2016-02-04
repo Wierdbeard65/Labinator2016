@@ -101,12 +101,14 @@
                     ////    classroom.Project = project;
                     ////    //Log.Write(_db,new Log() { User = User.Identity.Name, Message = LogMessages.create, Classroom = classroom.Name });
                     this.db.Add<Classroom>(classroom);
+                    Log.Write(db, new Log() {Message=LogMessages.create,Detail="Classroom created for "+classroom.course+" on "+classroom.jsDate });
                     ////}
                 }
 
                 else
                 {
                     this.db.Update<Classroom>(classroom);
+                    Log.Write(db,new Log() {Message=LogMessages.update, Detail= "Classroom updated for  " + classroom.course + " on " + classroom.jsDate });
                 }
 
                 this.db.SaveChanges();
@@ -149,6 +151,7 @@
             Classroom classroom = this.db.Query<Classroom>().Where(c => c.ClassroomId == id).FirstOrDefault();
             this.db.Remove<Classroom>(classroom);
             this.db.SaveChanges();
+            Log.Write(db, new Log() {Message=LogMessages.delete, Detail = "Classroom deleted for  " + classroom.course + " on " + classroom.jsDate });
             return this.RedirectToAction("Index", "Home");
         }
 

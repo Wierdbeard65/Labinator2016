@@ -22,7 +22,7 @@ function columnRows(Row, Data, Index) {
 
 };
 var dc = [
-        { "data": "Start" },
+        { "data": "jsDate" },
         { "data": "course.Name" },
         { "data": "dataCenter.Name" },
         { "data": "ClassroomId" }

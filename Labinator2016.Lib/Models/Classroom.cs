@@ -17,5 +17,15 @@
         public DateTime Start { get; set; }
         public virtual Course course { get; set; }
         public virtual DataCenter dataCenter { get; set; }
+
+        [NotMapped]
+        public string jsDate
+        {
+            get
+            {
+                return Start.ToShortDateString();
+            }
+        }
+
     }
 }

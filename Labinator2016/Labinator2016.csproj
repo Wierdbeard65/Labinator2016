@@ -168,6 +168,7 @@
     <Content Include="Scripts\bootstrap-switch.min.js" />
     <Content Include="Scripts\CourseIndex.js" />
     <Content Include="Scripts\DataCenterIndex.js" />
+    <Content Include="Scripts\LogIndex.js" />
     <Content Include="Scripts\HomeIndex.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
@@ -185,6 +186,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DataCentersController.cs" />
     <Compile Include="Controllers\Generic.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DatatablesViewModel\DTColumn.cs">
@@ -237,6 +239,7 @@
     <Content Include="Views\Courses\Delete.cshtml" />
     <Content Include="Views\Classrooms\Edit.cshtml" />
     <Content Include="Views\Classrooms\Delete.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

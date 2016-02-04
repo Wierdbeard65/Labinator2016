@@ -1,0 +1,27 @@
+﻿<br />
+<p>
+    <table width="100%" class="table table-striped table-bordered" id="datatable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>TimeStamp</th>
+                <th>User</th>
+                <th>Message</th>
+                <th>Detail</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>TimeStamp</th>
+                <th>User</th>
+                <th>Message</th>
+                <th>Detail</th>
+            </tr>
+        </tfoot>
+    </table>
+</p>
+@section Scripts {
+    <script src="~/Scripts/LogIndex.js" language="javascript"></script>
+    <script>
+        $(document).load(refreshList(aj, dc, columnRows));
+    </script>
+}
