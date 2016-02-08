@@ -71,20 +71,44 @@ namespace Labinator2016.Lib.Models
         public DbSet<DataCenter> DataCenters { get; set; }
 
         /// <summary>
-        /// Gets or sets the Users table reference.
-        /// </summary>
-        /// <value>
-        /// A representation of the Users table in the Database.
-        /// </value>
-        public DbSet<User> Users { get; set; }
-
-        /// <summary>
         /// Gets or sets the logs table reference.
         /// </summary>
         /// <value>
         /// A representation of the Logs table in the Database.
         /// </value>
         public DbSet<Log> Logs { get; set; }
+
+        /// <summary>
+        /// Gets or sets the seats table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the Seats table in the Database.
+        /// </value>
+        public DbSet<Seat> Seats { get; set; }
+
+        /// <summary>
+        /// Gets or sets the seat machines table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the SeatMachiness table in the Database.
+        /// </value>
+        public DbSet<SeatMachine> SeatMachines { get; set; }
+
+        /// <summary>
+        /// Gets or sets the seats table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the Seats table in the Database.
+        /// </value>
+        public DbSet<SeatTemp> SeatTemps { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Users table reference.
+        /// </summary>
+        /// <value>
+        /// A representation of the Users table in the Database.
+        /// </value>
+        public DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Implements the Interface Query on the Database.

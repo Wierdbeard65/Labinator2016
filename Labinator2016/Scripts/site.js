@@ -17,15 +17,11 @@ function refreshList(aj, dc, cr) {
             }
         }
     );
-    oTable.buttons().container().appendTo($('.col-sm-6:eq(0)', oTable.table().container()));
+//    oTable.buttons().container().appendTo($('.col-sm-6:eq(0)', oTable.table().container()));
     //$('#datatable').on('draw.dt', function () {
-
     //    $(this).parent().find(".dataTables_paginate a").each(function () {
-
     //        if ($(this).children("span").length === 0) {
-
     //            $(this).html('&nbsp;<span class="btn">' + $(this).html() + '</span>&nbsp;');
-
     //        }
     //    });
     //});

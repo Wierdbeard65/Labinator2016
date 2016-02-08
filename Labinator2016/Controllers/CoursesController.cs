@@ -83,7 +83,7 @@ namespace Labinator2016.Controllers
         /// <returns>A JSON response with the requested data</returns>
         public JsonResult MachineAjax(DTParameters param)
         {
-            DTResult<CourseMachineTemp> result = Generic.Ajax<CourseMachineTemp>(this.db.Query<CourseMachineTemp>().Where(cmt => cmt.SessionId == param.Session).ToList(), param);
+            DTResult<CourseMachineTemp> result = Generic.Ajax<CourseMachineTemp>(this.db.Query<CourseMachineTemp>().Where(cmt => cmt.SessionId == param.SessionId).ToList(), param);
             return this.Json(result);
         }
 
@@ -102,9 +102,9 @@ namespace Labinator2016.Controllers
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             dynamic parameters = serializer.Deserialize<object>(json);
-            if ((parameters["Template"] != null) && (parameters["session"] != null) && (parameters["Course"] != null))
+            if ((parameters["Template"] != null) && (parameters["Session"] != null) && (parameters["Course"] != null))
             {
-                this.PopulateTemp(int.Parse(parameters["Course"]), parameters["Template"], parameters["session"]);
+                this.PopulateTemp(int.Parse(parameters["Course"]), parameters["Template"], parameters["Session"]);
             }
 
             response.Add("Status", "Done");
@@ -168,12 +168,12 @@ namespace Labinator2016.Controllers
                 if (course.CourseId == 0)
                 {
                     this.db.Add<Course>(course);
-                    Log.Write(db,new Log() {Message=LogMessages.create, Detail="Course "+course.Name+" created." });
+                    Log.Write(db, ControllerContext.HttpContext, new Log() {Message=LogMessages.create, Detail="Course "+course.Name+" created." });
                 }
                 else
                 {
                     this.db.Update<Course>(course);
-                    Log.Write(db, new Log() { Message = LogMessages.update, Detail = "Course " + course.Name + " updated." });
+                    Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "Course " + course.Name + " updated." });
                 }
 
                 this.db.SaveChanges();
@@ -391,7 +391,7 @@ namespace Labinator2016.Controllers
             }
 
             this.db.SaveChanges();
-            Log.Write(db, new Log() { Message = LogMessages.delete, Detail = "Course " + course.Name + " deleted." });
+            Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "Course " + course.Name + " deleted." });
 
             return this.RedirectToAction("Index");
         }

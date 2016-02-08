@@ -43,5 +43,11 @@ namespace Labinator2016.Controllers
         {
             return this.View(model);
         }
+
+        public ActionResult Grid(int id)
+        {
+            ViewBag.ClassroomId = id;
+            return this.View();
+        }
     }
 }

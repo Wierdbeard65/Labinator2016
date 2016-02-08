@@ -35,7 +35,7 @@ namespace Labinator2016.Tests.Controllers
             db.AddSet(TestCourseMachineTempData.CourseMachineTemps);
             var controller = new CoursesController(db, st);
             controller.ControllerContext = new FakeControllerContext();
-            DTParameters param = new DTParameters() { Start = 2, Length = 5, Search = new DTSearch(), Order = new DTOrder[1] { new DTOrder() { Column = 1, Dir = DTOrderDir.ASC } }, Course = 1, Session = "12345" };
+            DTParameters param = new DTParameters() { Start = 2, Length = 5, Search = new DTSearch(), Order = new DTOrder[1] { new DTOrder() { Column = 1, Dir = DTOrderDir.ASC } }, Course = 1, SessionId = "12345" };
             JsonResult result = controller.MachineAjax(param) as JsonResult;
             Assert.IsNotNull(result);
             Assert.AreEqual(5, ((List<CourseMachineTemp>)((DTResult<CourseMachineTemp>)result.Data).data).Count);
@@ -105,7 +105,7 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
             Assert.AreEqual(1, db.Added.Count);
             Assert.AreEqual("TestNew", ((Course)db.Added[0]).Name);
-            Assert.AreEqual(2, db.saved);
+            Assert.AreEqual(3, db.saved);
         }
         [Test]
         public void CourseEditExistingWriteTest()
@@ -125,7 +125,7 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(0, db.Added.Count);
             Assert.AreEqual(1, db.Updated.Count);
             Assert.AreEqual("TestUpdate", ((Course)db.Updated[0]).Name);
-            Assert.AreEqual(2, db.saved);
+            Assert.AreEqual(3, db.saved);
         }
         [Test]
         public void CourseDeleteStartTest()

@@ -105,7 +105,7 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
             Assert.AreEqual(1, db.Added.Count);
             Assert.AreEqual("TestNew", ((DataCenter)db.Added[0]).Name);
-            Assert.AreEqual(1, db.saved);
+            Assert.AreEqual(2, db.saved);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Labinator2016.Tests.Controllers
             Assert.AreEqual(0, db.Added.Count);
             Assert.AreEqual(1, db.Updated.Count);
             Assert.AreEqual("TestChange", ((DataCenter)db.Updated[0]).Name);
-            Assert.AreEqual(1, db.saved);
+            Assert.AreEqual(2, db.saved);
         }
     }
 }

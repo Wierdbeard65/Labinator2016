@@ -64,9 +64,9 @@ namespace Labinator2016.ViewModels.DatatablesViewModel
                     : null;
             }
         }
-        public string Session { get; set; }
+        public string SessionId { get; set; }
         public string Classroom { get; set; }
-        public Int32 Course { get; set; }
+        public int Course { get; set; }
         public string Template { get; set; }
         public DTParameters()
         {

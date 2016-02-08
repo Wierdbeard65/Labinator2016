@@ -13,6 +13,8 @@ namespace Labinator2016.Lib.Models
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
     using Labinator2016.Lib.Headers;
 
     /// <summary>
@@ -83,11 +85,11 @@ namespace Labinator2016.Lib.Models
         /// </summary>
         /// <param name="db">The database handle.</param>
         /// <param name="logEntry">The log entry to write.</param>
-        public static void Write(ILabinatorDb db, Log logEntry)
+        public static void Write(ILabinatorDb db, HttpContextBase cx, Log logEntry)
         {
             if ((logEntry.User==null) ||(logEntry.User == string.Empty))
             {
-                logEntry.User = System.Web.HttpContext.Current.User.Identity.Name;
+                logEntry.User = cx.User.Identity.Name;
             }
             logEntry.TimeStamp = DateTime.Now;
             db.Add<Log>(logEntry);

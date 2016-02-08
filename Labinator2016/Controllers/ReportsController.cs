@@ -9,6 +9,7 @@ using Labinator2016.ViewModels.DatatablesViewModel;
 
 namespace Labinator2016.Controllers
 {
+    [Authorize]
     public class ReportsController : Controller
     {
         /// <summary>

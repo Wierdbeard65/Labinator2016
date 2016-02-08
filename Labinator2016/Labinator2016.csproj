@@ -151,6 +151,11 @@
     <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\004326-3d-glossy-blue-orb-icon-arrows-triangle-circle-right.png" />
+    <Content Include="Images\016836-3d-glossy-blue-orb-icon-symbols-shapes-power-button.png" />
+    <Content Include="Images\016848-3d-glossy-blue-orb-icon-symbols-shapes-shape-pause-button.png" />
+    <Content Include="Images\016848-3d-glossy-blue-orb-icon-symbols-shapes-shape-stop-button.png" />
+    <Content Include="Images\075728-3d-glossy-blue-orb-icon-business-computer-monitor.png" />
     <Content Include="Images\btnSignIn.gif" />
     <Content Include="Images\footerLabLogin.png" />
     <Content Include="Images\formDivider.gif" />
@@ -166,8 +171,10 @@
     <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\bootstrap-switch.min.js" />
+    <Content Include="Scripts\ClassroomEdit.js" />
     <Content Include="Scripts\CourseIndex.js" />
     <Content Include="Scripts\DataCenterIndex.js" />
+    <Content Include="Scripts\HomeGrid.js" />
     <Content Include="Scripts\LogIndex.js" />
     <Content Include="Scripts\HomeIndex.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -240,6 +247,7 @@
     <Content Include="Views\Classrooms\Edit.cshtml" />
     <Content Include="Views\Classrooms\Delete.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Home\Grid.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

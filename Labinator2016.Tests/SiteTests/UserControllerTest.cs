@@ -202,7 +202,9 @@ namespace Labinator2016.Tests.Controllers
             var db = new FakeDatabase();
             var auth = new FakeFormAuthenticator();
             db.AddSet(TestUserData.Users);
+            var cx = new FakeControllerContext();
             var controller = new UsersController(db, auth);
+            controller.ControllerContext = cx;
             var result = controller.Login(new LoginViewModel() { UserName = "NonExistent@test.com", Password = "password", ReturnUrl = "/" }) as ViewResult;
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.ViewData.ModelState[""]);
@@ -218,7 +220,9 @@ namespace Labinator2016.Tests.Controllers
             var db = new FakeDatabase();
             var auth = new FakeFormAuthenticator();
             db.AddSet(TestUserData.Users);
+            var cx = new FakeControllerContext();
             var controller = new UsersController(db, auth);
+            controller.ControllerContext = cx;
             var result = controller.Login(new LoginViewModel() { UserName = "TestUser0@test.com", Password = "bad", ReturnUrl = "/" }) as ViewResult;
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.ViewData.ModelState[""]);

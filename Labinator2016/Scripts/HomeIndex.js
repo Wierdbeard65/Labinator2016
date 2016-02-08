@@ -11,6 +11,10 @@
 
 function columnRows(Row, Data, Index) {
     var link = '<a class="btn btn-primary"';
+    link = link + ' href="Home/Grid/' + Data["ClassroomId"] + '">';
+    link = link + 'Open';
+    link = link + '</a>';
+    link = link + '&nbsp;<a class="btn btn-default"';
     link = link + ' href="Classrooms/Edit/' + Data["ClassroomId"] + '">';
     link = link + 'Edit';
     link = link + '</a>';

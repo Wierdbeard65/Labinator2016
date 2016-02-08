@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Labinator2016.Lib.Models;
 using Labinator2016.Lib.Headers;
+using System.Web;
 
 namespace Labinator2016.Tests.TestData
 {
@@ -12,9 +13,10 @@ namespace Labinator2016.Tests.TestData
         {
             // Arrange
             FakeDatabase db = new FakeDatabase();
+            HttpContextBase cx = new FakeHttpContext();
 
             // Act
-            Log.Write(db, new Log() {Detail="TestMessage", Message=LogMessages.connected });
+            Log.Write(db, cx, new Log() {Detail="TestMessage", Message=LogMessages.connected });
 
             // Assert
             Assert.AreEqual(1, db.LogAdded.Count);

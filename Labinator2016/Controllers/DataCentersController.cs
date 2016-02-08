@@ -108,12 +108,12 @@ namespace Labinator2016.Controllers
                 if (dataCenter.DataCenterId == 0)
                 {
                     this.db.Add<DataCenter>(dataCenter);
-                    Log.Write(db, new Log() { Message = LogMessages.create, Detail = "DataCenter " + dataCenter.Name + " created." });
+                    Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "DataCenter " + dataCenter.Name + " created." });
                 }
                 else
                 {
                     this.db.Update<DataCenter>(dataCenter);
-                    Log.Write(db, new Log() { Message = LogMessages.update, Detail = "DataCenter " + dataCenter.Name + " updated." });
+                    Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "DataCenter " + dataCenter.Name + " updated." });
                 }
 
                 this.db.SaveChanges();
@@ -156,7 +156,7 @@ namespace Labinator2016.Controllers
             DataCenter dataCenter = this.db.Query<DataCenter>().Where(dc => dc.DataCenterId == id).FirstOrDefault();
             this.db.Remove<DataCenter>(dataCenter);
             this.db.SaveChanges();
-            Log.Write(db, new Log() { Message = LogMessages.delete, Detail = "DataCenter " + dataCenter.Name + " deleted." });
+            Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "DataCenter " + dataCenter.Name + " deleted." });
             return this.RedirectToAction("Index");
         }
 
