@@ -10,6 +10,7 @@
     using System.Web.Script.Serialization;
     using Lib.Headers;
     using Lib.Models;
+    using Lib.REST;
     using Lib.Utilities;
     using ViewModels.DatatablesViewModel;
     [Authorize]
@@ -21,12 +22,18 @@
         private ILabinatorDb db;
 
         /// <summary>
+        /// Handle to the Sky Tap interface.
+        /// </summary>
+        private ISkyTap st;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ClassroomsController"/> class.
         /// Used for regular constructions. Obtains handle to Database.
         /// </summary>
         public ClassroomsController()
         {
             this.db = new LabinatorContext();
+            this.st = new SkyTap();
         }
 
         /// <summary>
@@ -34,9 +41,11 @@
         /// Used for constructing when Unit Testing.
         /// </summary>
         /// <param name="db">Handle to Database stub.</param>
-        public ClassroomsController(ILabinatorDb db)
+        /// <param name="st">Handle to Skytap stub.</param>
+        public ClassroomsController(ILabinatorDb db, ISkyTap st)
         {
             this.db = db;
+            this.st = st;
         }
 
         /// <summary>
@@ -125,26 +134,29 @@
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ClassroomId,CourseId,DataCenterId,UserId,Start,Name")] Classroom classroom, string SessionId)
         {
-            //// Project projectObject = new Project(_st);
+            Project projectObject = new Project(st);
             if (ModelState.IsValid)
             {
                 if (classroom.ClassroomId == 0)
                 {
-                    ////                    String ProjectName = "Automated-" + classroom.Name + "-" + classroom.Start.ToShortDateString();
-                    ////String project = projectObject.Add(ProjectName);
-                    ////if (project != null)
-                    ////{
-                    ////    classroom.Project = project;
-                    ////    //Log.Write(_db,new Log() { User = User.Identity.Name, Message = LogMessages.create, Classroom = classroom.Name });
-                    this.db.Add<Classroom>(classroom);
-                    Log.Write(db, ControllerContext.HttpContext, new Log() {Message=LogMessages.create,Detail="Classroom created for "+classroom.course+" on "+classroom.jsDate });
-                    ////}
+                    Course crs = this.db.Query<Course>().Where(c => c.CourseId == classroom.CourseId).FirstOrDefault();
+                    if (crs != null)
+                    {
+                        String ProjectName = crs.Name + "-" + classroom.Start.ToShortDateString();
+                        String project = projectObject.Add(ProjectName);
+                        if (project != null)
+                        {
+                            classroom.Project = project;
+                            this.db.Add<Classroom>(classroom);
+                            Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "Classroom created for " + classroom.course + " on " + classroom.jsDate });
+                        }
+                    }
                 }
 
                 else
                 {
                     this.db.Update<Classroom>(classroom);
-                    Log.Write(db, ControllerContext.HttpContext, new Log() {Message=LogMessages.update, Detail= "Classroom updated for  " + classroom.course + " on " + classroom.jsDate });
+                    Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "Classroom updated for  " + classroom.course + " on " + classroom.jsDate });
                 }
                 List<SeatTemp> sts = this.db.Query<SeatTemp>().Where(st=>st.SessionId==SessionId).ToList();
                 List<int> stids = sts.Select(s => s.SeatId).ToList();
@@ -202,7 +214,9 @@
         [Authorize]
         public ActionResult Delete(int id)
         {
+            Project projectObject = new Project(st);
             Classroom classroom = this.db.Query<Classroom>().Where(c => c.ClassroomId == id).FirstOrDefault();
+            projectObject.Delete(classroom.Project);
             this.db.Remove<Classroom>(classroom);
             this.db.SaveChanges();
             Log.Write(db, ControllerContext.HttpContext, new Log() {Message=LogMessages.delete, Detail = "Classroom deleted for  " + classroom.course + " on " + classroom.jsDate });

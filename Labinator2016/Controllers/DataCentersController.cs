@@ -101,7 +101,7 @@ namespace Labinator2016.Controllers
         /// <returns>A redirection back to the list of DataCenters.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DataCenterId,Name,Timezone,Type,GateWayIP")] DataCenter dataCenter)
+        public ActionResult Edit([Bind(Include = "DataCenterId,Name,Timezone,Type,GateWayIP,Region")] DataCenter dataCenter)
         {
             if (ModelState.IsValid)
             {

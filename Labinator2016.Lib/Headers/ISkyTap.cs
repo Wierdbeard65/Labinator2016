@@ -18,6 +18,8 @@ namespace Labinator2016.Lib.Headers
     /// </summary>
     public interface ISkyTap
     {
+
+        IRestResponse Execute(RestRequest request);
         /// <summary>
         /// Obtains a single object of type T from the Sky Tap REST interface.
         /// </summary>

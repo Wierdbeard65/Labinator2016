@@ -40,6 +40,33 @@ namespace Labinator2016.Lib.REST
             eventLog.Source = "Skytapinator_Service";
             eventLog.Log = "Skytapinator";
         }
+
+        public IRestResponse Execute(RestRequest request)
+        {
+            int counter = 0;
+            request.AddParameter("query", "region:" + SkyTapRegion);
+            var response = SkyTap.Client.Execute(request);
+            while (response.StatusCode != HttpStatusCode.OK && counter < MAX_RETRIES)
+            {
+                counter++;
+                EventLog.LogE("REST request Failed. Retry attempt " + counter + "\r\n" +
+                     "Parameters  : " + request.Parameters.ToString(),
+                     System.Diagnostics.EventLogEntryType.Error,
+                     EventIds.ConfigCreateFailure
+                );
+                response = SkyTap.Client.Execute(request);
+            }
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                EventLog.LogE("REST request Failed. Giving up.\r\n" +
+                      "Parameters  : " + request.Parameters.ToString(),
+                      System.Diagnostics.EventLogEntryType.Error,
+                      EventIds.ConfigCreateFailure
+                 );
+            }
+            return response;
+        }
+
         public T Execute<T>(RestRequest request)
         {
             int counter = 0;

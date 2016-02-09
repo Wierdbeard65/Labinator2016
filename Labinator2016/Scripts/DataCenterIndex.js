@@ -17,11 +17,11 @@ var dc = [
 ];
 
 function columnRows(Row, Data, Index) {
-    var link = '<a class="btn"';
+    var link = '<a class="btn btn-primary"';
     link = link + ' href="DataCenters/Edit/' + Data["DataCenterId"] + '">';
     link = link + 'Edit';
     link = link + '</a>';
-    link = link + '&nbsp;<a class="btn"';
+    link = link + '&nbsp;<a class="btn btn-danger"';
     link = link + ' href="DataCenters/Delete/' + Data["DataCenterId"] + '">';
     link = link + 'Delete';
     link = link + '</a>';

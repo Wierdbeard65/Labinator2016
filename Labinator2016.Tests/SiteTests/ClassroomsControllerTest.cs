@@ -31,8 +31,9 @@ namespace Labinator2016.Tests.SiteTests
         public void ClassroomAjaxList()
         {
             var db = new FakeDatabase();
+            var st = new FakeSkyTap();
             db.AddSet(TestClassroomData.Classrooms);
-            var controller = new ClassroomsController(db);
+            var controller = new ClassroomsController(db,st);
             controller.ControllerContext = new FakeControllerContext();
             DTParameters param = new DTParameters() { Start = 2, Length = 3, Search = new DTSearch(), Order = new DTOrder[1] { new DTOrder() { Column = 1, Dir = DTOrderDir.ASC } } };
             JsonResult result = controller.Ajax(param) as JsonResult;

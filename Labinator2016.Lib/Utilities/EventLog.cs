@@ -46,7 +46,7 @@ namespace Labinator2016.Lib.Utilities
                 SetupEventLog();
             }
 
-            eventLog.WriteEntry(message, type, (int)id);
+            ////eventLog.WriteEntry(message, type, (int)id);
         }
     }
 }

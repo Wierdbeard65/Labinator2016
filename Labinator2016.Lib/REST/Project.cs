@@ -1,6 +1,7 @@
 ﻿namespace Labinator2016.Lib.REST
 {
     using System;
+    using System.Net;
     using Labinator2016.Lib.Headers;
     using RestSharp;
 
@@ -33,12 +34,12 @@
             }
             return Return;
         }
-        //public static Boolean Delete(String Project)
-        //{
-        //    RestRequest request = new RestRequest("projects/" + Project, Method.DELETE);
-        //    var response = DLLConfig.Client.Execute(request);
+        public Boolean Delete(String Project)
+        {
+            RestRequest request = new RestRequest("projects/" + Project, Method.DELETE);
+            IRestResponse response = this.st.Execute(request);
 
-        //    return response.StatusCode == HttpStatusCode.OK;
-        //}
+            return response.StatusCode == HttpStatusCode.OK;
+        }
     }
 }

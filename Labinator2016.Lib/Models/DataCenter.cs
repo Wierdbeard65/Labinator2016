@@ -32,6 +32,14 @@ namespace Labinator2016.Lib.Models
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the region.
+        /// </summary>
+        /// <value>
+        /// The region.
+        /// </value>
+        public string Region { get; set; }
+
+        /// <summary>
         /// Gets or sets the that classes associated with this DataCenter typically run in..
         /// </summary>
         /// <value>
