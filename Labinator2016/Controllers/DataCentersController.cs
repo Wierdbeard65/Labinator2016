@@ -8,6 +8,7 @@
 /// Author: Paul Simpson
 /// Version: 1.0 - Initial build.
 /// Version: 1.1 - Logging added.
+/// Version: 1.2 - Gateway storage added.
 /// </summary>
 namespace Labinator2016.Controllers
 {
@@ -16,10 +17,12 @@ namespace Labinator2016.Controllers
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+    using System.Web.Script.Serialization;
     using Labinator2016.Lib.Headers;
     using Labinator2016.Lib.Models;
+    using Labinator2016.Lib.REST;
     using Labinator2016.ViewModels.DatatablesViewModel;
-
+    using RestSharp;
     /// <summary>
     /// Back-end processing for all DataCenter-related work and pages.
     /// </summary>
@@ -43,7 +46,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="DataCentersController"/> class for use in testing.
         /// </summary>
-        /// <param name="db">The Fake database</param>
+        /// <param Name="db">The Fake database</param>
         public DataCentersController(ILabinatorDb db)
         {
             this.db = db;
@@ -52,11 +55,30 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Provides a response to an AJAX request for a list of DataCenters.
         /// </summary>
-        /// <param name="param">The filter, sort and paging configuration from the DataTable</param>
+        /// <param Name="param">The filter, sort and paging configuration from the DataTable</param>
         /// <returns>A JSON response with the requested data</returns>
         public ActionResult Ajax(DTParameters param)
         {
             return this.Json(Generic.Ajax<DataCenter>(this.db.Query<DataCenter>().ToList(), param));
+        }
+
+        public ActionResult ConfigurationAjax(string region)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            Dictionary<string, string> reply = new Dictionary<string, string>();
+            SkyTap st = new SkyTap();
+            if (region != string.Empty)
+            {
+                RestRequest request = new RestRequest("v2/configurations", Method.GET);
+                request.AddParameter("query", "region:" + region);
+                IRestResponse restResponse = st.Execute(request);
+                dynamic response = serializer.DeserializeObject(restResponse.Content);
+                foreach (dynamic configuration in response)
+                {
+                    reply.Add(configuration["id"], configuration["name"]);
+                }
+            }
+            return this.Json(reply);
         }
 
         /// <summary>
@@ -71,7 +93,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// The first stage in editing a DataCenter.
         /// </summary>
-        /// <param name="id">The DataCenterID of the DataCenter to edit. Zero indicates "new".</param>
+        /// <param Name="id">The DataCenterID of the DataCenter to edit. Zero indicates "new".</param>
         /// <returns>The edit view.</returns>
         public ActionResult Edit(int id)
         {
@@ -88,7 +110,17 @@ namespace Labinator2016.Controllers
                     return this.HttpNotFound();
                 }
             }
-
+            List<string> regions = Region.regions;
+            List<string> centers = this.db.Query<DataCenter>().Select(d => d.Region).ToList();
+            regions = regions.Where(r => !centers.Contains(r)).ToList();
+            regions.Sort();
+            List<SelectListItem> regionList = new List<SelectListItem>();
+            foreach (string region in regions)
+            {
+                regionList.Add(new SelectListItem() { Text=region,Value= region});
+            }
+            regionList.Insert(0, new SelectListItem() {Text="Select Region....",Value=string.Empty,Selected=true });
+            ViewBag.Region = new SelectList(regionList,"Value","Text", dataCenter.Region);
             List<TimeZoneInfo> timezoneList = TimeZoneInfo.GetSystemTimeZones().ToList();
             ViewBag.Timezone = new SelectList(timezoneList, "Id", "DisplayName", dataCenter.Timezone);
             return this.View(dataCenter);
@@ -97,18 +129,39 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Writes the changes made to a DataCenter back to the database.
         /// </summary>
-        /// <param name="dataCenter">The DataCenter object returned from the browser.</param>
+        /// <param Name="dataCenter">The DataCenter object returned from the browser.</param>
         /// <returns>A redirection back to the list of DataCenters.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DataCenterId,Name,Timezone,Type,GateWayIP,Region")] DataCenter dataCenter)
+        public ActionResult Edit([Bind(Include = "DataCenterId,Name,Timezone,Type,GateWayIP,GateWayId,Region")] DataCenter dataCenter)
         {
             if (ModelState.IsValid)
             {
+                if (dataCenter.GateWayId != string.Empty)
+                {
+                    Configuration backbone = new Configuration();
+                    backbone.Id = dataCenter.GateWayId;
+                    try
+                    {
+                        dataCenter.GateWayBackboneId = backbone.BackboneId;
+                    }
+                    catch(RestException e)
+                    {
+
+                    }
+                }
                 if (dataCenter.DataCenterId == 0)
                 {
-                    this.db.Add<DataCenter>(dataCenter);
-                    Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "DataCenter " + dataCenter.Name + " created." });
+                    if (dataCenter.Region != string.Empty)
+                    {
+                        this.db.Add<DataCenter>(dataCenter);
+                        Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "DataCenter " + dataCenter.Name + " created." });
+                    }
+                    else
+                    {
+                        return this.Edit(dataCenter.DataCenterId);
+                    }
+
                 }
                 else
                 {
@@ -120,13 +173,13 @@ namespace Labinator2016.Controllers
                 return this.RedirectToAction("Index");
             }
 
-            return this.View(dataCenter);
+            return this.Edit(dataCenter.DataCenterId);
         }
 
         /// <summary>
         /// Performs the first part of the two-stage deletion of a DataCenter.
         /// </summary>
-        /// <param name="id">The DataCenterID of the datacenter to delete.</param>
+        /// <param Name="id">The DataCenterID of the datacenter to delete.</param>
         /// <returns>The confirmation view</returns>
         public ActionResult Delete(int? id)
         {
@@ -147,7 +200,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Performs the actual deletion of a Datacenter when confirmed by the user.
         /// </summary>
-        /// <param name="id">The DataCenterID of the Datacenter to delete.</param>
+        /// <param Name="id">The DataCenterID of the Datacenter to delete.</param>
         /// <returns>A redirection back to the list of DataCenters.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -163,7 +216,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Releases unmanaged resources and optionally releases managed resources.
         /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// <param Name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

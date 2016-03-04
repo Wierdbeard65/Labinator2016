@@ -122,7 +122,9 @@
     <Compile Include="Migrations\201601251317244_Courses.Designer.cs">
       <DependentUpon>201601251317244_Courses.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602022017263_Classrooms.cs" />
+    <Compile Include="Migrations\201602022017263_Classrooms.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\201602022017263_Classrooms.Designer.cs">
       <DependentUpon>201602022017263_Classrooms.cs</DependentUpon>
     </Compile>
@@ -141,21 +143,29 @@
     <Compile Include="Models\SeatMachine.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="REST\Configuration.cs" />
+    <Compile Include="REST\Interface.cs" />
+    <Compile Include="REST\Network.cs" />
     <Compile Include="REST\Project.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="REST\Publish_Sets.cs" />
+    <Compile Include="REST\Region.cs" />
+    <Compile Include="REST\RestException.cs" />
     <Compile Include="REST\SkyTap.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="REST\Template.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="REST\Tunnel.cs" />
     <Compile Include="REST\Vm.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utilities\FormsAuthWrapper.cs" />
     <Compile Include="Utilities\HtmlHelperExtensions.cs" />
     <Compile Include="Utilities\EventLog.cs" />
+    <Compile Include="Utilities\IPUtils.cs" />
     <Compile Include="Utilities\PasswordHash.cs" />
   </ItemGroup>
   <ItemGroup>

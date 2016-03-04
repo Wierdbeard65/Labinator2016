@@ -43,10 +43,10 @@ namespace Labinator2016.Lib.Models
         public string VMId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the virtual machine.
+        /// Gets or sets the Name of the virtual machine.
         /// </summary>
         /// <value>
-        /// The name of the virtual machine.
+        /// The Name of the virtual machine.
         /// </value>
         public string VMName { get; set; }
 

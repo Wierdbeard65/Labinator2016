@@ -25,7 +25,7 @@ namespace Labinator2016
         /// <summary>
         /// Configures the application, performing start-up processing.
         /// </summary>
-        /// <param name="app">Handle to the application.</param>
+        /// <param Name="app">Handle to the application.</param>
         public void Configuration(IAppBuilder app)
         {
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888

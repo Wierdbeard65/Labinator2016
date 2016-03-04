@@ -23,29 +23,29 @@ namespace Labinator2016.Lib.Headers
         /// <summary>
         /// Performs a query for the specified type..
         /// </summary>
-        /// <typeparam name="T">Table being queried</typeparam>
+        /// <typeparam Name="T">Table being queried</typeparam>
         /// <returns>The data from the table.</returns>
         IQueryable<T> Query<T>() where T : class;
 
         /// <summary>
         /// Adds a record to a table.
         /// </summary>
-        /// <typeparam name="T">Type (Table) to add record to.</typeparam>
-        /// <param name="entity">Data to add.</param>
+        /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
+        /// <param Name="entity">Data to add.</param>
         void Add<T>(T entity) where T : class;
 
         /// <summary>
         /// Updates a record in a table.
         /// </summary>
-        /// <typeparam name="T">Type (Table) to add record to.</typeparam>
-        /// <param name="entity">Data to update.</param>
+        /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
+        /// <param Name="entity">Data to update.</param>
         void Update<T>(T entity) where T : class;
 
         /// <summary>
         /// Removes a record from a table.
         /// </summary>
-        /// <typeparam name="T">Type (Table) to add record to.</typeparam>
-        /// <param name="entity">Data to remove.</param>
+        /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
+        /// <param Name="entity">Data to remove.</param>
         void Remove<T>(T entity) where T : class;
 
         /// <summary>

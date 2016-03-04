@@ -3,7 +3,7 @@
     "url": 'Classrooms/Ajax',
     "contentType": 'application/json; charset=utf-8',
     'data': function (data) {
-        //                data = $.extend({}, data, { "Classroom": $('#SelectedRoom').val() });
+        data = $.extend({}, data, { "ShowAll": $('#ShowAll').val() });
         data = JSON.stringify(data);
         return data;
     }
@@ -31,3 +31,10 @@ var dc = [
         { "data": "dataCenter.Name" },
         { "data": "ClassroomId" }
 ];
+$(document).load(refreshList(aj, dc, columnRows));
+$("div.toolbar").html('<center><a href="Classrooms/Edit/0" class = "btn btn-primary">Add</a></center>');
+$("[name='ShowAll']").bootstrapSwitch({
+    "onText": "All Rooms",
+    "offText": "My Rooms",
+    "labelText": "Show"
+});

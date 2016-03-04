@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web.Script.Serialization;
-using Labinator2016.Lib.Headers;
-using Labinator2016.Lib.Models;
-using Labinator2016.Lib.Utilities;
-using RestSharp;
-using RestSharp.Authenticators;
-
-namespace Labinator2016.Lib.REST
+﻿namespace Labinator2016.Lib.REST
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Script.Serialization;
+    using Labinator2016.Lib.Headers;
+    using Labinator2016.Lib.Models;
+    using Labinator2016.Lib.Utilities;
+    using RestSharp;
+    using RestSharp.Authenticators;
+
     public class SkyTap : ISkyTap
     {
         const int MAX_RETRIES = 10;
         public static string SkyTapUser { get; set; }
         public static string SkyTapAPIKey { get; set; }
-        public static string SkyTapRegion { get; set; }
+//        public static string SkyTapRegion { get; set; }
         public static RestClient Client { get; set; }
         private static JavaScriptSerializer serializer;
         private static System.Diagnostics.EventLog eventLog;
@@ -27,7 +27,7 @@ namespace Labinator2016.Lib.REST
             serializer = new JavaScriptSerializer();
             SkyTapUser = "paul.simpson@inin.com";
             SkyTapAPIKey = "c4246ea631bf8a6c97d85997a3494082251ece3e";
-            SkyTapRegion = "US-West";
+            // SkyTapRegion = "US-West";
             Client = new RestClient();
             Client.BaseUrl = new Uri("https://cloud.skytap.com");
             Client.Authenticator = new HttpBasicAuthenticator(SkyTapUser, SkyTapAPIKey);
@@ -44,7 +44,34 @@ namespace Labinator2016.Lib.REST
         public IRestResponse Execute(RestRequest request)
         {
             int counter = 0;
-            request.AddParameter("query", "region:" + SkyTapRegion);
+//            request.AddParameter("query", "region:" + SkyTapRegion);
+            IRestResponse response = SkyTap.Client.Execute(request);
+            while (response.StatusCode != HttpStatusCode.OK && counter < MAX_RETRIES)
+            {
+                counter++;
+                EventLog.LogE("REST request Failed. Retry attempt " + counter + "\r\n" +
+                     "Parameters  : " + request.Parameters.ToString(),
+                     System.Diagnostics.EventLogEntryType.Error,
+                     EventIds.ConfigCreateFailure
+                );
+                ;   response = SkyTap.Client.Execute(request);
+            }
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                EventLog.LogE("REST request Failed. Giving up.\r\n" +
+                      "Parameters  : " + request.Parameters.ToString(),
+                      System.Diagnostics.EventLogEntryType.Error,
+                      EventIds.ConfigCreateFailure
+                 );
+                throw new RestException("Max Retries reached.",request,response,SkyTapUser,SkyTapAPIKey);
+            }
+            return response;
+        }
+
+        public T Execute<T>(RestRequest request)
+        {
+            int counter = 0;
+//            request.AddParameter("query", "region:" + SkyTapRegion);
             var response = SkyTap.Client.Execute(request);
             while (response.StatusCode != HttpStatusCode.OK && counter < MAX_RETRIES)
             {
@@ -63,40 +90,15 @@ namespace Labinator2016.Lib.REST
                       System.Diagnostics.EventLogEntryType.Error,
                       EventIds.ConfigCreateFailure
                  );
-            }
-            return response;
-        }
-
-        public T Execute<T>(RestRequest request)
-        {
-            int counter = 0;
-            request.AddParameter("query", "region:" + SkyTapRegion);
-            var response = SkyTap.Client.Execute(request);
-            while (response.StatusCode != HttpStatusCode.OK && counter < MAX_RETRIES)
-            {
-                counter++;
-                EventLog.LogE("REST request Failed. Retry attempt " + counter + "\r\n" +
-                     "Parameters  : " + request.Parameters.ToString(),
-                     System.Diagnostics.EventLogEntryType.Error,
-                     EventIds.ConfigCreateFailure
-                );
-                response = SkyTap.Client.Execute(request);
-            }
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-               EventLog.LogE("REST request Failed. Giving up.\r\n" +
-                     "Parameters  : " + request.Parameters.ToString(),
-                     System.Diagnostics.EventLogEntryType.Error,
-                     EventIds.ConfigCreateFailure
-                );
                 return default(T);
             }
             return serializer.Deserialize<T>(response.Content);
         }
+
         public List<T> ExecuteList<T>(RestRequest request)
         {
             int counter = 0;
-            request.AddParameter("query", "region:" + SkyTapRegion);
+//            request.AddParameter("query", "region:" + SkyTapRegion);
             var response = SkyTap.Client.Execute(request);
             while (response.StatusCode != HttpStatusCode.OK && counter < MAX_RETRIES)
             {
@@ -123,7 +125,6 @@ namespace Labinator2016.Lib.REST
                 reply = array.ToList();
             }
             return reply;
-
         }
     }
 }

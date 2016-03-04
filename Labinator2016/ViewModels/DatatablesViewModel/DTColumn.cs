@@ -21,7 +21,7 @@ namespace Labinator2016.ViewModels.DatatablesViewModel
         public string Data { get; set; }
 
         /// <summary>
-        /// Column's name, as defined by columns.name.
+        /// Column's Name, as defined by columns.Name.
         /// </summary>
         public string Name { get; set; }
 

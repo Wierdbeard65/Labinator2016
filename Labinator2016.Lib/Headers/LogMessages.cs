@@ -63,6 +63,11 @@ namespace Labinator2016.Lib.Headers
         /// <summary>
         /// A user joined an existing environment connection.
         /// </summary>
-        joined
+        joined,
+
+        /// <summary>
+        /// An Error Ocurred.
+        /// </summary>
+        Error
     }
 }

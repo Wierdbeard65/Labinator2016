@@ -210,7 +210,7 @@ namespace Labinator2016.Tests.Controllers
             Assert.IsNotNull(result.ViewData.ModelState[""]);
             Assert.IsNotNull(result.ViewData.ModelState[""].Errors);
             Assert.IsTrue(result.ViewData.ModelState[""].Errors.Count == 1);
-            Assert.AreEqual("The user name or password provided is incorrect.", result.ViewData.ModelState[""].Errors[0].ErrorMessage);
+            Assert.AreEqual("The user Name or password provided is incorrect.", result.ViewData.ModelState[""].Errors[0].ErrorMessage);
             Assert.AreEqual(1, db.LogAdded.Count);
             Assert.AreEqual(LogMessages.incorrectlogon, ((Log)db.LogAdded[0]).Message);
         }
@@ -228,7 +228,7 @@ namespace Labinator2016.Tests.Controllers
             Assert.IsNotNull(result.ViewData.ModelState[""]);
             Assert.IsNotNull(result.ViewData.ModelState[""].Errors);
             Assert.IsTrue(result.ViewData.ModelState[""].Errors.Count == 1);
-            Assert.AreEqual("The user name or password provided is incorrect.", result.ViewData.ModelState[""].Errors[0].ErrorMessage);
+            Assert.AreEqual("The user Name or password provided is incorrect.", result.ViewData.ModelState[""].Errors[0].ErrorMessage);
             Assert.AreEqual(1, db.LogAdded.Count);
             Assert.AreEqual(LogMessages.incorrectlogon, ((Log)db.LogAdded[0]).Message);
         }

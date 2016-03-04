@@ -31,7 +31,7 @@ namespace Labinator2016.Lib.REST
             RestRequest request = new RestRequest("v2/templates", Method.GET);
             request.AddParameter("scope", "company");
             request.AddParameter("count", "100");
-            request.AddParameter("sort", "name");
+            request.AddParameter("sort", "Name");
             List<Template> response = st.ExecuteList<Template>(request);
             return response;
         }

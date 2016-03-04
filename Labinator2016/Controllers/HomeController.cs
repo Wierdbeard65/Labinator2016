@@ -12,8 +12,16 @@
 /// </summary>
 namespace Labinator2016.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
     using System.Web.Mvc;
-    using ViewModels;
+    using System.Web.Script.Serialization;
+    using Labinator2016.Lib.Headers;
+    using Labinator2016.Lib.Models;
 
     /// <summary>
     /// Controller class for the Home Page
@@ -23,27 +31,75 @@ namespace Labinator2016.Controllers
     public class HomeController : Controller
     {
         /// <summary>
-        /// Initial Index with a default view of "Owner's only"
+        /// Handle to the database
+        /// </summary>
+        private ILabinatorDb db;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// Used for regular constructions. Obtains handle to Database.
+        /// </summary>
+        public HomeController()
+        {
+            this.db = new LabinatorContext();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// Used for constructing when Unit Testing.
+        /// </summary>
+        /// <param Name="db">Handle to Database stub.</param>
+        public HomeController(ILabinatorDb db)
+        {
+            this.db = db;
+        }
+
+        /// <summary>
+        /// Initial Index
         /// </summary>
         /// <returns>Index view</returns>
         public ActionResult Index()
         {
-            IndexViewModel model = new IndexViewModel() { ShowAll = false };
-            return this.View(model);
+            if (User.IsInRole("Instructor") || User.IsInRole("Administrator"))
+            {
+                return this.View();
+            }
+            else
+            {
+                User user = this.db.Query<User>().Where(u => u.EmailAddress == User.Identity.Name).FirstOrDefault();
+                if (user == null)
+                {
+                    UrlHelper helper = new UrlHelper();
+                    return this.Redirect("/Home/Error?Message=" + helper.Encode("User " + User.Identity.Name + " does not exist"));
+                }
+                DateTime start = DateTime.Now.AddHours(1);
+                List<Classroom> RunningClassrooms = this.db.Query<Classroom>().Include(c=>c.course).Where(c => c.Start < start).ToList();
+                RunningClassrooms = RunningClassrooms.Where(c => c.Start.AddDays(c.course.Days).AddHours(c.course.Hours + 1) > DateTime.Now).ToList();
+                List<int> RunningClassroomIds = RunningClassrooms.Select(c => c.ClassroomId).ToList();
+                List<Seat> seats = this.db.Query<Seat>().Where(s => s.UserId == user.UserId && RunningClassroomIds.Contains(s.ClassroomId)).ToList();
+                if (seats.Count == 0)
+                {
+                    UrlHelper helper = new UrlHelper();
+                    return this.Redirect("/Home/Error?Message=" + helper.Encode("Running Classrooms: " + RunningClassrooms.Count + "<br/>"
+                                                                            + "Classroom IDs :" + RunningClassroomIds.ToString() + "<br/>"
+                                                                            + "User Id :" + user.UserId));
+                }
+                return this.RedirectToAction("Connect", new { id = seats[0].SeatId });
+            }
         }
-
         /// <summary>
-        /// Index if re-display is required (e.g. if the scope of classes is changed).
+        /// Initial Index
         /// </summary>
-        /// <param name="model">The model.</param>
         /// <returns>Index view</returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(IndexViewModel model)
+        public ActionResult Connect()
         {
-            return this.View(model);
+            return View();
         }
-
+        /// <summary>
+        /// Grids the specified identifier.
+        /// </summary>
+        /// <param Name="id">The identifier.</param>
+        /// <returns></returns>
         public ActionResult Grid(int id)
         {
             ViewBag.ClassroomId = id;

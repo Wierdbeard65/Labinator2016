@@ -15,7 +15,7 @@ namespace Labinator2016.ViewModels.DatatablesViewModel
     /// <summary>
     /// A full result, as understood by jQuery DataTables.
     /// </summary>
-    /// <typeparam name="T">The data type of each row.</typeparam>
+    /// <typeparam Name="T">The data type of each row.</typeparam>
     public class DTResult<T>
     {
         /// <summary>
@@ -37,7 +37,7 @@ namespace Labinator2016.ViewModels.DatatablesViewModel
         /// <summary>
         /// The data to be displayed in the table.
         /// This is an array of data source objects, one for each row, which will be used by DataTables.
-        /// Note that this parameter's name can be changed using the ajaxDT option's dataSrc property.
+        /// Note that this parameter's Name can be changed using the ajaxDT option's dataSrc property.
         /// </summary>
         public List<T> data { get; set; }
     }

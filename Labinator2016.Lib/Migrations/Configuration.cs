@@ -36,7 +36,7 @@ namespace Labinator2016.Lib.Migrations
         /// <summary>
         /// Runs after upgrading to the latest migration to allow seed data to be updated.
         /// </summary>
-        /// <param name="context">Context to be used for updating seed data.</param>
+        /// <param Name="context">Context to be used for updating seed data.</param>
         /// <remarks>
         /// Note that the database may already contain seed data when this method runs. This means that
         /// implementations of this method must check whether or not seed data is present and/or up-to-date

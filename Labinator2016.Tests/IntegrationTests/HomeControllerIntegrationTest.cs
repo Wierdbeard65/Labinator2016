@@ -46,6 +46,7 @@ namespace Labinator2016.Tests.Controllers
                     case "Users/Login":
                     case "Users/Ajax":
                     case "DataCenters/Ajax":
+                    case "DataCenters/ConfigurationAjax":
                     case "Courses/Ajax":
                     case "Courses/MachineAjax":
                     case "Courses/Refresh":

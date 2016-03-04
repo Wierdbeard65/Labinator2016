@@ -83,8 +83,8 @@ namespace Labinator2016.Lib.Models
         /// <summary>
         /// Writes a log message to the database.
         /// </summary>
-        /// <param name="db">The database handle.</param>
-        /// <param name="logEntry">The log entry to write.</param>
+        /// <param Name="db">The database handle.</param>
+        /// <param Name="logEntry">The log entry to write.</param>
         public static void Write(ILabinatorDb db, HttpContextBase cx, Log logEntry)
         {
             if ((logEntry.User==null) ||(logEntry.User == string.Empty))

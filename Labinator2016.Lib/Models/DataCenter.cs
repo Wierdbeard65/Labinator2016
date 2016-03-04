@@ -24,10 +24,10 @@ namespace Labinator2016.Lib.Models
         public int DataCenterId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the Name.
         /// </summary>
         /// <value>
-        /// The name.
+        /// The Name.
         /// </value>
         public string Name { get; set; }
 
@@ -62,5 +62,20 @@ namespace Labinator2016.Lib.Models
         /// The IP address of the Spark Gateway used for this Datacenter.
         /// </value>
         public string GateWayIP { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the Name of the Environment running the Spark Gateway
+        /// </summary>
+        public string GateWayName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ID of the Environment running the Spark Gateway
+        /// </summary>
+        public string GateWayId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ID of the Backbone Network on the GateWay Environment
+        /// </summary>
+        public string GateWayBackboneId { get; set; }
     }
 }

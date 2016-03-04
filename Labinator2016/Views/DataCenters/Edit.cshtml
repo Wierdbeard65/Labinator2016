@@ -1,17 +1,13 @@
 ﻿@model Labinator2016.Lib.Models.DataCenter
 
-<h2>Edit</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
         <h4>DataCenter</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.DataCenterId)
-
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -19,15 +15,23 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
+                @{
+                    if (Model.DataCenterId == 0)
+                    {
+                        @Html.DropDownList("Region", null, new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Model.Region
+                        @Html.HiddenFor(model => model.Region)
+                    }
+                }
                 @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Timezone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -35,7 +39,6 @@
                 @Html.ValidationMessageFor(model => model.Timezone, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -49,7 +52,15 @@
                 </div>
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.GateWayId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.GateWayId, new { @id="oldGW", @name = "oldGW" })
+                <select name="GateWayId" id="GateWayId" class="form-control">
+                </select>
+                @Html.ValidationMessageFor(model => model.GateWayId, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.GateWayIP, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -57,7 +68,6 @@
                 @Html.ValidationMessageFor(model => model.GateWayIP, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -67,5 +77,6 @@
     </div>
 }
 @section Scripts {
+    <script src="~/Scripts/DataCenterEdit.js" language="javascript"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }

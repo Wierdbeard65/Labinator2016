@@ -54,8 +54,8 @@ namespace Labinator2016
         /// <summary>
         /// Handles the PostAuthenticateRequest event of the Application control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param Name="sender">The source of the event.</param>
+        /// <param Name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
             if (FormsAuthentication.CookiesSupported == true)

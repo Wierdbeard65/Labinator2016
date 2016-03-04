@@ -38,7 +38,7 @@ namespace Labinator2016.Lib.Models
         /// The user identifier.
         /// </value>
         public int UserId { get; set; }
-        ////public string ConfigurationId { get; set; }
+        public string ConfigurationId { get; set; }
         ////public DateTime? LastContact { get; set; }
         public string SessionId { get; set; }
         ////public int PercentageRunning { get; set; }
@@ -59,6 +59,7 @@ namespace Labinator2016.Lib.Models
             seatTemp.SeatId = this.SeatId;
             seatTemp.ClassroomId = this.ClassroomId;
             seatTemp.UserId = this.UserId;
+            seatTemp.ConfigurationId = this.ConfigurationId;
             return seatTemp;
         }
     }

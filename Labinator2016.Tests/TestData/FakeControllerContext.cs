@@ -54,7 +54,7 @@
         private FakeIdentity identity = new FakeIdentity();
         public bool IsInRole(string str)
         {
-            return false;
+            return true;
         }
         public System.Security.Principal.IIdentity Identity
         {

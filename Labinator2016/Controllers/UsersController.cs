@@ -53,8 +53,8 @@ namespace Labinator2016.Controllers
         /// Initializes a new instance of the <see cref="UsersController"/> class.
         /// Used for constructing when Unit Testing.
         /// </summary>
-        /// <param name="db">Handle to Database stub.</param>
-        /// <param name="auth">Handle to the Authenticator stub.</param>
+        /// <param Name="db">Handle to Database stub.</param>
+        /// <param Name="auth">Handle to the Authenticator stub.</param>
         public UsersController(ILabinatorDb db, IAuth auth)
         {
             this.db = db;
@@ -73,7 +73,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Displays a page to edit a user
         /// </summary>
-        /// <param name="id">The id of the User being edited. Zero means new.</param>
+        /// <param Name="id">The Id of the User being edited. Zero means new.</param>
         /// <returns>The User Edit view</returns>
         public ActionResult Edit(int? id)
         {
@@ -102,8 +102,8 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Processes the data from the Edit form.
         /// </summary>
-        /// <param name="user">The user object from the Edit page</param>
-        /// <returns>Back to Index, or re-display Edit page if there was an error.</returns>
+        /// <param Name="user">The user object from the Edit page</param>
+        /// <returns>Back to Index, or re-display Edit page if there was an Error.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserId,EmailAddress,Password,IsInstructor,IsAdministrator")] User user)
@@ -158,7 +158,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// First stage to delete a User.
         /// </summary>
-        /// <param name="id">The id of the User to delete</param>
+        /// <param Name="id">The Id of the User to delete</param>
         /// <returns>The Delete confirmation view</returns>
         public ActionResult Delete(int? id)
         {
@@ -179,7 +179,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Deletes the user after confirmation.
         /// </summary>
-        /// <param name="id">The id of the user to delete.</param>
+        /// <param Name="id">The Id of the user to delete.</param>
         /// <returns>The user list.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -195,7 +195,7 @@ namespace Labinator2016.Controllers
         /// Used to respond to an AJAX request for a list of Users. The results are then
         /// used to populate a DataTable on the Index Page.
         /// </summary>
-        /// <param name="param">The information sent from the DataTable regarding sorts, filters etc.</param>
+        /// <param Name="param">The information sent from the DataTable regarding sorts, filters etc.</param>
         /// <returns>A JSON response with the new information to display.</returns>
         [AllowAnonymous]
         public ActionResult Ajax(DTParameters param)
@@ -206,7 +206,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Sends the initial Login view to the browser.
         /// </summary>
-        /// <param name="returnUrl">The URL of the page that caused the authentication request.
+        /// <param Name="returnUrl">The URL of the page that caused the authentication request.
         /// Used to redirect back after successful login.</param>
         /// <returns>The view for the Login Dialog</returns>
         [AllowAnonymous]
@@ -220,7 +220,7 @@ namespace Labinator2016.Controllers
         /// Called when the user submits a login request.
         /// Verifies the credentials and redirects to the calling page, or re-displays Login Dialog if the Login fails.
         /// </summary>
-        /// <param name="model">The model.</param>
+        /// <param Name="model">The model.</param>
         /// <returns>A redirect to the original page, or the view for the Login Dialog</returns>
         [HttpPost]
         [AllowAnonymous]
@@ -248,7 +248,7 @@ namespace Labinator2016.Controllers
                     }
                 }
 
-                ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
+                ModelState.AddModelError(string.Empty, "The user Name or password provided is incorrect.");
                 Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.incorrectlogon, Detail = "There was an incorrect login attempt.", User = username });
             }
 

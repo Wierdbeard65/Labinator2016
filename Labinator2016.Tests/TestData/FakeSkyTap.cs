@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Labinator2016.Lib.Headers;
-using Labinator2016.Lib.REST;
-using RestSharp;
-
+﻿
 namespace Labinator2016.Tests.TestData
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Labinator2016.Lib.Headers;
+    using Labinator2016.Lib.REST;
+    using RestSharp;
+
     class FakeSkyTap : ISkyTap
     {
         public IQueryable<T> Query<T>() where T : class
@@ -23,7 +24,7 @@ namespace Labinator2016.Tests.TestData
         {
             if (request.Method == Method.POST)
             {
-                string name = request.Parameters.Where(p => p.Name == "name").First().Value.ToString();
+                string name = request.Parameters.Where(p => p.Name == "Name").First().Value.ToString();
                 Added.Add(name);
                 var type = typeof(T).ToString();
                 if (type == typeof(Project).ToString())
@@ -50,6 +51,10 @@ namespace Labinator2016.Tests.TestData
         public void Remove<T>(T entity) where T : class
         {
             Removed.Add(entity);
+        }
+        public IRestResponse Execute(RestRequest request)
+        {
+            return new RestResponse();
         }
         public Dictionary<Type, object> Sets = new Dictionary<Type, object>();
         public List<object> Added = new List<object>();

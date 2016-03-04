@@ -14,31 +14,36 @@
         public string summary { get; set; }
         public Boolean show_project_members { get; set; }
         public string auto_add_role_name { get; set; }
+        public string region { get; set; }
+
         public Project()
         {
             st = new SkyTap();
+            id = null;
         }
+
         public Project(ISkyTap st)
         {
             this.st = st;
+            id = null;
         }
-        public String Add(String Name)
+
+        public void Add()
         {
-            String Return = null;
             RestRequest request = new RestRequest("projects.json", Method.POST);
-            request.AddParameter("name", Name);
-            Project response = st.Execute<Project>(request);
+//            request.AddParameter("query", "region:" + this.region);
+            request.AddParameter("name", this.name);
+            Project response = this.st.Execute<Project>(request);
             if (response != default(Project))
             {
-                Return = response.id;
+                id = response.id;
             }
-            return Return;
         }
-        public Boolean Delete(String Project)
-        {
-            RestRequest request = new RestRequest("projects/" + Project, Method.DELETE);
-            IRestResponse response = this.st.Execute(request);
 
+        public Boolean Delete()
+        {
+            RestRequest request = new RestRequest("projects/" + id, Method.DELETE);
+            IRestResponse response = this.st.Execute(request);
             return response.StatusCode == HttpStatusCode.OK;
         }
     }

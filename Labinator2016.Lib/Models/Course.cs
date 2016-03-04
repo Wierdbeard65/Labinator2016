@@ -27,10 +27,10 @@ namespace Labinator2016.Lib.Models
         public int CourseId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the course.
+        /// Gets or sets the Name of the course.
         /// </summary>
         /// <value>
-        /// The name.
+        /// The Name.
         /// </value>
         public string Name { get; set; }
 
@@ -71,10 +71,10 @@ namespace Labinator2016.Lib.Models
         ////public virtual List<Log> Logs { get; set; }        
 
         /// <summary>
-        /// Gets or sets the name of the template used for this course. Not present in the database.
+        /// Gets or sets the Name of the template used for this course. Not present in the database.
         /// </summary>
         /// <value>
-        /// The name of the template.
+        /// The Name of the template.
         /// </value>
         [NotMapped]
         public string TemplateName { get; set; }

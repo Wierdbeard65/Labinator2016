@@ -34,24 +34,24 @@ namespace Labinator2016.Lib.REST
         public string id { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the Name.
         /// </summary>
         /// <value>
-        /// The name.
+        /// The Name.
         /// </value>
         public string name { get; set; }
 
         /// <summary>
-        /// Gets or sets the runstate.
+        /// Gets or sets the Runstate.
         /// </summary>
         /// <value>
-        /// The runstate.
+        /// The Runstate.
         /// </value>
         public string runstate { get; set; }
         ////        public Hardware hardware { get; set; }
         public bool? error { get; set; }
         public object asset_id { get; set; }
-        ////        public Interface[] interfaces { get; set; }
+        public Interface[] interfaces { get; set; }
         public object[] notes { get; set; }
         ////        public Label[] labels { get; set; }
         ////        public Credential[] credentials { get; set; }        
@@ -131,7 +131,7 @@ namespace Labinator2016.Lib.REST
         /// <summary>
         /// Initializes a new instance of the <see cref="Vm"/> class.
         /// </summary>
-        /// <param name="st">The st.</param>
+        /// <param Name="st">The st.</param>
         public Vm(ISkyTap st)
         {
             this.st = st;
@@ -152,7 +152,7 @@ namespace Labinator2016.Lib.REST
         /// <summary>
         /// Gets the list.
         /// </summary>
-        /// <param name="ConfigurationId">The configuration identifier.</param>
+        /// <param Name="ConfigurationId">The configuration identifier.</param>
         /// <returns></returns>
         public List<Vm> GetList(string ConfigurationId)
         {
@@ -164,7 +164,7 @@ namespace Labinator2016.Lib.REST
         /// <summary>
         /// Gets the template.
         /// </summary>
-        /// <param name="VmId">The vm identifier.</param>
+        /// <param Name="VmId">The vm identifier.</param>
         /// <returns></returns>
         public Vm GetTemplate(string VmId)
         {
@@ -183,11 +183,11 @@ namespace Labinator2016.Lib.REST
         ////    var request = new RestRequest("vms/" + VMId, Method.PUT);
         ////    if (status == "stopped")
         ////    {
-        ////        request.AddParameter("runstate", "running");
+        ////        request.AddParameter("Runstate", "running");
         ////    }
         ////    else
         ////    {
-        ////        request.AddParameter("runstate", "halted");
+        ////        request.AddParameter("Runstate", "halted");
         ////    }
         ////    Vm parameters = DLLConfig.Execute<Vm>(request);
         ////    return (parameters != null);
@@ -202,7 +202,7 @@ namespace Labinator2016.Lib.REST
         ////    var request = new RestRequest("vms/" + VMId, Method.PUT);
         ////    if (status == "running")
         ////    {
-        ////        request.AddParameter("runstate", "suspended");
+        ////        request.AddParameter("Runstate", "suspended");
         ////    }
         ////    Vm parameters = DLLConfig.Execute<Vm>(request);
         ////    return (parameters != null);
@@ -215,7 +215,7 @@ namespace Labinator2016.Lib.REST
         ////        return false;
         ////    }
         ////    var request = new RestRequest("vms/" + VMId, Method.PUT);
-        ////    request.AddParameter("runstate", "running");
+        ////    request.AddParameter("Runstate", "running");
         ////    Vm parameters = DLLConfig.Execute<Vm>(request);
         ////    return (parameters != null);
         ////}
@@ -229,7 +229,7 @@ namespace Labinator2016.Lib.REST
         ////    }
         ////    else
         ////    {
-        ////        return parameters.runstate;
+        ////        return parameters.Runstate;
         ////    }
         ////}
         ////}

@@ -92,40 +92,40 @@ namespace Labinator2016.Tests.Controllers
         /// <summary>
         /// Data the center edit new write test.
         /// </summary>
-        [Test]
-        public void DataCenterEditNewWriteTest()
-        {
-            var db = new FakeDatabase();
-            db.AddSet(TestDataCenterData.DataCenters);
-            var controller = new DataCentersController(db);
-            controller.ControllerContext = new FakeControllerContext();
-            DataCenter testDataCenter = new DataCenter() { DataCenterId = 0, Name = "TestNew" };
-            var result = controller.Edit(testDataCenter);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
-            Assert.AreEqual(1, db.Added.Count);
-            Assert.AreEqual("TestNew", ((DataCenter)db.Added[0]).Name);
-            Assert.AreEqual(2, db.saved);
-        }
+        ////[Test]
+        ////public void DataCenterEditNewWriteTest()
+        ////{
+        ////    var db = new FakeDatabase();
+        ////    db.AddSet(TestDataCenterData.DataCenters);
+        ////    var controller = new DataCentersController(db);
+        ////    controller.ControllerContext = new FakeControllerContext();
+        ////    DataCenter testDataCenter = new DataCenter() { DataCenterId = 0, Name = "TestNew" };
+        ////    var result = controller.Edit(testDataCenter);
+        ////    Assert.IsNotNull(result);
+        ////    Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
+        ////    Assert.AreEqual(1, db.Added.Count);
+        ////    Assert.AreEqual("TestNew", ((DataCenter)db.Added[0]).Name);
+        ////    Assert.AreEqual(2, db.saved);
+        ////}
 
         /// <summary>
         /// Data the center edit existing write test.
         /// </summary>
-        [Test]
-        public void DataCenterEditExistingWriteTest()
-        {
-            var db = new FakeDatabase();
-            db.AddSet(TestDataCenterData.DataCenters);
-            var controller = new DataCentersController(db);
-            controller.ControllerContext = new FakeControllerContext();
-            DataCenter testDataCenter = new DataCenter() { DataCenterId = 1, Name = "TestChange" };
-            var result = controller.Edit(testDataCenter);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
-            Assert.AreEqual(0, db.Added.Count);
-            Assert.AreEqual(1, db.Updated.Count);
-            Assert.AreEqual("TestChange", ((DataCenter)db.Updated[0]).Name);
-            Assert.AreEqual(2, db.saved);
-        }
+        ////[Test]
+        ////public void DataCenterEditExistingWriteTest()
+        ////{
+        ////    var db = new FakeDatabase();
+        ////    db.AddSet(TestDataCenterData.DataCenters);
+        ////    var controller = new DataCentersController(db);
+        ////    controller.ControllerContext = new FakeControllerContext();
+        ////    DataCenter testDataCenter = new DataCenter() { DataCenterId = 1, Name = "TestChange" };
+        ////    var result = controller.Edit(testDataCenter);
+        ////    Assert.IsNotNull(result);
+        ////    Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
+        ////    Assert.AreEqual(0, db.Added.Count);
+        ////    Assert.AreEqual(1, db.Updated.Count);
+        ////    Assert.AreEqual("TestChange", ((DataCenter)db.Updated[0]).Name);
+        ////    Assert.AreEqual(2, db.saved);
+        ////}
     }
 }

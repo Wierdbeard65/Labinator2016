@@ -49,6 +49,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="HtmlSanitizer">
+      <HintPath>..\..\HtmlSanitizer-master\HtmlSanitizer\bin\Release\HtmlSanitizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -92,6 +95,10 @@
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -173,6 +180,7 @@
     <Content Include="Scripts\bootstrap-switch.min.js" />
     <Content Include="Scripts\ClassroomEdit.js" />
     <Content Include="Scripts\CourseIndex.js" />
+    <Content Include="Scripts\DataCenterEdit.js" />
     <Content Include="Scripts\DataCenterIndex.js" />
     <Content Include="Scripts\HomeGrid.js" />
     <Content Include="Scripts\LogIndex.js" />

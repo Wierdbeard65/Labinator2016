@@ -75,7 +75,7 @@ namespace Labinator2016.Lib.Models
         /// The user.
         /// </value>
         public virtual User user { get; set; }
-        ////public string ConfigurationId { get; set; }
+        public string ConfigurationId { get; set; }
         ////public DateTime? LastContact { get; set; }
         ////public string SessionId { get; set; }
         ////public int PercentageRunning { get; set; }
@@ -97,6 +97,7 @@ namespace Labinator2016.Lib.Models
             seat.SeatId = this.SeatId;
             seat.ClassroomId = this.ClassroomId;
             seat.UserId = this.UserId;
+            seat.ConfigurationId = this.ConfigurationId;
             return seat;
         }
     }

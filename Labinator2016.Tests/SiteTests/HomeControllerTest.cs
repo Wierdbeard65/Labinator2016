@@ -13,8 +13,9 @@ namespace Labinator2016.Tests.Controllers
     using System.Web.Mvc;
     using Labinator2016.Controllers;
     using Labinator2016.ViewModels;
+    using Lib.Headers;
     using NUnit.Framework;
-
+    using TestData;
     /// <summary>
     /// Unit tests for the Home Controller
     /// </summary>
@@ -28,48 +29,15 @@ namespace Labinator2016.Tests.Controllers
         public void HomeControllerInitialIndexTest()
         {
             // Arrange
-            HomeController controller = new HomeController();
-
+            var db = new FakeDatabase();
+            db.AddSet(TestUserData.Users);
+            HomeController controller = new HomeController(db);
+            controller.ControllerContext = new FakeControllerContext();
             // Act
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(false, ((IndexViewModel)result.Model).ShowAll);
-        }
-
-        /// <summary>
-        /// Home the controller post back own classes only index test.
-        /// </summary>
-        [Test]
-        public void HomeControllerPostbackOwnClassesOnlyIndexTest()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index(new IndexViewModel() { ShowAll = false }) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(false, ((IndexViewModel)result.Model).ShowAll);
-        }
-
-        /// <summary>
-        /// Home the controller post back all classes index test.
-        /// </summary>
-        [Test]
-        public void HomeControllerPostbackAllClassesIndexTest()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index(new IndexViewModel() { ShowAll = true }) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(true, ((IndexViewModel)result.Model).ShowAll);
         }
     }
 }

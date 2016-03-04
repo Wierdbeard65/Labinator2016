@@ -18,10 +18,10 @@ namespace Labinator2016.ViewModels
     public class LoginViewModel
     {
         /// <summary>
-        /// Gets or sets the name of the User Logging in
+        /// Gets or sets the Name of the User Logging in
         /// </summary>
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         /// <summary>
