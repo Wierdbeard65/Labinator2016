@@ -39,8 +39,8 @@
         /// Initializes a new instance of the <see cref="ClassroomsController"/> class.
         /// Used for constructing when Unit Testing.
         /// </summary>
-        /// <param Name="db">Handle to Database stub.</param>
-        /// <param Name="st">Handle to Skytap stub.</param>
+        /// <param name="db">Handle to Database stub.</param>
+        /// <param name="st">Handle to Skytap stub.</param>
         public ClassroomsController(ILabinatorDb db, ISkyTap st)
         {
             this.db = db;
@@ -51,7 +51,7 @@
         /// Used to respond to an AJAX request for a list of Classrooms. The results are then
         /// used to populate a DataTable on the Index Page.
         /// </summary>
-        /// <param Name="param">The information sent from the DataTable regarding sorts, filters etc.</param>
+        /// <param name="param">The information sent from the DataTable regarding sorts, filters etc.</param>
         /// <returns>A JSON response with the new information to display.</returns>
         [AllowAnonymous]
         public ActionResult Ajax(DTParameters param)
@@ -63,12 +63,12 @@
         /// Used to respond to an AJAX request for a list of Seats. The results are then
         /// used to populate a DataTable on the Index Page.
         /// </summary>
-        /// <param Name="param">The information sent from the DataTable regarding sorts, filters etc.</param>
+        /// <param name="param">The information sent from the DataTable regarding sorts, filters etc.</param>
         /// <returns>A JSON response with the new information to display.</returns>
         [AllowAnonymous]
         public ActionResult AjaxSeat(DTParameters param)
         {
-            return this.Json(Generic.Ajax<SeatTemp>(this.db.Query<SeatTemp>().Where(st=>st.SessionId==param.SessionId).ToList(), param));
+            return this.Json(Generic.Ajax<SeatTemp>(this.db.Query<SeatTemp>().Where(st => st.SessionId == param.SessionId).ToList(), param));
         }
 
         [AllowAnonymous]
@@ -79,6 +79,7 @@
             {
                 json = reader.ReadToEnd();
             }
+
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             dynamic parameters = serializer.Deserialize<object>(json);
             List<Seat> seats = new List<Seat>();
@@ -87,12 +88,14 @@
                 int classroomId = parameters["ClassroomId"];
                 seats = this.db.Query<Seat>().Where(s => s.ClassroomId == classroomId).ToList();
             }
+
             return this.Json(seats);
         }
+
         /// <summary>
         /// The first stage in editing a Classroom.
         /// </summary>
-        /// <param Name="id">The ClassroomID of the Course to edit. Zero indicates "new".</param>
+        /// <param name="id">The ClassroomID of the Course to edit. Zero indicates "new".</param>
         /// <returns>The edit view.</returns>
         public ActionResult Edit(int id)
         {
@@ -101,12 +104,12 @@
             {
                 classroom = new Classroom() { ClassroomId = 0 };
                 User user = this.db.Query<User>().Where(u => u.EmailAddress == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault();
-                if(user != null)
+                if (user != null)
                 {
                     classroom.UserId = user.UserId;
                 }
+                classroom.Start = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 8, 30, 0);
             }
-
             else
             {
                 classroom = this.db.Query<Classroom>().Where(c => c.ClassroomId == id).FirstOrDefault();
@@ -127,11 +130,11 @@
         /// <summary>
         /// Writes the changes made to a Classroom back to the database.
         /// </summary>
-        /// <param Name="course">The Classroom object returned from the browser.</param>
+        /// <param name="course">The Classroom object returned from the browser.</param>
         /// <returns>A redirection back to the list of Classroom.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClassroomId,CourseId,DataCenterId,UserId,Start,Name")] Classroom classroom, string SessionId)
+        public ActionResult Edit([Bind(Include = "ClassroomId,CourseId,DataCenterId,UserId,Start,Name")] Classroom classroom, string sessionId)
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +144,7 @@
                     Course crs = this.db.Query<Course>().Where(c => c.CourseId == classroom.CourseId).FirstOrDefault();
                     if (crs != null)
                     {
-                        Project projectObject = new Project(st);
+                        Project projectObject = new Project(this.st);
                         if (classroom.ClassroomId == 0)
                         {
                             projectObject.name = crs.Name + "-" + classroom.Start.ToShortDateString();
@@ -151,25 +154,26 @@
                             {
                                 classroom.Project = projectObject.id;
                                 this.db.Add<Classroom>(classroom);
-                                Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "Classroom created for " + crs.Name + " on " + classroom.jsDate });
+                                Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "Classroom created for " + crs.Name + " on " + classroom.JsDate });
                             }
-
                         }
                         else
                         {
                             this.db.Update<Classroom>(classroom);
-                            Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "Classroom updated for  " + crs.Name + " on " + classroom.jsDate });
+                            Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "Classroom updated for  " + crs.Name + " on " + classroom.JsDate });
                         }
-                        List<SeatTemp> sts = this.db.Query<SeatTemp>().Where(st => st.SessionId == SessionId).ToList();
+
+                        List<SeatTemp> sts = this.db.Query<SeatTemp>().Where(st => st.SessionId == sessionId).ToList();
                         List<int> stids = sts.Select(s => s.SeatId).ToList();
                         List<Seat> seatsToRemove = this.db.Query<Seat>().Where(s => !stids.Contains(s.SeatId)).ToList();
-                        Configuration configuration = new Configuration(); ;
+                        Configuration configuration = new Configuration();
                         foreach (Seat s in seatsToRemove)
                         {
                             this.db.Remove<Seat>(s);
                             configuration.Id = s.ConfigurationId;
                             configuration.Delete();
                         }
+
                         foreach (SeatTemp st in sts)
                         {
                             Seat s = st.toSeat();
@@ -179,21 +183,25 @@
                                 {
                                     s.ClassroomId = classroom.ClassroomId;
                                 }
+
                                 User usr = this.db.Query<User>().Where(u => u.UserId == s.UserId).FirstOrDefault();
                                 configuration.Name = usr.EmailAddress + "-" + crs.Name;
-                                configuration.Add(classroom.Project, classroom.course.Template, dc.GateWayBackboneId, dc.Region);
+                                configuration.Add(classroom.Project, classroom.Course.Template, dc.GateWayBackboneId, dc.Region);
                                 if (configuration.Id != null)
                                 {
                                     s.ConfigurationId = configuration.Id;
                                     this.db.Add<Seat>(s);
                                 }
                             }
+
                             this.db.Remove<SeatTemp>(st);
                         }
+
                         this.db.SaveChanges();
                     }
                 }
-                return this.RedirectToAction("Index","Home");
+
+                return this.RedirectToAction("Index", "Home");
             }
 
             ViewBag.Session = System.Web.HttpContext.Current.Session.SessionID;
@@ -206,7 +214,7 @@
         /// <summary>
         /// Performs the first part of the two-stage deletion of a Classroom.
         /// </summary>
-        /// <param Name="id">The ClassroomID of the Classroom to delete.</param>
+        /// <param name="id">The ClassroomID of the Classroom to delete.</param>
         /// <returns>The confirmation view</returns>
         public ActionResult Delete(int? id)
         {
@@ -214,18 +222,20 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Classroom classroom = this.db.Query<Classroom>().Where(c => c.ClassroomId == id).FirstOrDefault();
             if (classroom == null)
             {
                 return this.HttpNotFound();
             }
+
             return this.View(classroom);
         }
 
         /// <summary>
         /// Performs the actual deletion of a Classroom when confirmed by the user.
         /// </summary>
-        /// <param Name="id">The ClassroomID of the Classroom to delete.</param>
+        /// <param name="id">The ClassroomID of the Classroom to delete.</param>
         /// <returns>A redirection back to the list of Classrooms.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -244,9 +254,11 @@
                     configuration.Delete();
                     this.db.Remove<Seat>(seat);
                 }
+
                 this.db.SaveChanges();
             }
-            Project projectObject = new Project(st);
+
+            Project projectObject = new Project(this.st);
             Classroom classroom = this.db.Query<Classroom>().Where(c => c.ClassroomId == id).FirstOrDefault();
             projectObject.id = classroom.Project;
             projectObject.Delete();
@@ -255,8 +267,9 @@
             Course crs = this.db.Query<Course>().Where(c => c.CourseId == classroom.CourseId).FirstOrDefault();
             if (crs != null)
             {
-                Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "Classroom deleted for  " + crs.Name + " on " + classroom.jsDate });
+                Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "Classroom deleted for  " + crs.Name + " on " + classroom.JsDate });
             }
+
             return this.RedirectToAction("Index", "Home");
         }
 
@@ -268,21 +281,22 @@
         /// <summary>
         /// Populates the temporary Course Machine table.
         /// </summary>
-        /// <param Name="classroomId">The course identifier of the Course being edited.</param>
-        /// <param Name="sessionId">A unique ID to distinguish between browser sessions.</param>
+        /// <param name="classroomId">The course identifier of the Course being edited.</param>
+        /// <param name="sessionId">A unique ID to distinguish between browser sessions.</param>
         [NonAction]
         public void PopulateTemp(int classroomId, string sessionId)
         {
-            List<SeatTemp> SeatTemps = this.db.Query<SeatTemp>()
+            List<SeatTemp> seatTemps = this.db.Query<SeatTemp>()
                                                     .Where(st => st.SessionId == sessionId)
                                                     .ToList();
-            if (SeatTemps != null)
+            if (seatTemps != null)
             {
-                foreach (SeatTemp st in SeatTemps)
+                foreach (SeatTemp st in seatTemps)
                 {
                     this.db.Remove<SeatTemp>(st);
                 }
             }
+
             List<Seat> seats = this.db.Query<Seat>()
                                                 .Where(s => s.ClassroomId == classroomId)
                                                 .ToList();
@@ -295,6 +309,7 @@
                     seatTemp.TimeStamp = DateTime.Now;
                     this.db.Add<SeatTemp>(seatTemp);
                 }
+
                 this.db.SaveChanges();
             }
         }
@@ -321,41 +336,43 @@
                 string classroom = parameters["Classroom"];
                 if (newSeats != string.Empty)
                 {
-                    string[] NewUsers = newSeats.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                    if (NewUsers.Count() > 0)
+                    string[] newUsers = newSeats.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    if (newUsers.Count() > 0)
                     {
-                        foreach (string NewUser in NewUsers)
+                        foreach (string newUser in newUsers)
                         {
-                            String NU = NewUser.ToLower();
-                            User existingUser = this.db.Query<User>().Where(u => u.EmailAddress == NU).FirstOrDefault();
+                            string nu = newUser.ToLower();
+                            User existingUser = this.db.Query<User>().Where(u => u.EmailAddress == nu).FirstOrDefault();
                             if (existingUser == null)
                             {
-                                User UserToAdd = new User();
-                                UserToAdd.EmailAddress = NU;
-                                UserToAdd.IsInstructor = false;
-                                UserToAdd.IsAdministrator = false;
-                                UserToAdd.Password = PasswordHash.CreateHash("password");
-                                this.db.Add<User>(UserToAdd);
+                                User userToAdd = new User();
+                                userToAdd.EmailAddress = nu;
+                                userToAdd.IsInstructor = false;
+                                userToAdd.IsAdministrator = false;
+                                userToAdd.Password = PasswordHash.CreateHash("password");
+                                this.db.Add<User>(userToAdd);
                                 this.db.SaveChanges();
                             }
-                            existingUser = this.db.Query<User>().Where(u => u.EmailAddress == NU).FirstOrDefault();
+
+                            existingUser = this.db.Query<User>().Where(u => u.EmailAddress == nu).FirstOrDefault();
                             SeatTemp existingSeat = this.db.Query<SeatTemp>().Where(s => (s.UserId == existingUser.UserId && s.SessionId == session)).FirstOrDefault();
                             if (existingSeat == null)
                             {
-                                //                                String configurationId = Configuration.Add(project, template, NU);
-                                //                                if (configurationId != null)
-                                //                               {
-                                SeatTemp seat = new SeatTemp() { UserId = existingUser.UserId, SessionId=session, TimeStamp = DateTime.Now, ClassroomId=int.Parse(classroom) };
+                                ////                                String configurationId = Configuration.Add(project, template, NU);
+                                ////                                if (configurationId != null)
+                                ////                               {
+                                SeatTemp seat = new SeatTemp() { UserId = existingUser.UserId, SessionId = session, TimeStamp = DateTime.Now, ClassroomId = int.Parse(classroom) };
                                 this.db.Add<SeatTemp>(seat);
                                 this.db.SaveChanges();
-                                   //                                        Logit.log(new Log() { User = User.Identity.Name, Message = LogMessages.create, Seat = seat.User.EmailAddress, Classroom = classroom.Name });
-//                                }
+                                ////                                   //                                        Logit.log(new Log() { User = User.Identity.Name, Message = LogMessages.create, Seat = seat.User.EmailAddress, Classroom = classroom.Name });
+                                ////                                }
                             }
                         }
                     }
                 }
-        }
-        response.Add("Status", "Done");
+            }
+
+            response.Add("Status", "Done");
             return this.Json(response);
         }
 
@@ -367,6 +384,7 @@
             {
                 json = reader.ReadToEnd();
             }
+
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             dynamic parameters = serializer.Deserialize<object>(json);
             if (parameters["SeatTempId"] != null)
@@ -379,6 +397,7 @@
                     this.db.SaveChanges();
                 }
             }
+
             response.Add("Status", "Done");
             return this.Json(response);
         }
@@ -389,6 +408,7 @@
             {
                 this.db.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

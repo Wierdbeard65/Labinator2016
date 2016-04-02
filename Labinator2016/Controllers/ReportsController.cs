@@ -34,8 +34,8 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportsController"/> class for use in testing.
         /// </summary>
-        /// <param Name="db">The Fake database</param>
-        /// <param Name="st">The Fake sky tap</param>
+        /// <param name="db">The Fake database</param>
+        /// <param name="st">The Fake sky tap</param>
         public ReportsController(ILabinatorDb db, ISkyTap st)
         {
             this.db = db;
@@ -52,7 +52,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Provides a response to an AJAX request for a list of courses.
         /// </summary>
-        /// <param Name="param">The filter, sort and paging configuration from the DataTable</param>
+        /// <param name="param">The filter, sort and paging configuration from the DataTable</param>
         /// <returns>A JSON response with the requested data</returns>
         public ActionResult Ajax(DTParameters param)
         {

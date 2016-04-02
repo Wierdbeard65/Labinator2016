@@ -21,7 +21,7 @@ namespace Labinator2016
         /// <summary>
         /// Registers the routes.
         /// </summary>
-        /// <param Name="routes">The existing route collection to be added to.</param>
+        /// <param name="routes">The existing route collection to be added to.</param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

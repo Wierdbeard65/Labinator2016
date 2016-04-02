@@ -31,6 +31,11 @@
             }
         }
 
+        void ILabinatorDb.Delete<T1>(System.Linq.Expressions.Expression<Func<T1, bool>> Target)
+        {
+
+        }
+
         public void Update<T>(T entity) where T : class
         {
             if (typeof(T) == typeof(Log))

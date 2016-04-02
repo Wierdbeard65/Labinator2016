@@ -121,9 +121,9 @@
 
         public string owner { get; set; }
 
-        public Publish_Sets[] publish_sets { get; set; }
+        public Publish_Sets[] Publish_sets { get; set; }
 
-        public string Add(string project, string template, string GatewayBackboneId, string region)
+        public string Add(string project, string template, string gatewayBackboneId, string region)
         {
             string retVal = null;
             RestRequest request = new RestRequest("configurations.json", Method.POST);
@@ -136,7 +136,7 @@
                 if (response != default(Configuration))
                 {
                     this.Id = response.Id;
-                    while (this.Runstate == "busy") ;
+                    while (this.Runstate == "busy");
                     RestRequest addConfigurationToProjectRequest = new RestRequest("projects/" + project + "/configurations/" + this.Id, Method.POST);
                     IRestResponse response2 = this.st.Execute(addConfigurationToProjectRequest);
                     int numericIP = this.Subnet;
@@ -147,8 +147,8 @@
                     string textGateway = IPUtils.NumericToStringIP(numericIP);
                     if (this.BackboneId != null)
                     {
-                        while (this.Runstate == "busy") ;
-                        RestRequest updateConfigIPRequest = new RestRequest("configurations/" + this.Id + "/networks/" + BackboneId + ".json", Method.PUT);
+                        while (this.Runstate == "busy" );
+                        RestRequest updateConfigIPRequest = new RestRequest("configurations/" + this.Id + "/networks/" + this.BackboneId + ".json", Method.PUT);
                         updateConfigIPRequest.AddParameter("subnet", textSubnet + "/29");
                         updateConfigIPRequest.AddParameter("subnet_addr", textSubnet);
                         updateConfigIPRequest.AddParameter("subnet_size", 29);
@@ -156,7 +156,7 @@
                         IRestResponse response3 = this.st.Execute(updateConfigIPRequest);
                         RestRequest createtunnelRequest = new RestRequest("tunnels.json", Method.POST);
                         createtunnelRequest.AddParameter("source_network_id", this.BackboneId);
-                        createtunnelRequest.AddParameter("target_network_id", GatewayBackboneId);
+                        createtunnelRequest.AddParameter("target_network_id", gatewayBackboneId);
                         IRestResponse response4 = this.st.Execute(createtunnelRequest);
                         retVal = this.Id;
                     }
@@ -166,6 +166,7 @@
             {
                 this.Delete();
             }
+
             return retVal;
         }
 
@@ -193,22 +194,23 @@
                 {
                     retVal = "unable to connect";
                 }
+
                 return retVal.ToLower();
             }
         }
 
-        public void Start()
-        {
-            var request = new RestRequest("configurations/" + this.Id, Method.PUT);
-            request.AddParameter("Runstate", "running");
-            this.st.Execute(request);
-        }
+        ////public void Start()
+        ////{
+        ////    var request = new RestRequest("configurations/" + this.Id, Method.PUT);
+        ////    request.AddParameter("Runstate", "running");
+        ////    this.st.Execute(request);
+        ////}
 
-        public void Suspend()
-        {
-            var request = new RestRequest("configurations/" + this.Id, Method.PUT);
-            request.AddParameter("Runstate", "suspended");
-            this.st.Execute(request);
-        }
+        ////public void Suspend()
+        ////{
+        ////    var request = new RestRequest("configurations/" + this.Id, Method.PUT);
+        ////    request.AddParameter("Runstate", "suspended");
+        ////    this.st.Execute(request);
+        ////}
     }
 }

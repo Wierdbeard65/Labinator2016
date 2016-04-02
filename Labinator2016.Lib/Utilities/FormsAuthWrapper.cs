@@ -22,8 +22,8 @@ namespace Labinator2016.Lib.Utilities
         /// <summary>
         /// Passes the authentication through to the standard authenticator
         /// </summary>
-        /// <param Name="userName">User to authenticate</param>
-        /// <param Name="remember">Flag as to whether to remember user between logins</param>
+        /// <param name="userName">User to authenticate</param>
+        /// <param name="remember">Flag as to whether to remember user between logins</param>
         public void DoAuth(string userName, bool remember)
         {
             FormsAuthentication.SetAuthCookie(userName, remember);

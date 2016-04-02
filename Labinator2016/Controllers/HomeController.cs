@@ -48,7 +48,7 @@ namespace Labinator2016.Controllers
         /// Initializes a new instance of the <see cref="HomeController"/> class.
         /// Used for constructing when Unit Testing.
         /// </summary>
-        /// <param Name="db">Handle to Database stub.</param>
+        /// <param name="db">Handle to Database stub.</param>
         public HomeController(ILabinatorDb db)
         {
             this.db = db;
@@ -73,8 +73,8 @@ namespace Labinator2016.Controllers
                     return this.Redirect("/Home/Error?Message=" + helper.Encode("User " + User.Identity.Name + " does not exist"));
                 }
                 DateTime start = DateTime.Now.AddHours(1);
-                List<Classroom> RunningClassrooms = this.db.Query<Classroom>().Include(c=>c.course).Where(c => c.Start < start).ToList();
-                RunningClassrooms = RunningClassrooms.Where(c => c.Start.AddDays(c.course.Days).AddHours(c.course.Hours + 1) > DateTime.Now).ToList();
+                List<Classroom> RunningClassrooms = this.db.Query<Classroom>().Include(c=>c.Course).Where(c => c.Start < start).ToList();
+                RunningClassrooms = RunningClassrooms.Where(c => c.Start.AddDays(c.Course.Days).AddHours(c.Course.Hours + 1) > DateTime.Now).ToList();
                 List<int> RunningClassroomIds = RunningClassrooms.Select(c => c.ClassroomId).ToList();
                 List<Seat> seats = this.db.Query<Seat>().Where(s => s.UserId == user.UserId && RunningClassroomIds.Contains(s.ClassroomId)).ToList();
                 if (seats.Count == 0)
@@ -98,7 +98,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Grids the specified identifier.
         /// </summary>
-        /// <param Name="id">The identifier.</param>
+        /// <param name="id">The identifier.</param>
         /// <returns></returns>
         public ActionResult Grid(int id)
         {

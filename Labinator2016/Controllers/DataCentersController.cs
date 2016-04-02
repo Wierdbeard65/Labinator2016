@@ -46,7 +46,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="DataCentersController"/> class for use in testing.
         /// </summary>
-        /// <param Name="db">The Fake database</param>
+        /// <param name="db">The Fake database</param>
         public DataCentersController(ILabinatorDb db)
         {
             this.db = db;
@@ -55,7 +55,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Provides a response to an AJAX request for a list of DataCenters.
         /// </summary>
-        /// <param Name="param">The filter, sort and paging configuration from the DataTable</param>
+        /// <param name="param">The filter, sort and paging configuration from the DataTable</param>
         /// <returns>A JSON response with the requested data</returns>
         public ActionResult Ajax(DTParameters param)
         {
@@ -93,7 +93,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// The first stage in editing a DataCenter.
         /// </summary>
-        /// <param Name="id">The DataCenterID of the DataCenter to edit. Zero indicates "new".</param>
+        /// <param name="id">The DataCenterID of the DataCenter to edit. Zero indicates "new".</param>
         /// <returns>The edit view.</returns>
         public ActionResult Edit(int id)
         {
@@ -129,7 +129,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Writes the changes made to a DataCenter back to the database.
         /// </summary>
-        /// <param Name="dataCenter">The DataCenter object returned from the browser.</param>
+        /// <param name="dataCenter">The DataCenter object returned from the browser.</param>
         /// <returns>A redirection back to the list of DataCenters.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -179,7 +179,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Performs the first part of the two-stage deletion of a DataCenter.
         /// </summary>
-        /// <param Name="id">The DataCenterID of the datacenter to delete.</param>
+        /// <param name="id">The DataCenterID of the datacenter to delete.</param>
         /// <returns>The confirmation view</returns>
         public ActionResult Delete(int? id)
         {
@@ -200,7 +200,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Performs the actual deletion of a Datacenter when confirmed by the user.
         /// </summary>
-        /// <param Name="id">The DataCenterID of the Datacenter to delete.</param>
+        /// <param name="id">The DataCenterID of the Datacenter to delete.</param>
         /// <returns>A redirection back to the list of DataCenters.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -216,7 +216,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Releases unmanaged resources and optionally releases managed resources.
         /// </summary>
-        /// <param Name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

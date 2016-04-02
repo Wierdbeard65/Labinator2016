@@ -11,6 +11,7 @@
 namespace Labinator2016.Lib.Headers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -31,22 +32,24 @@ namespace Labinator2016.Lib.Headers
         /// Adds a record to a table.
         /// </summary>
         /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
-        /// <param Name="entity">Data to add.</param>
+        /// <param name="entity">Data to add.</param>
         void Add<T>(T entity) where T : class;
 
-        /// <summary>
-        /// Updates a record in a table.
-        /// </summary>
-        /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
-        /// <param Name="entity">Data to update.</param>
-        void Update<T>(T entity) where T : class;
+        void Delete<T1>(System.Linq.Expressions.Expression<Func<T1, bool>> Target) where T1 : class;
 
         /// <summary>
         /// Removes a record from a table.
         /// </summary>
         /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
-        /// <param Name="entity">Data to remove.</param>
+        /// <param name="entity">Data to remove.</param>
         void Remove<T>(T entity) where T : class;
+
+        /// <summary>
+        /// Updates a record in a table.
+        /// </summary>
+        /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
+        /// <param name="entity">Data to update.</param>
+        void Update<T>(T entity) where T : class;
 
         /// <summary>
         /// Saves outstanding changes to the database.

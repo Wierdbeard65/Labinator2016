@@ -1,5 +1,4 @@
 ﻿<!doctype html>
-@using Labinator2016.Lib.Utilities
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -15,43 +14,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css" integrity="sha384-vVeW0vK0Dcrl3yDe9pkiU0lzno1emJy3EAQT9X6bTvfj5edXH7FJ07KONGSIZshn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker-standalone.min.css" integrity="sha384-AZe3Q5LPMFTiQtyIdINpjjMXjtmeWmeOHdSYCJYNGzDXKtD083YTlOyusybjVQk7" crossorigin="anonymous">
-    @RenderSection("css", required: false)
-    <link rel="stylesheet" href="~/Content/app.css">
+    <link rel="stylesheet" href="/Content/app.css">
 </head>
 <body>
     <div class="container wallpaper">
         <div class="row wide" id="bannerRow">
             <div class="col-sm-12 wide margin-bottom-md">
-                <img class="banner" src="~/Images/headerGraphic.png" />
+                <img class="banner" src="../Images/headerGraphic.png" />
             </div>
         </div>
-        @if (Request.IsAuthenticated)
-            {
-                <div class="row wide" id="NavRow">
-                    <div class="col-sm-11 menu-bar margin-bottom-md">
-                        <center>
-                            @Html.Raw("&nbsp;")
-                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default v-center" })
-                            @if (User.IsInRole("Administrator"))
-                {
-                                @Html.Raw("&nbsp;")
-                                @Html.ActionLink("DataCenters", "Index", "DataCenters", null, new { @class = "btn btn-default v-center" })
-                                @Html.Raw("&nbsp;")
-                                @Html.ActionLink("Users", "Index", "Users", null, new { @class = "btn btn-default v-center" })
-                                @Html.Raw("&nbsp;")
-                                @Html.ActionLink("Courses", "Index", "Courses", null, new { @class = "btn btn-default v-center" })
-                                @Html.Raw("&nbsp;")
-                                @Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "btn btn-default v-center" })
-                            }
-                            @Html.Raw("&nbsp;")
-                            @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "btn btn-default v-center" })
-                            @Html.Raw("&nbsp;")
-                        </center>
-                    </div>
-                </div>
-            }
-            @RenderBody()
+        <div class="row wide" id="NavRow">
+            <div class="col-sm-11 menu-bar-text margin-bottom-md">
+                <h1 class="v-center-text">
+                    <b>
+                        Mock-Up Page
+                    </b>
+                </h1>
+            </div>
         </div>
+
+        <!-- Section under Development -->
+
+
+                <!-- End of section under development -->
+    </div>
     <div class="navbar navbar-default navbar-fixed-bottom" id="footer">
         <div class="container-fluid">
             <p align="center" class="disclaimer"><br><b>IC</b> and <b>Interaction Client</b> are abbreviated terms indicating the core Customer Interaction Center&trade; (CIC) product from Interactive Intelligence, and used for internal Education Services purposes only.</p>
@@ -59,13 +45,14 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js" integrity="sha384-R4/ztc4ZlRqWjqIuvf6RX5yb/v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js" integrity="sha384-QIv8AGAxdI0cTHbmvoLkNuELOU7DQoz9LACnXQ61JsVJll396XlhlYsimV/19bJr" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js" integrity="sha384-QyXw3+FbFWMGvHERjd2qCYZRk+b2Pjmtq15C/hioWsjhRQ7ogFIq/TyxV45EzU1H" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js" integrity="sha384-fo515/EdB6QvtVyTtvtq4h0AeRxSvuTaUvc+Mg3HOeBUyozTDPBl53MpXK4CEW0+" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js" integrity="sha384-YArKvVMcKCuBUlxmMEAE42BQa4x1hG0HqJPYVMdND/0qv4E+HbCK724R+NqCKBDM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js" integrity="sha384-V936AaxnYTkq53cO2z8e42PFtCCdZhbRttfhgX8U1K9weNYVdCMbDetUKTtllFdc" crossorigin="anonymous"></script>
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+    <script src="/site.js" language="javascript"></script>
+    <script src="/Scripts/CourseEdit.js" language="javascript"></script>
 </body>
 </html>

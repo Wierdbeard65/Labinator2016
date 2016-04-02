@@ -26,8 +26,8 @@ namespace Labinator2016.Controllers
         /// converts it to the object response to the original AJAX request.
         /// </summary>
         /// <typeparam Name="T">The type of object in the DataTable</typeparam>
-        /// <param Name="allRecords">The Source record set.</param>
-        /// <param Name="param">The DTParameters object containing the formatting information.</param>
+        /// <param name="allRecords">The Source record set.</param>
+        /// <param name="param">The DTParameters object containing the formatting information.</param>
         /// <returns>A DTResult object containing the filtered and sorted data.</returns>
         public static DTResult<T> Ajax<T>(List<T> allRecords, DTParameters param) where T : class
         {

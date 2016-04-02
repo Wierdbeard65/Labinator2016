@@ -1,34 +1,21 @@
-﻿<br />
-<p>
-    <table width="100%" class="table table-striped table-bordered" id="datatable" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Start Time</th>
-                <th>Days</th>
-                <th>Hours</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Start Time</th>
-                <th>Days</th>
-                <th>Hours</th>
-                <th></th>
-            </tr>
-        </tfoot>
-    </table>
-</p>
+﻿<div class="row wide" id="Table">
+    <div class="col-sm-12">
+        <p>
+            <table width="100%" class="table table-striped table-bordered" id="datatable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Time</th>
+                        <th>Days</th>
+                        <th>Hours</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </p>
+    </div>
+</div>
+
 @section Scripts {
     <script src="~/Scripts/CourseIndex.js" language="javascript"></script>
-    <script>
-        $(document).load(refreshList(aj, dc, columnRows));
-        $("div.toolbar").html('<center>@Html.ActionLink(linkText: "Add",
-        actionName: "Edit",
-        controllerName: "Courses",
-        routeValues: new { Id = 0 },
-        htmlAttributes: new { @class = "btn btn-primary" })</center>');
-    </script>
 }

@@ -1,0 +1,117 @@
+$rounded-panel-radius: 20px;
+html{
+    height:100% !important;
+    }
+body{
+    margin: 8px;
+    height:100% !important;
+    }
+#wrapper{
+    min-height:100% !important;
+    height:100% !important;
+}
+.wallpaper{
+    background-image: url('../Images/bkgdTexture.jpg');
+    background-size:cover;
+    padding:0;
+    border: 5px solid;
+    border-color: lightgray;
+    border-radius: 20px;
+    height: calc(100vh - 95px) !important;
+}
+.wide{
+    padding:0;
+    margin: 0;
+}
+.banner{
+    margin:0;
+    max-width:100%;
+    border-radius:20px;
+}
+.menu-bar-text{
+    background-color: #0585A7;
+    height: 60px;
+    border-radius: 0px 30px 30px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-table;
+    left: -5px;
+}
+.menu-bar{
+    background-color: #0585A7;
+    height: 60px;
+    border-radius: 0px 30px 30px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+//    display: inline-table;
+    left: -5px;
+}
+.v-center{
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+}
+.v-center-text{
+    display:table-cell;
+    vertical-align:middle;
+}
+.margin-bottom-xs {margin-bottom: 5px;}  
+.margin-bottom-sm {margin-bottom: 8px;} 
+.margin-bottom-md {margin-bottom: 10px;}
+.margin-bottom-lg {margin-bottom: 15px;} 
+.rounded{
+    border-radius: $rounded-panel-radius;
+}
+.rounded-top{
+    border-radius:$rounded-panel-radius $rounded-panel-radius 0px 0px;
+}
+.rounded-bottom{
+border-radius:0px 0px $rounded-panel-radius $rounded-panel-radius;
+
+}
+.disclaimer {
+    font-family:sans-serif;
+    font-size:9pt;
+    color:black;
+    text-align:center;
+}
+.copyright {
+    font-family:sans-serif;
+    font-size:8pt;
+    color:black;
+    text-align:center;
+}
+.panel-labinator{
+    border-width: 0;
+}
+.panel-labinator .panel-heading {
+    border-color: #0C475F;
+    background-color: #0E5470;
+    color:white;
+    border-bottom:0px;
+    border-left:2px;
+    border-top:2px;
+    border-right:2px;
+    }
+.panel-labinator .panel-body {
+    background-color: #D6D6D6;
+    border-color: #B6B6B6;
+    border-bottom:0px;
+    border-left:2px;
+    border-top:0;
+    border-right:2px;
+    }
+.panel-labinator .panel-footer {
+    background-color: #D6D6D6;
+    border-color: #B6B6B6;
+    border-bottom:2px;
+    border-left:2px;
+    border-top:0;
+    border-right:2px;
+}
+.pagination{
+    margin:0px;
+}
+.table{
+    margin-bottom: 0;
+}

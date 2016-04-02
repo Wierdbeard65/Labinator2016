@@ -55,7 +55,7 @@ namespace Labinator2016.Lib.Utilities
         /// <summary>
         /// Creates a salted PBKDF2 hash of the password.
         /// </summary>
-        /// <param Name="password">The password to hash.</param>
+        /// <param name="password">The password to hash.</param>
         /// <returns>The hash of the password.</returns>
         public static string CreateHash(string password)
         {
@@ -74,8 +74,8 @@ namespace Labinator2016.Lib.Utilities
         /// <summary>
         /// Validates a password given a hash of the correct one.
         /// </summary>
-        /// <param Name="password">The password to check.</param>
-        /// <param Name="correctHash">A hash of the correct password.</param>
+        /// <param name="password">The password to check.</param>
+        /// <param name="correctHash">A hash of the correct password.</param>
         /// <returns>True if the password is correct. False otherwise.</returns>
         public static bool ValidatePassword(string password, string correctHash)
         {
@@ -100,8 +100,8 @@ namespace Labinator2016.Lib.Utilities
         /// method is used so that password hashes cannot be extracted from
         /// on-line systems using a timing attack and then attacked off-line.
         /// </summary>
-        /// <param Name="a">The first byte array.</param>
-        /// <param Name="b">The second byte array.</param>
+        /// <param name="a">The first byte array.</param>
+        /// <param name="b">The second byte array.</param>
         /// <returns>True if both byte arrays are equal. False otherwise.</returns>
         private static bool SlowEquals(byte[] a, byte[] b)
         {
@@ -117,10 +117,10 @@ namespace Labinator2016.Lib.Utilities
         /// <summary>
         /// Computes the PBKDF2-SHA1 hash of a password.
         /// </summary>
-        /// <param Name="password">The password to hash.</param>
-        /// <param Name="salt">The salt.</param>
-        /// <param Name="iterations">The PBKDF2 iteration count.</param>
-        /// <param Name="outputBytes">The length of the hash to generate, in bytes.</param>
+        /// <param name="password">The password to hash.</param>
+        /// <param name="salt">The salt.</param>
+        /// <param name="iterations">The PBKDF2 iteration count.</param>
+        /// <param name="outputBytes">The length of the hash to generate, in bytes.</param>
         /// <returns>A hash of the password.</returns>
         private static byte[] PBKDF2(string password, byte[] salt, int iterations, int outputBytes)
         {

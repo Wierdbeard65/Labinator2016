@@ -12,6 +12,8 @@
 namespace Labinator2016.Lib.REST
 {
     using System.Collections.Generic;
+    using System.Threading;
+    using System.Web.Script.Serialization;
     using Labinator2016.Lib.Headers;
     using RestSharp;
 
@@ -24,6 +26,8 @@ namespace Labinator2016.Lib.REST
         /// The handle used for Sky Tap. Allows for unit testing.
         /// </summary>
         private ISkyTap st;
+
+        private static JavaScriptSerializer serializer = new JavaScriptSerializer();
 
         /// <summary>
         /// Gets or sets the identifier.
@@ -47,13 +51,13 @@ namespace Labinator2016.Lib.REST
         /// <value>
         /// The Runstate.
         /// </value>
-        public string runstate { get; set; }
+        ////public string runstate { get; set; }
         ////        public Hardware hardware { get; set; }
-        public bool? error { get; set; }
-        public object asset_id { get; set; }
-        public Interface[] interfaces { get; set; }
-        public object[] notes { get; set; }
-        ////        public Label[] labels { get; set; }
+        ////public bool? error { get; set; }
+        ////public object asset_id { get; set; }
+        ////public Interface[] interfaces { get; set; }
+        ////public object[] notes { get; set; }
+        ////////        public Label[] labels { get; set; }
         ////        public Credential[] credentials { get; set; }        
 
         /// <summary>
@@ -131,7 +135,7 @@ namespace Labinator2016.Lib.REST
         /// <summary>
         /// Initializes a new instance of the <see cref="Vm"/> class.
         /// </summary>
-        /// <param Name="st">The st.</param>
+        /// <param name="st">The st.</param>
         public Vm(ISkyTap st)
         {
             this.st = st;
@@ -149,89 +153,117 @@ namespace Labinator2016.Lib.REST
         ////        return parameters.vms.ToList();
         ////    }
 
-        /// <summary>
-        /// Gets the list.
-        /// </summary>
-        /// <param Name="ConfigurationId">The configuration identifier.</param>
-        /// <returns></returns>
-        public List<Vm> GetList(string ConfigurationId)
+        /////// <summary>
+        /////// Gets the list.
+        /////// </summary>
+        /////// <param name="ConfigurationId">The configuration identifier.</param>
+        /////// <returns></returns>
+        ////public List<Vm> GetList(string ConfigurationId)
+        ////{
+        ////    RestRequest request = new RestRequest("v2/configurations/" + ConfigurationId, Method.GET);
+        ////    List<Vm> response = st.ExecuteList<Vm>(request);
+        ////    return (response);
+        ////}
+
+        /////// <summary>
+        /////// Gets the template.
+        /////// </summary>
+        /////// <param name="VmId">The vm identifier.</param>
+        /////// <returns></returns>
+        ////public Vm GetTemplate(string VmId)
+        ////{
+        ////    RestRequest request = new RestRequest("v2/templates/" + VmId, Method.GET);
+        ////    Vm response = this.st.Execute<Vm>(request);
+        ////    return response;
+        ////}
+
+        public bool PowerSwitch()
         {
-            RestRequest request = new RestRequest("v2/configurations/" + ConfigurationId, Method.GET);
-            List<Vm> response = st.ExecuteList<Vm>(request);
-            return (response);
+            string status = Status();
+            if (status == "Error")
+            {
+                return false;
+            }
+            var request = new RestRequest("vms/" + this.id, Method.PUT);
+            if (status == "stopped")
+            {
+                request.AddParameter("Runstate", "running");
+            }
+            else
+            {
+                request.AddParameter("Runstate", "halted");
+            }
+            IRestResponse response = this.st.Execute(request);
+            return (response != null);
         }
 
-        /// <summary>
-        /// Gets the template.
-        /// </summary>
-        /// <param Name="VmId">The vm identifier.</param>
-        /// <returns></returns>
-        public Vm GetTemplate(string VmId)
+        public static void SuspendMultiple(object parameter)
         {
-            RestRequest request = new RestRequest("v2/templates/" + VmId, Method.GET);
-            Vm response = this.st.Execute<Vm>(request);
-            return response;
+            List<Vm> machines = (List<Vm>)parameter;
+            foreach(Vm machine in machines)
+            {
+                machine.Suspend();
+            }
         }
 
-        ////public static Boolean PowerSwitch(string VMId)
-        ////{
-        ////    String status = Status(VMId);
-        ////    if (status == "Error")
-        ////    {
-        ////        return false;
-        ////    }
-        ////    var request = new RestRequest("vms/" + VMId, Method.PUT);
-        ////    if (status == "stopped")
-        ////    {
-        ////        request.AddParameter("Runstate", "running");
-        ////    }
-        ////    else
-        ////    {
-        ////        request.AddParameter("Runstate", "halted");
-        ////    }
-        ////    Vm parameters = DLLConfig.Execute<Vm>(request);
-        ////    return (parameters != null);
-        ////}
-        ////public static Boolean Suspend(string VMId)
-        ////{
-        ////    String status = Status(VMId);
-        ////    if (status == "Error")
-        ////    {
-        ////        return false;
-        ////    }
-        ////    var request = new RestRequest("vms/" + VMId, Method.PUT);
-        ////    if (status == "running")
-        ////    {
-        ////        request.AddParameter("Runstate", "suspended");
-        ////    }
-        ////    Vm parameters = DLLConfig.Execute<Vm>(request);
-        ////    return (parameters != null);
-        ////}
-        ////public static Boolean Start(string VMId)
-        ////{
-        ////    String status = Status(VMId);
-        ////    if (status == "Error")
-        ////    {
-        ////        return false;
-        ////    }
-        ////    var request = new RestRequest("vms/" + VMId, Method.PUT);
-        ////    request.AddParameter("Runstate", "running");
-        ////    Vm parameters = DLLConfig.Execute<Vm>(request);
-        ////    return (parameters != null);
-        ////}
-        ////public static string Status(string VMId)
-        ////{
-        ////    var request = new RestRequest("vms/" + VMId, Method.GET);
-        ////    Vm parameters = DLLConfig.Execute<Vm>(request);
-        ////    if (parameters == null)
-        ////    {
-        ////        return "Error";
-        ////    }
-        ////    else
-        ////    {
-        ////        return parameters.Runstate;
-        ////    }
-        ////}
+        public bool Suspend()
+        {
+            string status = this.Status();
+            if (status == "Error")
+            {
+                return false;
+            }
+            if (status == "running")
+            {
+                var request = new RestRequest("vms/" + this.id, Method.PUT);
+                if (status == "running")
+                {
+                    request.AddParameter("Runstate", "suspended");
+                }
+                IRestResponse parameters = this.st.Execute(request);
+                return (parameters != null);
+            }
+            return false;
+        }
+
+        public static void StartMultiple(object parameter)
+        {
+            List<Vm> machines = (List<Vm>)parameter;
+            foreach (Vm machine in machines)
+            {
+                machine.Start();
+            }
+        }
+        public bool Start()
+        {
+            string status = this.Status();
+            if (status == "Error")
+            {
+                return false;
+            }
+            if (status != "running")
+            {
+                var request = new RestRequest("vms/" + this.id, Method.PUT);
+                request.AddParameter("Runstate", "running");
+                IRestResponse parameters = this.st.Execute(request);
+                return (parameters != null);
+            }
+            return true;
+        }
+        public string Status()
+        {
+            var request = new RestRequest("vms/" + this.id, Method.GET);
+            IRestResponse response = this.st.Execute(request);
+            if (response == null)
+            {
+                return "Error";
+            }
+            else
+            {
+                dynamic vm = serializer.DeserializeObject(response.Content);
+                return vm["Runstate"];
+            }
+        }
         ////}
     }
 }

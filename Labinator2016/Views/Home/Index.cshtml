@@ -1,29 +1,25 @@
-﻿<br />
-<center><input type="checkbox" name="ShowAll" checked></center>
-    <p>
-        <table width="100%" class="table table-striped table-bordered" id="datatable" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Start</th>
-                    <th>Course</th>
-                    <th>Region</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>Start</th>
-                    <th>Course</th>
-                    <th>Region</th>
-                    <th></th>
-                </tr>
-            </tfoot>
-        </table>
-    </p>
-@section css{
-    <link rel="stylesheet" href="~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.min.css" />
-    }
+﻿<div class="row wide" id="Switch">
+    <div class="col-sm-12 margin-bottom-md">
+        <center><input type="checkbox" name="ShowAll" checked></center>
+    </div>
+</div>
+<div class="row wide" id="Table">
+    <div class="col-sm-12">
+        <p>
+            <table width="100%" class="table table-striped table-bordered" id="datatable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Start</th>
+                        <th>Course</th>
+                        <th>Region</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </p>
+    </div>
+</div>
+
 @section Scripts {
-    <script src="~/Scripts/bootstrap-switch.min.js"></script>
     <script src="~/Scripts/HomeIndex.js" language="javascript"></script>
 }

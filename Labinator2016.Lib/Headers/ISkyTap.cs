@@ -24,7 +24,7 @@ namespace Labinator2016.Lib.Headers
         /// Obtains a single object of type T from the Sky Tap REST interface.
         /// </summary>
         /// <typeparam Name="T">The type to obtain.</typeparam>
-        /// <param Name="request">The request to send</param>
+        /// <param name="request">The request to send</param>
         /// <returns>An object.</returns>
         T Execute<T>(RestRequest request);
 
@@ -32,7 +32,7 @@ namespace Labinator2016.Lib.Headers
         /// Obtains a list of objects of type T from the Sky Tap REST interface.
         /// </summary>
         /// <typeparam Name="T">The type to obtain.</typeparam>
-        /// <param Name="request">The request to send</param>
+        /// <param name="request">The request to send</param>
         /// <returns>A list of objects.</returns>
         List<T> ExecuteList<T>(RestRequest request);
     }

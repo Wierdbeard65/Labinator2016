@@ -81,16 +81,30 @@ namespace Labinator2016.Lib.Models
         }
 
         /// <summary>
-        /// Writes a log message to the database.
+        /// Writes a log message to the database. This version is used to log web-generated messages.
         /// </summary>
-        /// <param Name="db">The database handle.</param>
-        /// <param Name="logEntry">The log entry to write.</param>
+        /// <param name="db">The database handle.</param>
+        /// <param name="cx">The context of the User.</param>
+        /// <param name="logEntry">The log entry to write.</param>
         public static void Write(ILabinatorDb db, HttpContextBase cx, Log logEntry)
         {
             if ((logEntry.User==null) ||(logEntry.User == string.Empty))
             {
                 logEntry.User = cx.User.Identity.Name;
             }
+            logEntry.TimeStamp = DateTime.Now;
+            db.Add<Log>(logEntry);
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Writes a log message to the database. This version is used to log system-generated messages.
+        /// </summary>
+        /// <param name="db">The database handle.</param>
+        /// <param name="logEntry">The log entry to write.</param>
+        public static void Write(ILabinatorDb db, Log logEntry)
+        {
+            logEntry.User = "System";
             logEntry.TimeStamp = DateTime.Now;
             db.Add<Log>(logEntry);
             db.SaveChanges();

@@ -22,7 +22,7 @@ namespace Labinator2016
         /// Registers the header files in the bundle
         /// For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         /// </summary>
-        /// <param Name="bundles">The internal bundle collection.</param>
+        /// <param name="bundles">The internal bundle collection.</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(

@@ -21,7 +21,7 @@ namespace Labinator2016.Lib.Utilities
         /// <summary>
         /// Get the Current Version from the AssemblyInfo.cs file.
         /// </summary>
-        /// <param Name="helper">The helper.?!</param>
+        /// <param name="helper">The helper.?!</param>
         /// <returns>The current version</returns>
         public static MvcHtmlString CurrentVersion(this HtmlHelper helper)
         {

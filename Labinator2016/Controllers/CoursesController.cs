@@ -47,8 +47,8 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="CoursesController"/> class for use in testing.
         /// </summary>
-        /// <param Name="db">The Fake database</param>
-        /// <param Name="st">The Fake SkyTap</param>
+        /// <param name="db">The Fake database</param>
+        /// <param name="st">The Fake SkyTap</param>
         public CoursesController(ILabinatorDb db, ISkyTap st)
         {
             this.db = db;
@@ -69,7 +69,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Provides a response to an AJAX request for a list of courses.
         /// </summary>
-        /// <param Name="param">The filter, sort and paging configuration from the DataTable</param>
+        /// <param name="param">The filter, sort and paging configuration from the DataTable</param>
         /// <returns>A JSON response with the requested data</returns>
         public ActionResult Ajax(DTParameters param)
         {
@@ -79,7 +79,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Provides a response to an AJAX request for a list of machines associated with this course.
         /// </summary>
-        /// <param Name="param">The filter, sort and paging configuration from the DataTable</param>
+        /// <param name="param">The filter, sort and paging configuration from the DataTable</param>
         /// <returns>A JSON response with the requested data</returns>
         public JsonResult MachineAjax(DTParameters param)
         {
@@ -124,7 +124,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// The first stage in editing a Course.
         /// </summary>
-        /// <param Name="id">The CourseID of the Course to edit. Zero indicates "new".</param>
+        /// <param name="id">The CourseID of the Course to edit. Zero indicates "new".</param>
         /// <returns>The edit view.</returns>
         [Authorize]
         public ActionResult Edit(int id)
@@ -155,8 +155,8 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Writes the changes made to a Course back to the database.
         /// </summary>
-        /// <param Name="course">The Course object returned from the browser.</param>
-        /// <param Name="session">The GUID used to uniquely identify this browser session.</param>
+        /// <param name="course">The Course object returned from the browser.</param>
+        /// <param name="session">The GUID used to uniquely identify this browser session.</param>
         /// <returns>A redirection back to the list of Courses.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -239,9 +239,9 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Populates the temporary Course Machine table.
         /// </summary>
-        /// <param Name="courseId">The course identifier of the Course being edited.</param>
-        /// <param Name="templateId">The template identifier of the Course being edited.</param>
-        /// <param Name="sessionId">A unique ID to distinguish between browser sessions.</param>
+        /// <param name="courseId">The course identifier of the Course being edited.</param>
+        /// <param name="templateId">The template identifier of the Course being edited.</param>
+        /// <param name="sessionId">A unique ID to distinguish between browser sessions.</param>
         [NonAction]
         public void PopulateTemp(int courseId, string templateId, string sessionId)
         {
@@ -348,7 +348,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Performs the first part of the two-stage deletion of a Course.
         /// </summary>
-        /// <param Name="id">The CourseID of the Course to delete.</param>
+        /// <param name="id">The CourseID of the Course to delete.</param>
         /// <returns>The confirmation view</returns>
         [Authorize]
         public ActionResult Delete(int? id)
@@ -370,7 +370,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Performs the actual deletion of a Course when confirmed by the user.
         /// </summary>
-        /// <param Name="id">The CourseID of the Course to delete.</param>
+        /// <param name="id">The CourseID of the Course to delete.</param>
         /// <returns>A redirection back to the list of Courses.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -399,7 +399,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Releases unmanaged resources and optionally releases managed resources.
         /// </summary>
-        /// <param Name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

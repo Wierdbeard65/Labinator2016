@@ -2,11 +2,12 @@
 function refreshList(aj, dc, cr) {
     oTable = $('#datatable').DataTable(
         {
+            "scrollY": '1px',
             "serverSide": true,
             "Searching": false,
             "Ordering": false,
             "ajax": aj,
-            "dom": 'lfrtip<"toolbar">',
+            "dom": '<"col-sm-6"l><"col-sm-6"f>t<"col-sm-4"i><"toolbar col-sm-2"><"col-sm-6"p>',
             "rowCallback": cr,
             "processing": true,
             "pagingType": "full_numbers",
@@ -17,14 +18,10 @@ function refreshList(aj, dc, cr) {
             }
         }
     );
-//    oTable.buttons().container().appendTo($('.col-sm-6:eq(0)', oTable.table().container()));
-    //$('#datatable').on('draw.dt', function () {
-    //    $(this).parent().find(".dataTables_paginate a").each(function () {
-    //        if ($(this).children("span").length === 0) {
-    //            $(this).html('&nbsp;<span class="btn">' + $(this).html() + '</span>&nbsp;');
-    //        }
-    //    });
-    //});
+    resize();
+    $(window).resize(function () {
+        resize();
+    });
     setInterval(function () {
         oTable.ajax.reload(null, false);// user paging is not reset on reload
     }, 15000);

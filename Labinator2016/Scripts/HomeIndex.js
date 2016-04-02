@@ -26,11 +26,22 @@ function columnRows(Row, Data, Index) {
 
 };
 var dc = [
-        { "data": "jsDate" },
-        { "data": "course.Name" },
-        { "data": "dataCenter.Name" },
+        { "data": "JsDate" },
+        { "data": "Course.Name" },
+        { "data": "DataCenter.Name" },
         { "data": "ClassroomId" }
 ];
+function resize() {
+    $('.dataTables_scrollBody').css('height', '1px');
+    var boxHeight = $('.wallpaper').height();
+    var dt = $('#Table');
+    var datatableHeight = dt.height();
+    var brHeight = $('#bannerRow').height();
+    var nrHeight = $('#NavRow').height();
+    var swHeight = $('#Switch').height();
+    var tableHeight = boxHeight - (datatableHeight + brHeight + nrHeight + swHeight + 60);
+    $('.dataTables_scrollBody').css('height', tableHeight + 'px');
+}
 $(document).load(refreshList(aj, dc, columnRows));
 $("div.toolbar").html('<center><a href="Classrooms/Edit/0" class = "btn btn-primary">Add</a></center>');
 $("[name='ShowAll']").bootstrapSwitch({

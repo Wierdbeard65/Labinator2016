@@ -36,9 +36,9 @@ namespace Labinator2016.Lib.Utilities
         /// <summary>
         /// Logs an event to the Windows Application log..
         /// </summary>
-        /// <param Name="message">The text of the log message.</param>
-        /// <param Name="type">Event type (Info/Warning/Error)</param>
-        /// <param Name="id">The numeric identifier from the EventIds enumeration.</param>
+        /// <param name="message">The text of the log message.</param>
+        /// <param name="type">Event type (Info/Warning/Error)</param>
+        /// <param name="id">The numeric identifier from the EventIds enumeration.</param>
         public static void LogE(string message, EventLogEntryType type, EventIds id)
         {
             if (eventLog == null)

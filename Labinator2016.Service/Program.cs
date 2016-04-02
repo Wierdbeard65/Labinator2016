@@ -20,19 +20,19 @@ namespace Labinator2016.Service
     /// <summary>
     /// Main entry point for the service component which runs in the background.
     /// </summary>
-    public static class Program
+    class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        public static void Main()
+        static void Main(string[] args)
         {
-            ServiceBase[] servicesToRun;
-            servicesToRun = new ServiceBase[]
+            if (Environment.UserInteractive)
             {
-                ////new Service1()
-            };
-            ServiceBase.Run(servicesToRun);
+                LabinatorService service = new LabinatorService();
+                service.TestStartupAndStop(args);
+            }
+            else
+            {
+                System.ServiceProcess.ServiceBase.Run(new LabinatorService());
+            }
         }
     }
 }

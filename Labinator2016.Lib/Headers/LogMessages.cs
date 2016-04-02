@@ -68,6 +68,26 @@ namespace Labinator2016.Lib.Headers
         /// <summary>
         /// An Error Ocurred.
         /// </summary>
-        Error
+        Error,
+
+        /// <summary>
+        /// The service started.
+        /// </summary>
+        start,
+
+        /// <summary>
+        /// The service stopped.
+        /// </summary>
+        stop,
+
+        /// <summary>
+        /// Commencing a scan of environments to start or stop
+        /// </summary>
+        startstopscancommenced,
+
+        /// <summary>
+        /// The scan of environments to start or stop is complete
+        /// </summary>
+        startstopscancomplete
     }
 }
