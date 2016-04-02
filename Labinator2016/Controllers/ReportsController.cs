@@ -56,7 +56,7 @@ namespace Labinator2016.Controllers
         /// <returns>A JSON response with the requested data</returns>
         public ActionResult Ajax(DTParameters param)
         {
-            return this.Json(Generic.Ajax<Log>(this.db.Query<Log>().ToList(), param));
+            return this.Json(Generic.Ajax<Log>(this.db.Query<Log>().OrderByDescending(l=>l.TimeStamp).ToList(), param));
         }
 
         /// <summary>

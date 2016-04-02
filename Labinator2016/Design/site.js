@@ -1,54 +1,49 @@
 ﻿var dataset = [
         {
-            "VMName": "Machine 1",
-            "IsActive": "True",
-            "CourseMachineTempId": "1"
-        },
-        {
-            "VMName": "Machine 2",
-            "IsActive": "False",
-            "CourseMachineTempId": "1"
-        },
-        {
-            "VMName": "Machine 3",
-            "IsActive": "True",
-            "CourseMachineTempId": "1"
-        },
-        {
-            "VMName": "Machine 4",
-            "IsActive": "False",
-            "CourseMachineTempId": "1"
-        },
-        {
-            "VMName": "Machine 5",
-            "IsActive": "True",
-            "CourseMachineTempId": "1"
-        },
-
-       {
-           "VMName": "Machine 1",
-           "IsActive": "True",
-           "CourseMachineTempId": "1"
-       },
-        {
-            "VMName": "Machine 2",
-            "IsActive": "False",
-            "CourseMachineTempId": "1"
-        },
-        {
-            "VMName": "Machine 3",
-            "IsActive": "True",
-            "CourseMachineTempId": "1"
-        },
-        {
-            "VMName": "Machine 4",
-            "IsActive": "False",
-            "CourseMachineTempId": "1"
-        },
-        {
-            "VMName": "Machine 5",
-            "IsActive": "True",
-            "CourseMachineTempId": "1"
+            "EmailAddress": "student1@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "1"
+        }, {
+            "EmailAddress": "student2@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "2"
+        }, {
+            "EmailAddress": "student3@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "3"
+        }, {
+            "EmailAddress": "student4@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "4"
+        }, {
+            "EmailAddress": "student5@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "5"
+        }, {
+            "EmailAddress": "student6@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "6"
+        }, {
+            "EmailAddress": "student7@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "7"
+        }, {
+            "EmailAddress": "student8@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "8"
+        }, {
+            "EmailAddress": "student9@gmail.com",
+            "IsInstructor": false,
+            "IsAdministrator": false,
+            "UserId": "9"
         },
 
 ];

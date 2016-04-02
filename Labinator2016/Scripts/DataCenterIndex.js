@@ -32,3 +32,16 @@ function columnRows(Row, Data, Index) {
         $('td:eq(2)', Row).html("SkyTap");
     }
 };
+
+function resize() {
+    $('.dataTables_scrollBody').css('height', '1px');
+    var boxHeight = $('.wallpaper').height();
+    var dt = $('#Table');
+    var datatableHeight = dt.height();
+    var brHeight = $('#bannerRow').height();
+    var nrHeight = $('#NavRow').height();
+    var tableHeight = boxHeight - (datatableHeight + brHeight + nrHeight + 40);
+    $('.dataTables_scrollBody').css('height', tableHeight + 'px');
+}
+$(document).load(refreshList(aj, dc, columnRows));
+$("div.toolbar").html('<center><a href="DataCenters/Edit/0" class = "btn btn-primary">Add</a></center>');

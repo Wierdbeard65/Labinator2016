@@ -132,9 +132,13 @@ namespace Labinator2016.Service
         }
         public void CleanupTimer()
         {
+            Log.Write(this.db, new Log() { Message = LogMessages.cleanupscancommenced, Detail = "Scan Started." });
             DateTime cutoff = DateTime.Now.AddDays(-1);
             this.db.Delete<SeatTemp>(st => st.TimeStamp < cutoff);
             this.db.Delete<CourseMachineTemp>(cm => cm.TimeStamp < cutoff);
+            cutoff = DateTime.Now.AddDays(-30);
+            this.db.Delete<Log>(l=>l.TimeStamp < cutoff);
+            Log.Write(this.db, new Log() { Message = LogMessages.cleanupscancomplete, Detail = "Scan finished." });
         }
     }
 }

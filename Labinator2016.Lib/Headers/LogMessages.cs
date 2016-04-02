@@ -88,6 +88,16 @@ namespace Labinator2016.Lib.Headers
         /// <summary>
         /// The scan of environments to start or stop is complete
         /// </summary>
-        startstopscancomplete
+        startstopscancomplete,
+
+        /// <summary>
+        /// Commencing a scan of environments to start or stop
+        /// </summary>
+        cleanupscancommenced,
+
+        /// <summary>
+        /// The scan of environments to start or stop is complete
+        /// </summary>
+        cleanupscancomplete
     }
 }
