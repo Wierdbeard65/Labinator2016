@@ -66,7 +66,7 @@ namespace Labinator2016.Lib.Headers
         joined,
 
         /// <summary>
-        /// An Error Occured.
+        /// An Error Occurred.
         /// </summary>
         Error,
 

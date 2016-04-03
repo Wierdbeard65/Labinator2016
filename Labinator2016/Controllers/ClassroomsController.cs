@@ -176,7 +176,7 @@
 
                         foreach (SeatTemp st in sts)
                         {
-                            Seat s = st.toSeat();
+                            Seat s = st.ToSeat();
                             if (s.SeatId == 0)
                             {
                                 if (s.ClassroomId == 0)
