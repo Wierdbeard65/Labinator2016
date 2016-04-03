@@ -168,7 +168,7 @@ namespace Labinator2016.Controllers
                 if (course.CourseId == 0)
                 {
                     this.db.Add<Course>(course);
-                    Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message=LogMessages.create, Detail = "Course " + course.Name + " created." });
+                    Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "Course " + course.Name + " created." });
                 }
                 else
                 {

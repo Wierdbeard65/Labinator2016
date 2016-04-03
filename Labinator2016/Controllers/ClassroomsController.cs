@@ -86,7 +86,7 @@ namespace Labinator2016.Controllers
         }
 
         /// <summary>
-        /// Processes the AJAX request for a list of seats associated wuth a particular classroom.
+        /// Processes the AJAX request for a list of seats associated with a particular classroom.
         /// </summary>
         /// <returns>A JSON representation of the Seat list.</returns>
         [AllowAnonymous]

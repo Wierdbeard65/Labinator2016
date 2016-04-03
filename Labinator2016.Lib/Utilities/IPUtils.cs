@@ -16,7 +16,7 @@ namespace Labinator2016.Lib.Utilities
     public static class IPUtils
     {
         /// <summary>
-        /// Used to convert a numeric representation of an IP address into a String version (sotted notation)
+        /// Used to convert a numeric representation of an IP address into a String version (dotted notation)
         /// </summary>
         /// <param name="ip">The integer version of the IP address</param>
         /// <returns>A string containing the dotted notation IP address</returns>
