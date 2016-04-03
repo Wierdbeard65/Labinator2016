@@ -20,9 +20,13 @@ namespace Labinator2016.Service
     /// <summary>
     /// Main entry point for the service component which runs in the background.
     /// </summary>
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Main entry point for the software.
+        /// </summary>
+        /// <param name="args">The parameter is not used.</param>
+        public static void Main(string[] args)
         {
             if (Environment.UserInteractive)
             {
