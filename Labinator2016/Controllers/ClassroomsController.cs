@@ -174,13 +174,13 @@ namespace Labinator2016.Controllers
                             {
                                 classroom.Project = projectObject.id;
                                 this.db.Add<Classroom>(classroom);
-                                Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "Classroom created for " + crs.Name + " on " + classroom.JsDate });
+                                Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.create, Detail = "Classroom created for " + crs.Name + " on " + classroom.JSDate });
                             }
                         }
                         else
                         {
                             this.db.Update<Classroom>(classroom);
-                            Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "Classroom updated for  " + crs.Name + " on " + classroom.JsDate });
+                            Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "Classroom updated for  " + crs.Name + " on " + classroom.JSDate });
                         }
 
                         List<SeatTemp> sts = this.db.Query<SeatTemp>().Where(st => st.SessionId == sessionId).ToList();
@@ -287,7 +287,7 @@ namespace Labinator2016.Controllers
             Course crs = this.db.Query<Course>().Where(c => c.CourseId == classroom.CourseId).FirstOrDefault();
             if (crs != null)
             {
-                Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "Classroom deleted for  " + crs.Name + " on " + classroom.JsDate });
+                Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "Classroom deleted for  " + crs.Name + " on " + classroom.JSDate });
             }
 
             return this.RedirectToAction("Index", "Home");
