@@ -39,8 +39,8 @@ namespace Labinator2016.Lib.Headers
         /// Processes a multi-Record deletion using the Extended Entity Framework
         /// </summary>
         /// <typeparam name="T1">Type (Table) to delete records from.</typeparam>
-        /// <param name="Target">The LINQ expression that identifies the records to be deleted.</param>
-        void Delete<T1>(System.Linq.Expressions.Expression<Func<T1, bool>> Target) where T1 : class;
+        /// <param name="target">The LINQ expression that identifies the records to be deleted.</param>
+        void Delete<T1>(System.Linq.Expressions.Expression<Func<T1, bool>> target) where T1 : class;
 
         /// <summary>
         /// Removes a record from a table.
@@ -54,7 +54,7 @@ namespace Labinator2016.Lib.Headers
         /// </summary>
         /// <typeparam name="T">Type (Table) to add record to.</typeparam>
         /// <param name="entity">Data to update.</param>
-        void Update<T>(T entity) where T :class;
+        void Update<T>(T entity) where T : class;
 
         /// <summary>
         /// Saves outstanding changes to the database.

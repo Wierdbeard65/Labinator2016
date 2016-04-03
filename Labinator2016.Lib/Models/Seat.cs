@@ -40,7 +40,7 @@ namespace Labinator2016.Lib.Models
         public int UserId { get; set; }
 
         /// <summary>
-        /// The Identifier for the Configuration in Sky Tap that corresponds to this Seat.
+        /// Gets or sets the Identifier for the Configuration in Sky Tap that corresponds to this Seat.
         /// </summary>
         public string ConfigurationId { get; set; }
         ////public DateTime? LastContact { get; set; }
@@ -54,7 +54,7 @@ namespace Labinator2016.Lib.Models
         ////[NotMapped]
         
         /// <summary>
-        /// The User associated with this Seat.
+        /// Gets or sets the User associated with this Seat.
         /// </summary>
         public virtual User User { get; set; }
         ////[NotMapped]

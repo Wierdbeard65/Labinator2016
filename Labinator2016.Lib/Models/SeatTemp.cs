@@ -76,7 +76,7 @@ namespace Labinator2016.Lib.Models
         public virtual User User { get; set; }
 
         /// <summary>
-        /// Gets or Sets the Configuration Identifier
+        /// Gets or sets the Configuration Identifier
         /// </summary>
         /// <value>
         /// The Configuration Identifier

@@ -66,7 +66,7 @@ namespace Labinator2016.Lib.Models
         /// Gets the JavaScript readable version of the Time Stamp time.
         /// </summary>
         [NotMapped]
-        public string jsTime
+        public string JSTime
         {
             get
             {
