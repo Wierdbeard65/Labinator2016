@@ -48,10 +48,10 @@ namespace Labinator2016.Lib.Models
         public string VMId { get; set; }
 
         /// <summary>
-        /// Gets or sets the status.
+        /// Gets or sets the Status.
         /// </summary>
         /// <value>
-        /// The status.
+        /// The Status.
         /// </value>
         public string Status { get; set; }
 

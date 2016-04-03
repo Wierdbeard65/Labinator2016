@@ -90,7 +90,7 @@ namespace Labinator2016.Controllers
         /// <summary>
         /// Called via AJAX when the Template associated with the Course is changed, in order to re-align the Temporary table.
         /// </summary>
-        /// <returns>JSON status message</returns>
+        /// <returns>JSON Status message</returns>
         public JsonResult Refresh()
         {
             string json;

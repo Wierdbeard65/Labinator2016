@@ -83,7 +83,7 @@ namespace Labinator2016.Controllers
                 dynamic response = serializer.DeserializeObject(restResponse.Content);
                 foreach (dynamic configuration in response)
                 {
-                    reply.Add(configuration["id"], configuration["name"]);
+                    reply.Add(configuration["ID"], configuration["name"]);
                 }
             }
 

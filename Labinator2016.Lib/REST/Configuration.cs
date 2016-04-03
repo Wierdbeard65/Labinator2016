@@ -72,7 +72,7 @@ namespace Labinator2016.Lib.REST
                     {
                         if (network["name"] == "Backbone")
                         {
-                            result = network["id"];
+                            result = network["ID"];
                         }
                     }
                 }
@@ -239,7 +239,7 @@ namespace Labinator2016.Lib.REST
         /// <summary>
         /// Removes the configuration from Sky Tap, deleting all the virtual machines.
         /// </summary>
-        /// <returns>A status code to indicate success</returns>
+        /// <returns>A Status code to indicate success</returns>
         public bool Delete()
         {
             RestRequest request = new RestRequest("configurations/" + this.Id, Method.DELETE);
