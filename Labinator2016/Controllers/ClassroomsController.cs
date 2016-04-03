@@ -1,4 +1,14 @@
-﻿namespace Labinator2016.Controllers
+﻿//-----------------------------------------------------------------------
+// <copyright file="ClassroomsController.cs" company="Interactive Intelligence">
+//     Copyright (c) Interactive Intelligence. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+/// <summary>
+/// Author: Paul Simpson
+/// Version: 1.0 - Initial build.
+/// </summary>
+namespace Labinator2016.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +22,10 @@
     using Lib.REST;
     using Lib.Utilities;
     using ViewModels.DatatablesViewModel;
+
+    /// <summary>
+    /// Controller containing all of the Actions relating to the management of Classrooms.
+    /// </summary>
     [Authorize]
     public class ClassroomsController : Controller
     {
@@ -39,8 +53,8 @@
         /// Initializes a new instance of the <see cref="ClassroomsController"/> class.
         /// Used for constructing when Unit Testing.
         /// </summary>
-        /// <param name="db">Handle to Database stub.</param>
-        /// <param name="st">Handle to Skytap stub.</param>
+        /// <param name="db">Handle to Database interface stub.</param>
+        /// <param name="st">Handle to Sky Tap interface stub.</param>
         public ClassroomsController(ILabinatorDb db, ISkyTap st)
         {
             this.db = db;
@@ -59,7 +73,7 @@
             return this.Json(Generic.Ajax<Classroom>(this.db.Query<Classroom>().ToList(), param));
         }
 
-        /// <summary>
+        /// <summary>`
         /// Used to respond to an AJAX request for a list of Seats. The results are then
         /// used to populate a DataTable on the Index Page.
         /// </summary>
@@ -71,6 +85,10 @@
             return this.Json(Generic.Ajax<SeatTemp>(this.db.Query<SeatTemp>().Where(st => st.SessionId == param.SessionId).ToList(), param));
         }
 
+        /// <summary>
+        /// Processes the AJAX request for a list of seats associated wuth a particular classroom.
+        /// </summary>
+        /// <returns>A JSON representation of the Seat list.</returns>
         [AllowAnonymous]
         public JsonResult SeatGrid()
         {
@@ -108,6 +126,7 @@
                 {
                     classroom.UserId = user.UserId;
                 }
+
                 classroom.Start = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 8, 30, 0);
             }
             else
@@ -130,7 +149,8 @@
         /// <summary>
         /// Writes the changes made to a Classroom back to the database.
         /// </summary>
-        /// <param name="course">The Classroom object returned from the browser.</param>
+        /// <param name="classroom">The Classroom object returned from the browser.</param>
+        /// <param name="sessionId">The session identifier for the user's browser session</param>
         /// <returns>A redirection back to the list of Classroom.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -273,6 +293,10 @@
             return this.RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Action called when the User requests the detail of a Classroom.
+        /// </summary>
+        /// <returns>A View containing the classroom detail</returns>
         public ActionResult Detail()
         {
             return this.View();
@@ -376,6 +400,11 @@
             return this.Json(response);
         }
 
+        /// <summary>
+        /// When the user removes a seat from the classroom during editing, it generates an AJAX request which, in turn
+        /// removes the corresponding record from the Temporary Seat table. This action processes the request.
+        /// </summary>
+        /// <returns>A JSON response indicating the action has been completed.</returns>
         public JsonResult RemoveSeat()
         {
             string json;
@@ -402,6 +431,10 @@
             return this.Json(response);
         }
 
+        /// <summary>
+        /// Destructor for the object. Allow the disposal of the Database object before calling the base class destructor
+        /// </summary>
+        /// <param name="disposing">A boolean representing whether disposal is required.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -168,12 +168,12 @@ namespace Labinator2016.Controllers
                 if (course.CourseId == 0)
                 {
                     this.db.Add<Course>(course);
-                    Log.Write(db, ControllerContext.HttpContext, new Log() {Message=LogMessages.create, Detail="Course "+course.Name+" created." });
+                    Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message=LogMessages.create, Detail = "Course " + course.Name + " created." });
                 }
                 else
                 {
                     this.db.Update<Course>(course);
-                    Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "Course " + course.Name + " updated." });
+                    Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "Course " + course.Name + " updated." });
                 }
 
                 this.db.SaveChanges();
@@ -391,7 +391,7 @@ namespace Labinator2016.Controllers
             }
 
             this.db.SaveChanges();
-            Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "Course " + course.Name + " deleted." });
+            Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "Course " + course.Name + " deleted." });
 
             return this.RedirectToAction("Index");
         }
