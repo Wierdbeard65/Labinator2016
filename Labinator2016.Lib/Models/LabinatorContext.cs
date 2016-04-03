@@ -125,7 +125,7 @@ namespace Labinator2016.Lib.Models
         }
 
         /// <summary>
-        /// Impliments the Delete Record Set (Part of Entity Framework Extended) on the database.
+        /// Implements the Delete Record Set (Part of Entity Framework Extended) on the database.
         /// </summary>
         /// <typeparam name="T1">Type (Table) to delete records from.</typeparam>
         /// <param name="target">A LINQ expression that specifies record set to be deleted</param>
