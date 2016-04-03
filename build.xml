@@ -39,7 +39,7 @@
   </Target>
 
   <!-- Compiles and Cleans all projects (if named correctly) -->
-  <Target Name="Build" DependsOnTargets="Clean">
+  <!--<Target Name="Build" DependsOnTargets="Clean">
     <PropertyGroup>
       <CurrentProject>%(Projects.Identity)</CurrentProject>
     </PropertyGroup>
@@ -47,8 +47,11 @@
     <MSBuild Projects="$(CurrentProject)\$(CurrentProject).csproj"
       Targets="Clean;Build"
       Properties="Configuration=$(Configuration)" />
+  </Target>-->
+  <Target Name="Build" DependsOnTargets="Clean">
+    <MSBuild Projects="Labinator2016.sln" Targets="Clean;Build"
+      Properties="Configuration=$(Configuration)" />
   </Target>
-
 
   <Target Name="Package" DependsOnTargets="Build">
 
