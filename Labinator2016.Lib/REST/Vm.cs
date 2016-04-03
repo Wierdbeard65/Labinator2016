@@ -85,10 +85,10 @@ namespace Labinator2016.Lib.REST
         public bool? maintenance_lock_engaged { get; set; }
 
         /// <summary>
-        /// Gets or sets the region_backend.
+        /// Gets or sets the Region_backend.
         /// </summary>
         /// <value>
-        /// The region_backend.
+        /// The Region_backend.
         /// </value>
         public string region_backend { get; set; }
 

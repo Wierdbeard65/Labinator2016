@@ -44,7 +44,7 @@
         public IRestResponse Execute(RestRequest request)
         {
             int counter = 0;
-//            request.AddParameter("query", "region:" + SkyTapRegion);
+//            request.AddParameter("query", "Region:" + SkyTapRegion);
             IRestResponse response = SkyTap.Client.Execute(request);
             while (response.StatusCode != HttpStatusCode.OK && counter < MAX_RETRIES)
             {
@@ -71,7 +71,7 @@
         public T Execute<T>(RestRequest request)
         {
             int counter = 0;
-//            request.AddParameter("query", "region:" + SkyTapRegion);
+//            request.AddParameter("query", "Region:" + SkyTapRegion);
             var response = SkyTap.Client.Execute(request);
             while (response.StatusCode != HttpStatusCode.OK && counter < MAX_RETRIES)
             {
@@ -98,7 +98,7 @@
         public List<T> ExecuteList<T>(RestRequest request)
         {
             int counter = 0;
-//            request.AddParameter("query", "region:" + SkyTapRegion);
+//            request.AddParameter("query", "Region:" + SkyTapRegion);
             var response = SkyTap.Client.Execute(request);
             while (response.StatusCode != HttpStatusCode.OK && counter < MAX_RETRIES)
             {

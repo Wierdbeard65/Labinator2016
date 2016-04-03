@@ -32,10 +32,10 @@ namespace Labinator2016.Lib.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the region.
+        /// Gets or sets the Region.
         /// </summary>
         /// <value>
-        /// The region.
+        /// The Region.
         /// </value>
         public string Region { get; set; }
 

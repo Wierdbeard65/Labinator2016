@@ -64,7 +64,7 @@ namespace Labinator2016.Controllers
         }
 
         /// <summary>
-        /// When the client sends an AJAX request for a list of <see cref="Configuration"/>s for a specific region, this Action responds
+        /// When the client sends an AJAX request for a list of <see cref="Configuration"/>s for a specific Region, this Action responds
         /// </summary>
         /// When setting up a <see cref="DataCenter"/>, a machine (<see cref="Configuration"/>) must be identified which hosts the Spark Gateway. The response
         /// to the AJAX request is used to populate the Select List.
@@ -78,7 +78,7 @@ namespace Labinator2016.Controllers
             if (region != string.Empty)
             {
                 RestRequest request = new RestRequest("v2/configurations", Method.GET);
-                request.AddParameter("query", "region:" + region);
+                request.AddParameter("query", "Region:" + region);
                 IRestResponse restResponse = st.Execute(request);
                 dynamic response = serializer.DeserializeObject(restResponse.Content);
                 foreach (dynamic configuration in response)

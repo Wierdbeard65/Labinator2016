@@ -31,7 +31,7 @@
         public void Add()
         {
             RestRequest request = new RestRequest("projects.json", Method.POST);
-//            request.AddParameter("query", "region:" + this.region);
+//            request.AddParameter("query", "Region:" + this.Region);
             request.AddParameter("name", this.name);
             Project response = this.st.Execute<Project>(request);
             if (response != default(Project))
