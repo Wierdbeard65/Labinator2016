@@ -26,47 +26,47 @@ namespace Labinator2016.Tests.Controllers
         /// <summary>
         /// Logins the redirect test.
         /// </summary>
-        [Test]
-        public void LoginRedirectTest()
-        {
-            string testURL;
-            HttpWebRequest request;
-            Assembly asm = Assembly.LoadFrom("D:\\Source\\Labinator2016\\Labinator2016\\bin\\Labinator2016.dll");
-            IEnumerable<MethodInfo> conts = asm.GetTypes()
-                .Where(type => typeof(Controller).IsAssignableFrom(type)) // filter controllers
-                .SelectMany(type => type.GetMethods())
-                .Where(method => method.IsPublic && method.Module.ToString() == "Labinator2016.dll" && !method.IsDefined(typeof(NonActionAttribute)));
-            foreach (MethodInfo testAction in conts)
-            {
-                testURL = testAction.DeclaringType.Name.Replace("Controller", string.Empty) + "/" + testAction.Name;
-                switch (testURL)
-                {
-                    case "Users/Login":
-                    case "Users/Ajax":
-                    case "DataCenters/Ajax":
-                    case "DataCenters/ConfigurationAjax":
-                    case "Courses/Ajax":
-                    case "Courses/MachineAjax":
-                    case "Courses/Refresh":
-                    case "Courses/Active":
-                    case "Classrooms/Ajax":
-                    case "Classrooms/AjaxSeat":
-                    case "Classrooms/SeatGrid":
-                    case "Reports/Ajax":
-                        break;
-                    default:
-                        request = (HttpWebRequest)HttpWebRequest.Create("http://localhost/Labinator2016/" + testURL);
-                        request.AllowAutoRedirect = false;
+        ////[Test]
+        ////public void LoginRedirectTest()
+        ////{
+        ////    string testURL;
+        ////    HttpWebRequest request;
+        ////    Assembly asm = Assembly.LoadFrom("D:\\Source\\Labinator2016\\Labinator2016\\bin\\Labinator2016.dll");
+        ////    IEnumerable<MethodInfo> conts = asm.GetTypes()
+        ////        .Where(type => typeof(Controller).IsAssignableFrom(type)) // filter controllers
+        ////        .SelectMany(type => type.GetMethods())
+        ////        .Where(method => method.IsPublic && method.Module.ToString() == "Labinator2016.dll" && !method.IsDefined(typeof(NonActionAttribute)));
+        ////    foreach (MethodInfo testAction in conts)
+        ////    {
+        ////        testURL = testAction.DeclaringType.Name.Replace("Controller", string.Empty) + "/" + testAction.Name;
+        ////        switch (testURL)
+        ////        {
+        ////            case "Users/Login":
+        ////            case "Users/Ajax":
+        ////            case "DataCenters/Ajax":
+        ////            case "DataCenters/ConfigurationAjax":
+        ////            case "Courses/Ajax":
+        ////            case "Courses/MachineAjax":
+        ////            case "Courses/Refresh":
+        ////            case "Courses/Active":
+        ////            case "Classrooms/Ajax":
+        ////            case "Classrooms/AjaxSeat":
+        ////            case "Classrooms/SeatGrid":
+        ////            case "Reports/Ajax":
+        ////                break;
+        ////            default:
+        ////                request = (HttpWebRequest)HttpWebRequest.Create("http://localhost/Labinator2016/" + testURL);
+        ////                request.AllowAutoRedirect = false;
 
-                        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                        {
-                            Assert.IsNotNull(response.Headers["Location"], "Action " + testURL + " does not re-direct to Login");
-                        }
+        ////                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        ////                {
+        ////                    Assert.IsNotNull(response.Headers["Location"], "Action " + testURL + " does not re-direct to Login");
+        ////                }
 
-                        break;
-                }
-            }
-        }
+        ////                break;
+        ////        }
+        ////    }
+        ////}
 
         ///// <summary>
         ///// Logins the test.
