@@ -23,6 +23,7 @@ namespace Labinator2016.Controllers
     using Labinator2016.Lib.REST;
     using Labinator2016.ViewModels.DatatablesViewModel;
     using RestSharp;
+
     /// <summary>
     /// Back-end processing for all DataCenter-related work and pages.
     /// </summary>
@@ -62,6 +63,13 @@ namespace Labinator2016.Controllers
             return this.Json(Generic.Ajax<DataCenter>(this.db.Query<DataCenter>().ToList(), param));
         }
 
+        /// <summary>
+        /// When the client sends an AJAX request for a list of <see cref="Configuration"/>s for a specific region, this Action responds
+        /// </summary>
+        /// When setting up a <see cref="DataCenter"/>, a machine (<see cref="Configuration"/>) must be identified which hosts the Spark Gateway. The response
+        /// to the AJAX request is used to populate the Select List.
+        /// <param name="region">The <see cref="Region"/> we are working with</param>
+        /// <returns>A JSON encoded list of <see cref="Configuration"/>s</returns>
         public ActionResult ConfigurationAjax(string region)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -78,6 +86,7 @@ namespace Labinator2016.Controllers
                     reply.Add(configuration["id"], configuration["name"]);
                 }
             }
+
             return this.Json(reply);
         }
 
@@ -110,6 +119,7 @@ namespace Labinator2016.Controllers
                     return this.HttpNotFound();
                 }
             }
+
             List<string> regions = Region.regions;
             List<string> centers = this.db.Query<DataCenter>().Select(d => d.Region).ToList();
             regions = regions.Where(r => !centers.Contains(r)).ToList();
@@ -117,10 +127,11 @@ namespace Labinator2016.Controllers
             List<SelectListItem> regionList = new List<SelectListItem>();
             foreach (string region in regions)
             {
-                regionList.Add(new SelectListItem() { Text=region,Value= region});
+                regionList.Add(new SelectListItem() { Text = region, Value = region });
             }
-            regionList.Insert(0, new SelectListItem() {Text="Select Region....",Value=string.Empty,Selected=true });
-            ViewBag.Region = new SelectList(regionList,"Value","Text", dataCenter.Region);
+
+            regionList.Insert(0, new SelectListItem() { Text = "Select Region....", Value = string.Empty, Selected = true });
+            ViewBag.Region = new SelectList(regionList, "Value", "Text", dataCenter.Region);
             List<TimeZoneInfo> timezoneList = TimeZoneInfo.GetSystemTimeZones().ToList();
             ViewBag.Timezone = new SelectList(timezoneList, "Id", "DisplayName", dataCenter.Timezone);
             return this.View(dataCenter);
@@ -145,11 +156,11 @@ namespace Labinator2016.Controllers
                     {
                         dataCenter.GateWayBackboneId = backbone.BackboneId;
                     }
-                    catch(RestException e)
+                    catch (RestException e)
                     {
-
                     }
                 }
+
                 if (dataCenter.DataCenterId == 0)
                 {
                     if (dataCenter.Region != string.Empty)
@@ -161,12 +172,11 @@ namespace Labinator2016.Controllers
                     {
                         return this.Edit(dataCenter.DataCenterId);
                     }
-
                 }
                 else
                 {
                     this.db.Update<DataCenter>(dataCenter);
-                    Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "DataCenter " + dataCenter.Name + " updated." });
+                    Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.update, Detail = "DataCenter " + dataCenter.Name + " updated." });
                 }
 
                 this.db.SaveChanges();
@@ -209,7 +219,7 @@ namespace Labinator2016.Controllers
             DataCenter dataCenter = this.db.Query<DataCenter>().Where(dc => dc.DataCenterId == id).FirstOrDefault();
             this.db.Remove<DataCenter>(dataCenter);
             this.db.SaveChanges();
-            Log.Write(db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "DataCenter " + dataCenter.Name + " deleted." });
+            Log.Write(this.db, ControllerContext.HttpContext, new Log() { Message = LogMessages.delete, Detail = "DataCenter " + dataCenter.Name + " deleted." });
             return this.RedirectToAction("Index");
         }
 

@@ -11,11 +11,12 @@
 /// </summary>
 namespace Labinator2016.Lib.Models
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using EntityFramework.Extensions;
     using Labinator2016.Lib.Headers;
-    using System;
+
     /// <summary>
     /// Implements the Database interface for the actual database.
     /// </summary>
@@ -91,7 +92,7 @@ namespace Labinator2016.Lib.Models
         /// Gets or sets the Seat machines table reference.
         /// </summary>
         /// <value>
-        /// A representation of the SeatMachiness table in the Database.
+        /// A representation of the Seat Machines table in the Database.
         /// </value>
         public DbSet<SeatMachine> SeatMachines { get; set; }
 
@@ -114,7 +115,7 @@ namespace Labinator2016.Lib.Models
         /// <summary>
         /// Implements the Interface Query on the Database.
         /// </summary>
-        /// <typeparam Name="T">Table being queried</typeparam>
+        /// <typeparam name="T">Table being queried</typeparam>
         /// <returns>
         /// The data from the table.
         /// </returns>
@@ -123,15 +124,20 @@ namespace Labinator2016.Lib.Models
             return this.Set<T>();
         }
 
-        void ILabinatorDb.Delete<T1>(System.Linq.Expressions.Expression<Func<T1, bool>> Target) 
+        /// <summary>
+        /// Impliments the Delete Record Set (Part of Entity Framework Extended) on the database.
+        /// </summary>
+        /// <typeparam name="T1">Type (Table) to delete records from.</typeparam>
+        /// <param name="target">A LINQ expression that specifies record set to be deleted</param>
+        void ILabinatorDb.Delete<T1>(System.Linq.Expressions.Expression<Func<T1, bool>> target) 
         {
-            this.Set<T1>().Where(Target).Delete();
+            this.Set<T1>().Where(target).Delete();
         }
 
         /// <summary>
         /// Implements the Add Record Interface on the Database.
         /// </summary>
-        /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
+        /// <typeparam name="T">Type (Table) to add record to.</typeparam>
         /// <param name="entity">Data to add.</param>
         void ILabinatorDb.Add<T>(T entity)
         {
@@ -141,7 +147,7 @@ namespace Labinator2016.Lib.Models
         /// <summary>
         /// Implements the Update Record Interface on the Database.
         /// </summary>
-        /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
+        /// <typeparam name="T">Type (Table) to add record to.</typeparam>
         /// <param name="entity">Data to update.</param>
         void ILabinatorDb.Update<T>(T entity)
         {
@@ -151,7 +157,7 @@ namespace Labinator2016.Lib.Models
         /// <summary>
         /// Implements the Remove a Record Interface on the Database.
         /// </summary>
-        /// <typeparam Name="T">Type (Table) to add record to.</typeparam>
+        /// <typeparam name="T">Type (Table) to add record to.</typeparam>
         /// <param name="entity">Data to remove.</param>
         void ILabinatorDb.Remove<T>(T entity)
         {

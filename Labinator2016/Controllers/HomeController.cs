@@ -72,34 +72,38 @@ namespace Labinator2016.Controllers
                     UrlHelper helper = new UrlHelper();
                     return this.Redirect("/Home/Error?Message=" + helper.Encode("User " + User.Identity.Name + " does not exist"));
                 }
+
                 DateTime start = DateTime.Now.AddHours(1);
-                List<Classroom> RunningClassrooms = this.db.Query<Classroom>().Include(c=>c.Course).Where(c => c.Start < start).ToList();
-                RunningClassrooms = RunningClassrooms.Where(c => c.Start.AddDays(c.Course.Days).AddHours(c.Course.Hours + 1) > DateTime.Now).ToList();
-                List<int> RunningClassroomIds = RunningClassrooms.Select(c => c.ClassroomId).ToList();
-                List<Seat> seats = this.db.Query<Seat>().Where(s => s.UserId == user.UserId && RunningClassroomIds.Contains(s.ClassroomId)).ToList();
+                List<Classroom> runningClassrooms = this.db.Query<Classroom>().Include(c => c.Course).Where(c => c.Start < start).ToList();
+                runningClassrooms = runningClassrooms.Where(c => c.Start.AddDays(c.Course.Days).AddHours(c.Course.Hours + 1) > DateTime.Now).ToList();
+                List<int> runningClassroomIds = runningClassrooms.Select(c => c.ClassroomId).ToList();
+                List<Seat> seats = this.db.Query<Seat>().Where(s => s.UserId == user.UserId && runningClassroomIds.Contains(s.ClassroomId)).ToList();
                 if (seats.Count == 0)
                 {
                     UrlHelper helper = new UrlHelper();
-                    return this.Redirect("/Home/Error?Message=" + helper.Encode("Running Classrooms: " + RunningClassrooms.Count + "<br/>"
-                                                                            + "Classroom IDs :" + RunningClassroomIds.ToString() + "<br/>"
+                    return this.Redirect("/Home/Error?Message=" + helper.Encode("Running Classrooms: " + runningClassrooms.Count + "<br/>"
+                                                                            + "Classroom IDs :" + runningClassroomIds.ToString() + "<br/>"
                                                                             + "User Id :" + user.UserId));
                 }
+
                 return this.RedirectToAction("Connect", new { id = seats[0].SeatId });
             }
         }
+
         /// <summary>
-        /// Initial Index
+        /// The Connect view is the one which displays the RDP session.
         /// </summary>
-        /// <returns>Index view</returns>
+        /// <returns>Connection view</returns>
         public ActionResult Connect()
         {
-            return View();
+            return this.View();
         }
+
         /// <summary>
-        /// Grids the specified identifier.
+        /// Provides the view of all the thumbnails of each <see cref="Seat"/> in the <see cref="Classroom"/> and associated control options.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <param name="id">The <see cref="Classroom"/> identifier.</param>
+        /// <returns>The Grid View</returns>
         public ActionResult Grid(int id)
         {
             ViewBag.ClassroomId = id;

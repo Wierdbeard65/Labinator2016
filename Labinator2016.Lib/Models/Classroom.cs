@@ -61,7 +61,7 @@ namespace Labinator2016.Lib.Models
         public virtual DataCenter DataCenter { get; set; }
 
         /// <summary>
-        /// Gets a Javascript-readable string representation of the Start date for display.
+        /// Gets a Javascript readable string representation of the Start date for display.
         /// </summary>
         [NotMapped]
         public string JSDate
