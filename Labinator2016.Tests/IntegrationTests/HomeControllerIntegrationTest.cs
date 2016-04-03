@@ -14,9 +14,7 @@ namespace Labinator2016.Tests.Controllers
     using System.Linq;
     using System.Net;
     using System.Reflection;
-    using System.Text;
     using System.Web.Mvc;
-    using MVCIntegrationTestFramework.Browsing;
     using NUnit.Framework;
 
     /// <summary>
