@@ -79,8 +79,8 @@ namespace Labinator2016.Tests.Controllers
         ////    create a new instance of WebClient
         ////    WebClient client = new WebClient();
 
-        ////    set the user agent to IE6
-        ////    client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
+        ////    set the User agent to IE6
+        ////    client.Headers.Add("User-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705;)");
 
         ////    actually execute the GET request
         ////        string ret = client.DownloadString("http://localhost/Labinator2016/");

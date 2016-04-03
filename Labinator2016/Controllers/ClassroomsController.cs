@@ -233,7 +233,7 @@
         }
 
         /// <summary>
-        /// Performs the actual deletion of a Classroom when confirmed by the user.
+        /// Performs the actual deletion of a Classroom when confirmed by the User.
         /// </summary>
         /// <param name="id">The ClassroomID of the Classroom to delete.</param>
         /// <returns>A redirection back to the list of Classrooms.</returns>
@@ -304,7 +304,7 @@
             {
                 foreach (Seat seat in seats)
                 {
-                    SeatTemp seatTemp = seat.toSeatTemp();
+                    SeatTemp seatTemp = seat.ToSeatTemp();
                     seatTemp.SessionId = sessionId;
                     seatTemp.TimeStamp = DateTime.Now;
                     this.db.Add<SeatTemp>(seatTemp);
@@ -315,7 +315,7 @@
         }
 
         /// <summary>
-        /// Processes the AJAX request that adds a seat to a classroom
+        /// Processes the AJAX request that adds a Seat to a classroom
         /// </summary>
         /// <returns>An empty response</returns>
         public JsonResult AddSeats()
@@ -364,7 +364,7 @@
                                 SeatTemp seat = new SeatTemp() { UserId = existingUser.UserId, SessionId = session, TimeStamp = DateTime.Now, ClassroomId = int.Parse(classroom) };
                                 this.db.Add<SeatTemp>(seat);
                                 this.db.SaveChanges();
-                                ////                                   //                                        Logit.log(new Log() { User = User.Identity.Name, Message = LogMessages.create, Seat = seat.User.EmailAddress, Classroom = classroom.Name });
+                                ////                                   //                                        Logit.log(new Log() { User = User.Identity.Name, Message = LogMessages.create, Seat = Seat.User.EmailAddress, Classroom = classroom.Name });
                                 ////                                }
                             }
                         }

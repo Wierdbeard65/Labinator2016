@@ -16,10 +16,10 @@ namespace Labinator2016.Lib.Models
     public class SeatMachine
     {
         /// <summary>
-        /// Gets or sets the seat machine identifier.
+        /// Gets or sets the Seat machine identifier.
         /// </summary>
         /// <value>
-        /// The seat machine identifier.
+        /// The Seat machine identifier.
         /// </value>
         public int SeatMachineId { get; set; }
 
@@ -32,18 +32,18 @@ namespace Labinator2016.Lib.Models
         public int CourseMachineId { get; set; }
 
         /// <summary>
-        /// Gets or sets the seat identifier.
+        /// Gets or sets the Seat identifier.
         /// </summary>
         /// <value>
-        /// The seat identifier.
+        /// The Seat identifier.
         /// </value>
         public int SeatId { get; set; }
 
         /// <summary>
-        /// Gets or sets the vm identifier.
+        /// Gets or sets the Virtual Machine identifier.
         /// </summary>
         /// <value>
-        /// The vm identifier.
+        /// The Virtual Machine identifier.
         /// </value>
         public string VMId { get; set; }
 
@@ -64,12 +64,12 @@ namespace Labinator2016.Lib.Models
         public string SessionId { get; set; }
 
         /// <summary>
-        /// Gets or sets the seat.
+        /// Gets or sets the Seat.
         /// </summary>
         /// <value>
-        /// The seat.
+        /// The Seat.
         /// </value>
-        public virtual Seat seat { get; set; }
+        public virtual Seat Seat { get; set; }
 
         /// <summary>
         /// Gets or sets the course machine.
@@ -77,6 +77,6 @@ namespace Labinator2016.Lib.Models
         /// <value>
         /// The course machine.
         /// </value>
-        public virtual CourseMachine courseMachine { get; set; }
+        public virtual CourseMachine CourseMachine { get; set; }
     }
 }

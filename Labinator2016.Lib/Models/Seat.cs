@@ -16,10 +16,10 @@ namespace Labinator2016.Lib.Models
     public class Seat
     {
         /// <summary>
-        /// Gets or sets the seat identifier.
+        /// Gets or sets the Seat identifier.
         /// </summary>
         /// <value>
-        /// The seat identifier.
+        /// The Seat identifier.
         /// </value>
         public int SeatId { get; set; }
 
@@ -32,15 +32,19 @@ namespace Labinator2016.Lib.Models
         public int ClassroomId { get; set; }
 
         /// <summary>
-        /// Gets or sets the user identifier.
+        /// Gets or sets the User identifier.
         /// </summary>
         /// <value>
-        /// The user identifier.
+        /// The User identifier.
         /// </value>
         public int UserId { get; set; }
+
+        /// <summary>
+        /// The Identifier for the Configuration in Sky Tap that corresponds to this Seat.
+        /// </summary>
         public string ConfigurationId { get; set; }
         ////public DateTime? LastContact { get; set; }
-        public string SessionId { get; set; }
+        ////public string SessionId { get; set; }
         ////public int PercentageRunning { get; set; }
         ////public string IPAddress { get; set; }
         ////public string Thumbnail { get; set; }
@@ -48,12 +52,21 @@ namespace Labinator2016.Lib.Models
         ////public bool Allow247 { get; set; }
         ////public bool Running { get; set; }
         ////[NotMapped]
+        
+        /// <summary>
+        /// The User associated with this Seat.
+        /// </summary>
         public virtual User User { get; set; }
         ////[NotMapped]
         ////public virtual Classroom Classroom { get; set; }
         ////[NotMapped]
         ////public string State { get; set; }
-        public SeatTemp toSeatTemp()
+
+        /// <summary>
+        /// Converts a Seat object into a Temporary Seat object
+        /// </summary>
+        /// <returns>A Temporary Seat Object</returns>
+        public SeatTemp ToSeatTemp()
         {
             SeatTemp seatTemp = new SeatTemp();
             seatTemp.SeatId = this.SeatId;

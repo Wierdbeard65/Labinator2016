@@ -18,12 +18,17 @@ namespace Labinator2016.Lib.Headers
     /// </summary>
     public interface ISkyTap
     {
-
+        /// <summary>
+        /// Executes a single REST request against the Sky Tap system.
+        /// </summary>
+        /// <param name="request">The REST request object</param>
+        /// <returns>The REST response object</returns>
         IRestResponse Execute(RestRequest request);
+
         /// <summary>
         /// Obtains a single object of type T from the Sky Tap REST interface.
         /// </summary>
-        /// <typeparam Name="T">The type to obtain.</typeparam>
+        /// <typeparam name="T">The type to obtain.</typeparam>
         /// <param name="request">The request to send</param>
         /// <returns>An object.</returns>
         T Execute<T>(RestRequest request);
@@ -31,7 +36,7 @@ namespace Labinator2016.Lib.Headers
         /// <summary>
         /// Obtains a list of objects of type T from the Sky Tap REST interface.
         /// </summary>
-        /// <typeparam Name="T">The type to obtain.</typeparam>
+        /// <typeparam name="T">The type to obtain.</typeparam>
         /// <param name="request">The request to send</param>
         /// <returns>A list of objects.</returns>
         List<T> ExecuteList<T>(RestRequest request);

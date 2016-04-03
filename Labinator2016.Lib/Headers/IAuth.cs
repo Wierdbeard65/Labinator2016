@@ -17,7 +17,7 @@ namespace Labinator2016.Lib.Headers
         /// <summary>
         /// Does the authentication.
         /// </summary>
-        /// <param name="userName">Name of the user.</param>
+        /// <param name="userName">Name of the User.</param>
         /// <param name="remember">if set to <c>true</c> [remember].</param>
         void DoAuth(string userName, bool remember);
 

@@ -88,7 +88,7 @@ namespace Labinator2016.Lib.Models
         public DbSet<Seat> Seats { get; set; }
 
         /// <summary>
-        /// Gets or sets the seat machines table reference.
+        /// Gets or sets the Seat machines table reference.
         /// </summary>
         /// <value>
         /// A representation of the SeatMachiness table in the Database.

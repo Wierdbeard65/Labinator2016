@@ -20,10 +20,10 @@ namespace Labinator2016.Lib.Models
     public class User
     {
         /// <summary>
-        /// Gets or sets the user identifier.
+        /// Gets or sets the User identifier.
         /// </summary>
         /// <value>
-        /// The user identifier.
+        /// The User identifier.
         /// </value>
         public int UserId { get; set; }
 
@@ -45,19 +45,19 @@ namespace Labinator2016.Lib.Models
         public string Password { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this user is an instructor.
+        /// Gets or sets a value indicating whether this User is an instructor.
         /// </summary>
         /// <value>
-        /// <c>true</c> if this user is an instructor; otherwise, <c>false</c>.
+        /// <c>true</c> if this User is an instructor; otherwise, <c>false</c>.
         /// </value>
         [Display(Name = "Instructor")]
         public bool IsInstructor { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this user is an administrator.
+        /// Gets or sets a value indicating whether this User is an administrator.
         /// </summary>
         /// <value>
-        /// <c>true</c> if this user is an administrator; otherwise, <c>false</c>.
+        /// <c>true</c> if this User is an administrator; otherwise, <c>false</c>.
         /// </value>
         [Display(Name = "Administrator")]
         public bool IsAdministrator { get; set; }

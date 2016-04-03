@@ -19,18 +19,18 @@ namespace Labinator2016.Lib.Models
     public class SeatTemp
     {
         /// <summary>
-        /// Gets or sets the seat temporary identifier.
+        /// Gets or sets the Seat temporary identifier.
         /// </summary>
         /// <value>
-        /// The seat temporary identifier.
+        /// The Seat temporary identifier.
         /// </value>
         public int SeatTempId { get; set; }
 
         /// <summary>
-        /// Gets or sets the seat identifier.
+        /// Gets or sets the Seat identifier.
         /// </summary>
         /// <value>
-        /// The seat identifier.
+        /// The Seat identifier.
         /// </value>
         public int SeatId { get; set; }
 
@@ -43,10 +43,10 @@ namespace Labinator2016.Lib.Models
         public int ClassroomId { get; set; }
 
         /// <summary>
-        /// Gets or sets the user identifier.
+        /// Gets or sets the User identifier.
         /// </summary>
         /// <value>
-        /// The user identifier.
+        /// The User identifier.
         /// </value>
         public int UserId { get; set; }
 
@@ -58,7 +58,6 @@ namespace Labinator2016.Lib.Models
         /// </value>
         public string SessionId { get; set; }
 
-
         /// <summary>
         /// Gets or sets the time stamp.
         /// </summary>
@@ -69,13 +68,21 @@ namespace Labinator2016.Lib.Models
         public DateTime TimeStamp { get; set; }
 
         /// <summary>
-        /// Gets or sets the user.
+        /// Gets or sets the User.
         /// </summary>
         /// <value>
-        /// The user.
+        /// The User.
         /// </value>
-        public virtual User user { get; set; }
+        public virtual User User { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the Configuration Identifier
+        /// </summary>
+        /// <value>
+        /// The Configuration Identifier
+        /// </value>
         public string ConfigurationId { get; set; }
+
         ////public DateTime? LastContact { get; set; }
         ////public string SessionId { get; set; }
         ////public int PercentageRunning { get; set; }
@@ -91,7 +98,11 @@ namespace Labinator2016.Lib.Models
         ////[NotMapped]
         ////public string State { get; set; }
 
-        public Seat toSeat()
+        /// <summary>
+        /// Converts a Temporary Seat into a Seat by copying the relevant information
+        /// </summary>
+        /// <returns>A Seat version of the Temporary Seat</returns>
+        public Seat ToSeat()
         {
             Seat seat = new Seat();
             seat.SeatId = this.SeatId;

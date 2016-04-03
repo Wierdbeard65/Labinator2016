@@ -78,7 +78,7 @@ namespace Labinator2016
                             roles.Add("Administrator");
                         }
 
-                        // Let us set the Pricipal with our user specific details
+                        // Let us set the Pricipal with our User specific details
                         HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(
                           new System.Security.Principal.GenericIdentity(username, "Forms"), roles.ToArray());
                     }

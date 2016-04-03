@@ -56,17 +56,17 @@ namespace Labinator2016.Lib.Headers
         started,
 
         /// <summary>
-        /// A user connected to an environment.
+        /// A User connected to an environment.
         /// </summary>
         connected,
 
         /// <summary>
-        /// A user joined an existing environment connection.
+        /// A User joined an existing environment connection.
         /// </summary>
         joined,
 
         /// <summary>
-        /// An Error Ocurred.
+        /// An Error Occured.
         /// </summary>
         Error,
 

@@ -368,7 +368,7 @@ namespace Labinator2016.Controllers
         }
 
         /// <summary>
-        /// Performs the actual deletion of a Course when confirmed by the user.
+        /// Performs the actual deletion of a Course when confirmed by the User.
         /// </summary>
         /// <param name="id">The CourseID of the Course to delete.</param>
         /// <returns>A redirection back to the list of Courses.</returns>

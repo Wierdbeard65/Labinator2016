@@ -198,7 +198,7 @@ namespace Labinator2016.Controllers
         }
 
         /// <summary>
-        /// Performs the actual deletion of a Datacenter when confirmed by the user.
+        /// Performs the actual deletion of a Datacenter when confirmed by the User.
         /// </summary>
         /// <param name="id">The DataCenterID of the Datacenter to delete.</param>
         /// <returns>A redirection back to the list of DataCenters.</returns>

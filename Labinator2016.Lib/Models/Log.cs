@@ -39,10 +39,10 @@ namespace Labinator2016.Lib.Models
         public DateTime TimeStamp { get; set; }
 
         /// <summary>
-        /// Gets or sets the user sparking this update (if any).
+        /// Gets or sets the User sparking this update (if any).
         /// </summary>
         /// <value>
-        /// The user.
+        /// The User.
         /// </value>
         public string User { get; set; }
 
@@ -62,6 +62,9 @@ namespace Labinator2016.Lib.Models
         /// </value>
         public LogMessages Message { get; set; }
 
+        /// <summary>
+        /// Gets the JavaScript readable version of the Time Stamp time.
+        /// </summary>
         [NotMapped]
         public string jsTime
         {
@@ -71,6 +74,9 @@ namespace Labinator2016.Lib.Models
             }
         }
 
+        /// <summary>
+        /// Gets the String representation of the enumerated message type.
+        /// </summary>
         [NotMapped]
         public string Msg
         {
@@ -88,10 +94,11 @@ namespace Labinator2016.Lib.Models
         /// <param name="logEntry">The log entry to write.</param>
         public static void Write(ILabinatorDb db, HttpContextBase cx, Log logEntry)
         {
-            if ((logEntry.User==null) ||(logEntry.User == string.Empty))
+            if ((logEntry.User == null) || (logEntry.User == string.Empty))
             {
                 logEntry.User = cx.User.Identity.Name;
             }
+
             logEntry.TimeStamp = DateTime.Now;
             db.Add<Log>(logEntry);
             db.SaveChanges();
