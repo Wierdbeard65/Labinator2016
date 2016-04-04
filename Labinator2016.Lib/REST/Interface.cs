@@ -61,12 +61,12 @@ namespace Labinator2016.Lib.REST
         public string VM_id { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the Virtual Machine this interface resides on.
+        /// Gets or sets the Name of the Virtual Machine this interface resides on.
         /// </summary>
         public string VM_name { get; set; }
 
         /// <summary>
-        /// Gets or sets the status of the interface
+        /// Gets or sets the Status of the interface
         /// </summary>
         public string Status { get; set; }
 
@@ -76,7 +76,7 @@ namespace Labinator2016.Lib.REST
         public string Network_id { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the network this interface is attached to.
+        /// Gets or sets the Name of the network this interface is attached to.
         /// </summary>
         public string Network_name { get; set; }
 
@@ -86,7 +86,7 @@ namespace Labinator2016.Lib.REST
         public string Network_type { get; set; }
 
         /// <summary>
-        /// Gets or sets the subnet of the network this interface is attached to.
+        /// Gets or sets the Subnet of the network this interface is attached to.
         /// </summary>
         public string Network_subnet { get; set; }
 

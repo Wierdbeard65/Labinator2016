@@ -83,7 +83,7 @@ namespace Labinator2016.Controllers
                 dynamic response = serializer.DeserializeObject(restResponse.Content);
                 foreach (dynamic configuration in response)
                 {
-                    reply.Add(configuration["ID"], configuration["name"]);
+                    reply.Add(configuration["ID"], configuration["Name"]);
                 }
             }
 
@@ -120,7 +120,7 @@ namespace Labinator2016.Controllers
                 }
             }
 
-            List<string> regions = Region.regions;
+            List<string> regions = Region.Regions;
             List<string> centers = this.db.Query<DataCenter>().Select(d => d.Region).ToList();
             regions = regions.Where(r => !centers.Contains(r)).ToList();
             regions.Sort();

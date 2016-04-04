@@ -1,14 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Region.cs" company="Interactive Intelligence">
+//     Copyright (c) Interactive Intelligence. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
+/// <summary>
+/// Author: Paul Simpson
+/// Version: 1.0 - Initial build.
+/// </summary>
 namespace Labinator2016.Lib.REST
 {
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Static class that holds a list of valid Sky Tap Regions.
+    /// </summary>
     public static class Region
     {
-        private static List<string> regionList = new List<string>() {  "US-West",
+        /// <summary>
+        /// String list of Regions
+        /// </summary>
+        private static List<string> regionList = new List<string>()
+                                                                  {
+                                                                    "US-West",
                                                                     "US-Central",
                                                                     "US-East",
                                                                     "EMEA",
@@ -17,7 +31,10 @@ namespace Labinator2016.Lib.REST
                                                                     "CAN-Toronto"
                                                                   };
 
-        public static List<string> regions
+        /// <summary>
+        /// Gets the list of Regions.
+        /// </summary>
+        public static List<string> Regions
         {
             get
             {

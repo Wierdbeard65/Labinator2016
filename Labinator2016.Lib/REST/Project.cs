@@ -32,7 +32,7 @@
         {
             RestRequest request = new RestRequest("projects.json", Method.POST);
 //            request.AddParameter("query", "Region:" + this.Region);
-            request.AddParameter("name", this.name);
+            request.AddParameter("Name", this.name);
             Project response = this.st.Execute<Project>(request);
             if (response != default(Project))
             {

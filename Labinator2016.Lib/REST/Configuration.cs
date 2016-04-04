@@ -70,7 +70,7 @@ namespace Labinator2016.Lib.REST
                     dynamic config = serializer.DeserializeObject(response.Content);
                     foreach (dynamic network in config["networks"])
                     {
-                        if (network["name"] == "Backbone")
+                        if (network["Name"] == "Backbone")
                         {
                             result = network["ID"];
                         }
@@ -127,12 +127,12 @@ namespace Labinator2016.Lib.REST
         public string Url { get; set; }
 
         /// <summary>
-        /// Gets or sets the configuration name.
+        /// Gets or sets the configuration Name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets a string indicating an error condition.
+        /// Gets or sets a string indicating an Error condition.
         /// </summary>
         public string Error { get; set; }
 
@@ -177,12 +177,12 @@ namespace Labinator2016.Lib.REST
         public bool Disable_internet { get; set; }
 
         /// <summary>
-        /// Gets or sets the region used for this configuration.
+        /// Gets or sets the Region used for this configuration.
         /// </summary>
         public string Region { get; set; }
 
         /// <summary>
-        /// Gets or sets the region backend for this configuration.
+        /// Gets or sets the Region backend for this configuration.
         /// </summary>
         public string Region_backend { get; set; }
 
@@ -253,8 +253,8 @@ namespace Labinator2016.Lib.REST
         /// </summary>
         /// <param name="project">The Sky Tap Project to place the Configuration in.</param>
         /// <param name="template">The Sky Tap template to use.</param>
-        /// <param name="gatewayBackboneId">The identifier for the backbone network containing the gateway</param>
-        /// <param name="region">The region in which to create the configuration.</param>
+        /// <param name="gatewayBackboneId">The identifier for the backbone network containing the Gateway</param>
+        /// <param name="region">The Region in which to create the configuration.</param>
         /// <returns>A string containing the Sky Tap identification for the new configuration.</returns>
         public string Add(string project, string template, string gatewayBackboneId, string region)
         {
@@ -288,12 +288,12 @@ namespace Labinator2016.Lib.REST
                         }
 
                         RestRequest updateConfigIPRequest = new RestRequest("configurations/" + this.Id + "/networks/" + this.BackboneId + ".json", Method.PUT);
-                        updateConfigIPRequest.AddParameter("subnet", textSubnet + "/29");
-                        updateConfigIPRequest.AddParameter("subnet_addr", textSubnet);
-                        updateConfigIPRequest.AddParameter("subnet_size", 29);
-                        updateConfigIPRequest.AddParameter("gateway", textGateway);
+                        updateConfigIPRequest.AddParameter("Subnet", textSubnet + "/29");
+                        updateConfigIPRequest.AddParameter("Subnet_addr", textSubnet);
+                        updateConfigIPRequest.AddParameter("Subnet_size", 29);
+                        updateConfigIPRequest.AddParameter("Gateway", textGateway);
                         IRestResponse response3 = this.st.Execute(updateConfigIPRequest);
-                        RestRequest createtunnelRequest = new RestRequest("tunnels.json", Method.POST);
+                        RestRequest createtunnelRequest = new RestRequest("Tunnels.json", Method.POST);
                         createtunnelRequest.AddParameter("source_network_id", this.BackboneId);
                         createtunnelRequest.AddParameter("target_network_id", gatewayBackboneId);
                         IRestResponse response4 = this.st.Execute(createtunnelRequest);

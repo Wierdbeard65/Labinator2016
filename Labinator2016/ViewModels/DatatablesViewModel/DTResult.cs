@@ -15,7 +15,7 @@ namespace Labinator2016.ViewModels.DatatablesViewModel
     /// <summary>
     /// A full result, as understood by jQuery DataTables.
     /// </summary>
-    /// <typeparam Name="T">The data type of each row.</typeparam>
+    /// <typeparam name="T">The data type of each row.</typeparam>
     public class DTResult<T>
     {
         /// <summary>

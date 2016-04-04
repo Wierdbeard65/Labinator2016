@@ -64,7 +64,7 @@ namespace Labinator2016.Lib.Models
         public string GateWayIP { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the Name of the Environment running the Spark Gateway
+        /// Gets or sets the Name of the Name of the Environment running the Spark Gateway
         /// </summary>
         public string GateWayName { get; set; }
 

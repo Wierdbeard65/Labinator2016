@@ -53,7 +53,7 @@ namespace Labinator2016.Lib.REST
         /// </value>
         ////public string runstate { get; set; }
         ////        public Hardware hardware { get; set; }
-        ////public bool? error { get; set; }
+        ////public bool? Error { get; set; }
         ////public object asset_id { get; set; }
         ////public Interface[] interfaces { get; set; }
         ////public object[] notes { get; set; }
@@ -150,7 +150,7 @@ namespace Labinator2016.Lib.REST
         ////    }
         ////    else
         ////    {
-        ////        return parameters.vms.ToList();
+        ////        return parameters.VMs.ToList();
         ////    }
 
         /////// <summary>
@@ -184,7 +184,7 @@ namespace Labinator2016.Lib.REST
             {
                 return false;
             }
-            var request = new RestRequest("vms/" + this.id, Method.PUT);
+            var request = new RestRequest("VMs/" + this.id, Method.PUT);
             if (status == "stopped")
             {
                 request.AddParameter("Runstate", "running");
@@ -215,7 +215,7 @@ namespace Labinator2016.Lib.REST
             }
             if (status == "running")
             {
-                var request = new RestRequest("vms/" + this.id, Method.PUT);
+                var request = new RestRequest("VMs/" + this.id, Method.PUT);
                 if (status == "running")
                 {
                     request.AddParameter("Runstate", "suspended");
@@ -243,7 +243,7 @@ namespace Labinator2016.Lib.REST
             }
             if (status != "running")
             {
-                var request = new RestRequest("vms/" + this.id, Method.PUT);
+                var request = new RestRequest("VMs/" + this.id, Method.PUT);
                 request.AddParameter("Runstate", "running");
                 IRestResponse parameters = this.st.Execute(request);
                 return (parameters != null);
@@ -252,7 +252,7 @@ namespace Labinator2016.Lib.REST
         }
         public string Status()
         {
-            var request = new RestRequest("vms/" + this.id, Method.GET);
+            var request = new RestRequest("VMs/" + this.id, Method.GET);
             IRestResponse response = this.st.Execute(request);
             if (response == null)
             {
