@@ -408,6 +408,7 @@ namespace Labinator2016.Controllers
         public JsonResult RemoveSeat()
         {
             string json;
+            int seatTempId;
             IDictionary<string, string> response = new Dictionary<string, string>();
             using (var reader = new StreamReader(Request.InputStream))
             {
@@ -415,10 +416,10 @@ namespace Labinator2016.Controllers
             }
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            dynamic parameters = serializer.Deserialize<object>(json);
-            if (parameters["SeatTempId"] != null)
+            JsonResult parameters = this.Json(serializer.Deserialize<object>(json));
+            var SeatTempId = parameters.Data.GetType().GetProperties().Where(p => string.Compare(p.Name, "SeatTempId") == 0).FirstOrDefault();
+            if ((SeatTempId != null) && int.TryParse(SeatTempId.ToString(),out seatTempId))
             {
-                int seatTempId = parameters["SeatTempId"];
                 SeatTemp str = this.db.Query<SeatTemp>().Where(st => st.SeatTempId == seatTempId).FirstOrDefault();
                 if (str != null)
                 {
