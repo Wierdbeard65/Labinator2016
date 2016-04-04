@@ -10,6 +10,8 @@
 /// </summary>
 namespace Labinator2016.Lib.Utilities
 {
+    using System;
+
     /// <summary>
     /// Static class containing methods used to manipulate IP addresses
     /// </summary>
@@ -20,7 +22,7 @@ namespace Labinator2016.Lib.Utilities
         /// </summary>
         /// <param name="ip">The integer version of the IP address</param>
         /// <returns>A string containing the dotted notation IP address</returns>
-        public static string NumericToStringIP(int ip)
+        public static string NumericToStringIP(long ip)
         {
             string returnValue = string.Empty;
             for (int i = 0; i < 4; i++)

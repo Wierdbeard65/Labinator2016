@@ -98,6 +98,7 @@
     <Compile Include="SiteTests\CourseControllerTest.cs" />
     <Compile Include="SiteTests\DataCenterControllerTest.cs" />
     <Compile Include="SiteTests\HomeControllerTest.cs" />
+    <Compile Include="SiteTests\IPUtilsTest.cs" />
     <Compile Include="SiteTests\UserControllerTest.cs" />
     <Compile Include="TestData\FakeControllerContext.cs" />
     <Compile Include="TestData\FakeDatabase.cs" />
