@@ -68,6 +68,31 @@ namespace Labinator2016.Tests.SiteTests
             Assert.AreEqual("Done", jsonObject["Status"]);
             Assert.AreEqual(1, db.Added.Count);
         }
+
+        [Test]
+        public void AddSeatTestValidMultipleExistingUser()
+        {
+            var db = new FakeDatabase();
+            var st = new FakeSkyTap();
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestUserData.Users);
+            var controller = new ClassroomsController(db, st);
+            var httpRequest = new Mock<HttpRequestBase>();
+            var stream = new MemoryStream(Encoding.Default.GetBytes("{'NewSeats':'TestUser1@test.com\nTestUser2@test.com','Session':'12345','Classroom':1}"));
+            httpRequest.Setup(r => r.InputStream).Returns(stream);
+
+            var httpContext = new Mock<HttpContextBase>();
+            httpContext.Setup(c => c.Request).Returns(httpRequest.Object);
+
+            var routeData = new RouteData();
+            controller.ControllerContext = // set mocked context
+                 new ControllerContext(httpContext.Object, routeData, controller);
+            var result = controller.AddSeats();
+            dynamic jsonObject = result.Data;
+            Assert.AreEqual("Done", jsonObject["Status"]);
+            Assert.AreEqual(2, db.Added.Count);
+        }
+
         [Test]
         public void AddSeatTestValidSingleNewUser()
         {
@@ -90,6 +115,150 @@ namespace Labinator2016.Tests.SiteTests
             dynamic jsonObject = result.Data;
             Assert.AreEqual("Done", jsonObject["Status"]);
             Assert.AreEqual(2, db.Added.Count);
+        }
+
+        [Test]
+        public void AddSeatTestValidMultipleNewUser()
+        {
+            var db = new FakeDatabase();
+            var st = new FakeSkyTap();
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestUserData.Users);
+            var controller = new ClassroomsController(db, st);
+            var httpRequest = new Mock<HttpRequestBase>();
+            var stream = new MemoryStream(Encoding.Default.GetBytes("{'NewSeats':'TestUser999@test.com\nTestUser998@test.com','Session':'12345','Classroom':1}"));
+            httpRequest.Setup(r => r.InputStream).Returns(stream);
+
+            var httpContext = new Mock<HttpContextBase>();
+            httpContext.Setup(c => c.Request).Returns(httpRequest.Object);
+
+            var routeData = new RouteData();
+            controller.ControllerContext = // set mocked context
+                 new ControllerContext(httpContext.Object, routeData, controller);
+            var result = controller.AddSeats();
+            dynamic jsonObject = result.Data;
+            Assert.AreEqual("Done", jsonObject["Status"]);
+            Assert.AreEqual(4, db.Added.Count);
+        }
+
+        [Test]
+        public void AddSeatTestValidEmptyUser()
+        {
+            var db = new FakeDatabase();
+            var st = new FakeSkyTap();
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestUserData.Users);
+            var controller = new ClassroomsController(db, st);
+            var httpRequest = new Mock<HttpRequestBase>();
+            var stream = new MemoryStream(Encoding.Default.GetBytes("{'NewSeats':'','Session':'12345','Classroom':1}"));
+            httpRequest.Setup(r => r.InputStream).Returns(stream);
+
+            var httpContext = new Mock<HttpContextBase>();
+            httpContext.Setup(c => c.Request).Returns(httpRequest.Object);
+
+            var routeData = new RouteData();
+            controller.ControllerContext = // set mocked context
+                 new ControllerContext(httpContext.Object, routeData, controller);
+            var result = controller.AddSeats();
+            dynamic jsonObject = result.Data;
+            Assert.AreEqual("Done", jsonObject["Status"]);
+            Assert.AreEqual(0, db.Added.Count);
+        }
+
+        [Test]
+        public void AddSeatTestInvalidNoUser()
+        {
+            var db = new FakeDatabase();
+            var st = new FakeSkyTap();
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestUserData.Users);
+            var controller = new ClassroomsController(db, st);
+            var httpRequest = new Mock<HttpRequestBase>();
+            var stream = new MemoryStream(Encoding.Default.GetBytes("{'Session':'12345','Classroom':1}"));
+            httpRequest.Setup(r => r.InputStream).Returns(stream);
+
+            var httpContext = new Mock<HttpContextBase>();
+            httpContext.Setup(c => c.Request).Returns(httpRequest.Object);
+
+            var routeData = new RouteData();
+            controller.ControllerContext = // set mocked context
+                 new ControllerContext(httpContext.Object, routeData, controller);
+            var result = controller.AddSeats();
+            dynamic jsonObject = result.Data;
+            Assert.AreEqual("Done", jsonObject["Status"]);
+            Assert.AreEqual(0, db.Added.Count);
+        }
+
+        [Test]
+        public void AddSeatTestInvalidNoSession()
+        {
+            var db = new FakeDatabase();
+            var st = new FakeSkyTap();
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestUserData.Users);
+            var controller = new ClassroomsController(db, st);
+            var httpRequest = new Mock<HttpRequestBase>();
+            var stream = new MemoryStream(Encoding.Default.GetBytes("{'NewSeats':'TestUser999@test.com','Classroom':1}"));
+            httpRequest.Setup(r => r.InputStream).Returns(stream);
+
+            var httpContext = new Mock<HttpContextBase>();
+            httpContext.Setup(c => c.Request).Returns(httpRequest.Object);
+
+            var routeData = new RouteData();
+            controller.ControllerContext = // set mocked context
+                 new ControllerContext(httpContext.Object, routeData, controller);
+            var result = controller.AddSeats();
+            dynamic jsonObject = result.Data;
+            Assert.AreEqual("Done", jsonObject["Status"]);
+            Assert.AreEqual(0, db.Added.Count);
+        }
+
+        [Test]
+        public void AddSeatTestInvalidNoClassroom()
+        {
+            var db = new FakeDatabase();
+            var st = new FakeSkyTap();
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestUserData.Users);
+            var controller = new ClassroomsController(db, st);
+            var httpRequest = new Mock<HttpRequestBase>();
+            var stream = new MemoryStream(Encoding.Default.GetBytes("{'NewSeats':'TestUser999@test.com','Session':'12345'}"));
+            httpRequest.Setup(r => r.InputStream).Returns(stream);
+
+            var httpContext = new Mock<HttpContextBase>();
+            httpContext.Setup(c => c.Request).Returns(httpRequest.Object);
+
+            var routeData = new RouteData();
+            controller.ControllerContext = // set mocked context
+                 new ControllerContext(httpContext.Object, routeData, controller);
+            var result = controller.AddSeats();
+            dynamic jsonObject = result.Data;
+            Assert.AreEqual("Done", jsonObject["Status"]);
+            Assert.AreEqual(0, db.Added.Count);
+        }
+
+        [Test]
+        public void AddSeatTestInvalidClassroom()
+        {
+            var db = new FakeDatabase();
+            var st = new FakeSkyTap();
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestUserData.Users);
+            var controller = new ClassroomsController(db, st);
+            var httpRequest = new Mock<HttpRequestBase>();
+            var stream = new MemoryStream(Encoding.Default.GetBytes("{'NewSeats':'TestUser1@test.com\nTestUser2@test.com','Session':'12345','Classroom':'Invalid'}"));
+            httpRequest.Setup(r => r.InputStream).Returns(stream);
+
+            var httpContext = new Mock<HttpContextBase>();
+            httpContext.Setup(c => c.Request).Returns(httpRequest.Object);
+
+            var routeData = new RouteData();
+            controller.ControllerContext = // set mocked context
+                 new ControllerContext(httpContext.Object, routeData, controller);
+            var result = controller.AddSeats();
+            dynamic jsonObject = result.Data;
+            Assert.AreEqual("Done", jsonObject["Status"]);
+            Assert.AreEqual(0, db.Added.Count);
         }
 
         [Test]

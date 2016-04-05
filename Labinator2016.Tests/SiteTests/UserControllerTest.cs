@@ -64,7 +64,7 @@ namespace Labinator2016.Tests.Controllers
             ViewResult result = controller.Edit(1) as ViewResult;
             Assert.IsNotNull(result);
             Assert.AreEqual(typeof(User), result.Model.GetType());
-            Assert.AreEqual("TestUser1@test.com", ((User)result.Model).EmailAddress);
+            Assert.AreEqual("testuser1@test.com", ((User)result.Model).EmailAddress);
         }
         [Test]
         public void UsersControllerEditNewUserPostbackValidPasswordTest()
@@ -191,7 +191,7 @@ namespace Labinator2016.Tests.Controllers
             db.AddSet(TestUserData.Users);
             var controller = new UsersController(db, auth);
             controller.ControllerContext = new FakeControllerContext();
-            var result = controller.Login(new LoginViewModel() { UserName = "TestUser0@test.com", Password = "password", ReturnUrl = "/" });
+            var result = controller.Login(new LoginViewModel() { UserName = "testuser0@test.com", Password = "password", ReturnUrl = "/" });
             Assert.AreEqual(typeof(RedirectResult), result.GetType());
             Assert.AreEqual(1, db.LogAdded.Count);
             Assert.AreEqual(LogMessages.logon, ((Log)db.LogAdded[0]).Message);
