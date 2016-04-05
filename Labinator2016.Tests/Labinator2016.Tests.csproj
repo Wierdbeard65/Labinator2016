@@ -114,6 +114,7 @@
     <Compile Include="TestData\TestCourseMachineData.cs" />
     <Compile Include="TestData\TestCourseMachineTempData.cs" />
     <Compile Include="TestData\TestDataCenterData.cs" />
+    <Compile Include="TestData\TestSeatData.cs" />
     <Compile Include="TestData\TestSeatTempData.cs" />
     <Compile Include="TestData\TestTemplateRESTData.cs" />
     <Compile Include="TestData\TestUserData.cs" />

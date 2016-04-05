@@ -62,8 +62,7 @@
             {
             return identity;
             }
-}
-        
+        }        
     }
 
     public class FakeIdentity : System.Security.Principal.IIdentity
@@ -72,7 +71,7 @@
         {
             get
             {
-                return "Test User";
+                return "testuser1@test.com";
             }
         }
 

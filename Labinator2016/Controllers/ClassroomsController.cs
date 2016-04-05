@@ -121,7 +121,7 @@ namespace Labinator2016.Controllers
             if (id == 0)
             {
                 classroom = new Classroom() { ClassroomId = 0 };
-                User user = this.db.Query<User>().Where(u => u.EmailAddress == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault();
+                User user = this.db.Query<User>().Where(u => u.EmailAddress == this.ControllerContext.HttpContext.User.Identity.Name).FirstOrDefault();
                 if (user != null)
                 {
                     classroom.UserId = user.UserId;

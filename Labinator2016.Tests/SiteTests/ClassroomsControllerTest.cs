@@ -22,27 +22,75 @@ namespace Labinator2016.Tests.SiteTests
     using System.Text;
     using System.Web.Routing;
     using Moq;
-    using System.Web.Script.Serialization;/// <summary>
-                                          /// Unit tests for the Classroom Controller
-                                          /// </summary>
+    using System.Web.Script.Serialization;
+    /// <summary>
+    /// Unit tests for the Classroom Controller
+    /// </summary>
     [TestFixture]
     public class ClassroomsControllerTest
     {
-        /// <summary>
-        /// Classroom ajax list.
-        /// </summary>
         [Test]
         public void ClassroomAjaxList()
         {
             var db = new FakeDatabase();
             var st = new FakeSkyTap();
             db.AddSet(TestClassroomData.Classrooms);
-            var controller = new ClassroomsController(db,st);
+            var controller = new ClassroomsController(db, st);
             controller.ControllerContext = new FakeControllerContext();
             DTParameters param = new DTParameters() { Start = 2, Length = 3, Search = new DTSearch(), Order = new DTOrder[1] { new DTOrder() { Column = 1, Dir = DTOrderDir.ASC } } };
             JsonResult result = controller.Ajax(param) as JsonResult;
             Assert.IsNotNull(result);
             Assert.AreEqual(3, ((List<Classroom>)((DTResult<Classroom>)result.Data).data).Count);
+        }
+
+        [Test]
+        public void AjaxSeatList()
+        {
+            var db = new FakeDatabase();
+            var st = new FakeSkyTap();
+            db.AddSet(TestSeatTempData.SeatTemps);
+            var controller = new ClassroomsController(db, st);
+            controller.ControllerContext = new FakeControllerContext();
+            DTParameters param = new DTParameters() {SessionId= "12345", Start = 2, Length = 3, Search = new DTSearch(), Order = new DTOrder[1] { new DTOrder() { Column = 1, Dir = DTOrderDir.ASC } } };
+            JsonResult result = controller.AjaxSeat(param) as JsonResult;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, ((List<SeatTemp>)((DTResult<SeatTemp>)result.Data).data).Count);
+        }
+
+        [Test]
+        public void EditStartNew()
+        {
+            var db = new FakeDatabase();
+            db.AddSet(TestUserData.Users);
+            db.AddSet(TestSeatData.Seats);
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestDataCenterData.DataCenters);
+            db.AddSet(TestCourseData.Courses);
+            var st = new FakeSkyTap();
+            var controller = new ClassroomsController(db, st);
+            controller.ControllerContext = new FakeControllerContext();
+            ViewResult result = controller.Edit(0) as ViewResult;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, ((Classroom)result.Model).ClassroomId);
+        }
+
+        [Test]
+        public void EditStartExisting()
+        {
+            var db = new FakeDatabase();
+            db.AddSet(TestClassroomData.Classrooms);
+            db.AddSet(TestUserData.Users);
+            db.AddSet(TestSeatData.Seats);
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestDataCenterData.DataCenters);
+            db.AddSet(TestCourseData.Courses);
+            var st = new FakeSkyTap();
+            var controller = new ClassroomsController(db, st);
+            controller.ControllerContext = new FakeControllerContext();
+            ViewResult result = controller.Edit(1) as ViewResult;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, ((Classroom)result.Model).ClassroomId);
+            Assert.AreEqual("Test1", ((Classroom)result.Model).Project);
         }
 
         [Test]
