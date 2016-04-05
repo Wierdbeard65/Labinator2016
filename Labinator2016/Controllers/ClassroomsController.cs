@@ -186,7 +186,7 @@ namespace Labinator2016.Controllers
                         List<SeatTemp> sts = this.db.Query<SeatTemp>().Where(st => st.SessionId == sessionId).ToList();
                         List<int> stids = sts.Select(s => s.SeatId).ToList();
                         List<Seat> seatsToRemove = this.db.Query<Seat>().Where(s => !stids.Contains(s.SeatId)).ToList();
-                        Configuration configuration = new Configuration();
+                        Configuration configuration = new Configuration(this.st);
                         foreach (Seat s in seatsToRemove)
                         {
                             this.db.Remove<Seat>(s);
@@ -224,7 +224,7 @@ namespace Labinator2016.Controllers
                 return this.RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Session = System.Web.HttpContext.Current.Session.SessionID;
+            ViewBag.Session = sessionId;
             this.PopulateTemp(classroom.ClassroomId, ViewBag.Session);
             ViewBag.CourseId = new SelectList(this.db.Query<Course>(), "CourseId", "Name", classroom.CourseId);
             ViewBag.UserId = new SelectList(this.db.Query<User>(), "UserId", "EmailAddress", classroom.UserId);

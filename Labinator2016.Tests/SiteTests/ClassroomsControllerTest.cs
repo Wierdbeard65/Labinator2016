@@ -94,6 +94,43 @@ namespace Labinator2016.Tests.SiteTests
         }
 
         [Test]
+        public void EditWriteBackNew()
+        {
+            var db = new FakeDatabase();
+            db.AddSet(TestClassroomData.Classrooms);
+            db.AddSet(TestUserData.Users);
+            db.AddSet(TestSeatData.Seats);
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestDataCenterData.DataCenters);
+            db.AddSet(TestCourseData.Courses);
+            var st = new FakeSkyTap();
+            var controller = new ClassroomsController(db, st);
+            controller.ControllerContext = new FakeControllerContext();
+            Classroom NewRoom = new Classroom() { ClassroomId = 0, CourseId = 1, DataCenterId = 1, Project = "ABCDE", Start = System.DateTime.Now, UserId = 1 };
+            ActionResult result = controller.Edit(NewRoom, "12345");
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void EditWriteBackNewInvalidModel()
+        {
+            var db = new FakeDatabase();
+            db.AddSet(TestClassroomData.Classrooms);
+            db.AddSet(TestUserData.Users);
+            db.AddSet(TestSeatData.Seats);
+            db.AddSet(TestSeatTempData.SeatTemps);
+            db.AddSet(TestDataCenterData.DataCenters);
+            db.AddSet(TestCourseData.Courses);
+            var st = new FakeSkyTap();
+            var controller = new ClassroomsController(db, st);
+            controller.ControllerContext = new FakeControllerContext();
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            Classroom NewRoom = new Classroom() { ClassroomId = 0, CourseId = 1, DataCenterId = 1, Project = "ABCDE", Start = System.DateTime.Now, UserId = 1 };
+            ActionResult result = controller.Edit(NewRoom, "12345");
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void AddSeatTestValidSingleExistingUser()
         {
             var db = new FakeDatabase();
