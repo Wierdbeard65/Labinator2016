@@ -17,7 +17,7 @@
                 {
                     var user = new User();
                     user.UserId = i;
-                    user.EmailAddress = "TestUser" + i + "@test.com";
+                    user.EmailAddress = "testuser" + i + "@test.com";
                     user.Password = PasswordHash.CreateHash("password");
                     user.IsAdministrator = (i / 5 == Math.Ceiling((double)i / 5));
                     user.IsInstructor = (i / 3 == Math.Ceiling((double)i / 3));

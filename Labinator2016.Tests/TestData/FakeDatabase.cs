@@ -28,6 +28,17 @@
             else
             {
                 this.Added.Add(entity);
+                IQueryable<T> temp = this.Sets[typeof(T)] as IQueryable<T>;
+                List<T> existing = temp.ToList();
+                string IDName = entity.GetType().Name + "Id";
+                int MaxId = 0;
+                foreach(T item in existing)
+                {
+                    MaxId = Math.Max(MaxId, int.Parse(item.GetType().GetProperty(IDName).GetValue(item).ToString()));
+                }
+                entity.GetType().GetProperty(IDName).SetValue(entity,MaxId+1);
+                existing.Add(entity);
+                Sets[typeof(T)] = existing.AsQueryable();
             }
         }
 

@@ -345,6 +345,7 @@ namespace Labinator2016.Controllers
         public JsonResult AddSeats()
         {
             string json;
+            int classroomId;
             IDictionary<string, string> response = new Dictionary<string, string>();
             using (var reader = new StreamReader(Request.InputStream))
             {
@@ -353,43 +354,40 @@ namespace Labinator2016.Controllers
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             dynamic parameters = serializer.Deserialize<object>(json);
-            if ((parameters["NewSeats"] != null) && (parameters["Session"] != null) && (parameters["Classroom"] != null))
+            if (((IDictionary<string, object>)parameters).ContainsKey("NewSeats") && ((IDictionary<string, object>)parameters).ContainsKey("Session") && ((IDictionary<string, object>)parameters).ContainsKey("Classroom"))
             {
-                string newSeats = parameters["NewSeats"];
-                string session = parameters["Session"];
-                string classroom = parameters["Classroom"];
-                if (newSeats != string.Empty)
+                if (int.TryParse(string.Empty + parameters["Classroom"] + string.Empty, out classroomId))
                 {
-                    string[] newUsers = newSeats.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                    if (newUsers.Count() > 0)
+                    string newSeats = parameters["NewSeats"];
+                    string session = parameters["Session"];
+                    if (newSeats != string.Empty)
                     {
-                        foreach (string newUser in newUsers)
+                        string[] newUsers = newSeats.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        if (newUsers.Count() > 0)
                         {
-                            string nu = newUser.ToLower();
-                            User existingUser = this.db.Query<User>().Where(u => u.EmailAddress == nu).FirstOrDefault();
-                            if (existingUser == null)
+                            foreach (string newUser in newUsers)
                             {
-                                User userToAdd = new User();
-                                userToAdd.EmailAddress = nu;
-                                userToAdd.IsInstructor = false;
-                                userToAdd.IsAdministrator = false;
-                                userToAdd.Password = PasswordHash.CreateHash("password");
-                                this.db.Add<User>(userToAdd);
-                                this.db.SaveChanges();
-                            }
+                                string nu = newUser.ToLower();
+                                User existingUser = this.db.Query<User>().Where(u => u.EmailAddress == nu).FirstOrDefault();
+                                if (existingUser == null)
+                                {
+                                    User userToAdd = new User();
+                                    userToAdd.EmailAddress = nu;
+                                    userToAdd.IsInstructor = false;
+                                    userToAdd.IsAdministrator = false;
+                                    userToAdd.Password = PasswordHash.CreateHash("password");
+                                    this.db.Add<User>(userToAdd);
+                                    this.db.SaveChanges();
+                                    existingUser = this.db.Query<User>().Where(u => u.EmailAddress == nu).FirstOrDefault();
+                                }
 
-                            existingUser = this.db.Query<User>().Where(u => u.EmailAddress == nu).FirstOrDefault();
-                            SeatTemp existingSeat = this.db.Query<SeatTemp>().Where(s => (s.UserId == existingUser.UserId && s.SessionId == session)).FirstOrDefault();
-                            if (existingSeat == null)
-                            {
-                                ////                                String configurationId = Configuration.Add(project, template, NU);
-                                ////                                if (configurationId != null)
-                                ////                               {
-                                SeatTemp seat = new SeatTemp() { UserId = existingUser.UserId, SessionId = session, TimeStamp = DateTime.Now, ClassroomId = int.Parse(classroom) };
-                                this.db.Add<SeatTemp>(seat);
-                                this.db.SaveChanges();
-                                ////                                   //                                        Logit.log(new Log() { User = User.Identity.Name, Message = LogMessages.create, Seat = Seat.User.EmailAddress, Classroom = classroom.Name });
-                                ////                                }
+                                SeatTemp existingSeat = this.db.Query<SeatTemp>().Where(s => (s.UserId == existingUser.UserId && s.SessionId == session)).FirstOrDefault();
+                                if (existingSeat == null)
+                                {
+                                    SeatTemp seat = new SeatTemp() { UserId = existingUser.UserId, SessionId = session, TimeStamp = DateTime.Now, ClassroomId = classroomId };
+                                    this.db.Add<SeatTemp>(seat);
+                                    this.db.SaveChanges();
+                                }
                             }
                         }
                     }
@@ -417,9 +415,9 @@ namespace Labinator2016.Controllers
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             dynamic parameters = serializer.Deserialize<object>(json);
-            if (((IDictionary<String, object>)parameters).ContainsKey("SeatTempId"))
+            if (((IDictionary<string, object>)parameters).ContainsKey("SeatTempId"))
             {
-                if (int.TryParse("" + parameters["SeatTempId"] + "", out seatTempId))
+                if (int.TryParse(string.Empty + parameters["SeatTempId"] + string.Empty, out seatTempId))
                 {
                     SeatTemp str = this.db.Query<SeatTemp>().Where(st => st.SeatTempId == seatTempId).FirstOrDefault();
                     if (str != null)
@@ -429,6 +427,7 @@ namespace Labinator2016.Controllers
                     }
                 }
             }
+
             response.Add("Status", "Done");
             return this.Json(response);
         }
